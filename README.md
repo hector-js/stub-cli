@@ -3,9 +3,6 @@
 ## Quality measures
 
 ![](https://github.com/HecJimSan/stub-cli/workflows/%40hectorjs%2Fstub%2Dcli/badge.svg)
- - ![](https://github.com/HecJimSan/stub-cli/workflows/Unit%20tests/badge.svg)
- - ![](https://github.com/HecJimSan/stub-cli/workflows/Coverage/badge.svg)
-
 
 # Description
 
