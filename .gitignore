@@ -1,0 +1,7 @@
+#Ignore the following folders
+/node_modules
+.nyc_output
+/coverage/
+/temp/
+
+temporal
