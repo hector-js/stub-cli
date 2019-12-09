@@ -1,4 +1,4 @@
-import { getStatus } from "../../utils.cli";
+import { getStatus } from "../../../../utils.cli";
 
 export function assert(){
     return `\n      .end((err, res) => {`;

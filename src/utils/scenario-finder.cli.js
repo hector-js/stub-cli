@@ -1,6 +1,7 @@
 import { cd } from 'shelljs';
 import { warn } from 'console';
-import { writeFileByData, checkPath, sanitizeRootFile, getIdFormatted } from './utils.cli';
+import { sanitizeRootFile, getIdFormatted } from './utils.cli';
+import { checkPath, writeFileByData } from './file-utils.cli';
 
 const chalk = require('chalk');
 const RESOURCES_PATH = 'resources';

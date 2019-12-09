@@ -1,4 +1,4 @@
-import { getHeaders, arrayToJson } from "../../utils.cli";
+import { getHeaders, arrayToJson } from "../../../../utils.cli";
 
 export function headers(args){
     const headers = getHeaders(args);

@@ -1,4 +1,4 @@
-import { buildUrl } from "../../utils.cli";
+import { buildUrl } from "../../../../utils.cli";
 
 export function methodReq(method, args, idsFormatted){
     let path = args._[2];

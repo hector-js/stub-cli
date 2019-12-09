@@ -1,18 +1,16 @@
 import { cd, exec, mkdir, touch } from 'shelljs';
 import { writeFile, readFile } from 'fs';
 import { info, error } from 'console';
-import { handleQuestion, writeFileByData, createFileInPath } from '../utils/utils.cli';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
+import { handleQuestion, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 
 const chalk = require('chalk');
 
 export async function newCli(args) {
     const commands = args._;
     var start = new Date();
-
     exec('clear');
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
 
     var nameProject;
     if (commands.length < 2) {

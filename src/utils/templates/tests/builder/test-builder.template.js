@@ -1,13 +1,13 @@
-import { describe } from "./builder/describe.template";
-import { it } from "./builder/it.template";
-import { methodReq } from "./builder/method.template";
-import { headers } from "./builder/headers.template";
-import { bodyReq } from "./builder/body-req.template";
-import { assert, status, noErrors, body, endAssert, bodyG, emptyBody } from "./builder/assert.template";
-import { libraries } from "./builder/libraries.template";
-import { cookies } from "./builder/cookies.template";
+import { describe } from "./sections/describe.template";
+import { it } from "./sections/it.template";
+import { methodReq } from "./sections/method.template";
+import { headers } from "./sections/headers.template";
+import { bodyReq } from "./sections/body-req.template";
+import { assert, status, noErrors, body, endAssert, bodyG, emptyBody } from "./sections/assert.template";
+import { libraries } from "./sections/libraries.template";
+import { cookies } from "./sections/cookies.template";
 
-export class TemplateBuilder {
+export class TestBuilder {
 
     constructor(args, methodName) {
         this.template = ``;
@@ -16,7 +16,7 @@ export class TemplateBuilder {
     }
 
     static aTemplate(args, methodName) {
-        return new TemplateBuilder(args, methodName);
+        return new TestBuilder(args, methodName);
     }
 
     libraries() {

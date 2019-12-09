@@ -1,7 +1,7 @@
-import { TemplateBuilder } from "../builder.template";
+import { TestBuilder } from './builder/test-builder.template';
 
 export const patchTestTemplate = (args, idsFormatted) => {
-  return TemplateBuilder.aTemplate(args, 'patch')
+  return TestBuilder.aTemplate(args, 'patch')
     .libraries()
     .describe().it().request()
     .method(idsFormatted).headers().cookies()

@@ -1,4 +1,4 @@
-import { libraries } from "../builder/libraries.template";
+import { libraries } from "./builder/sections/libraries.template";
 
 export const healthTest = libraries() + `
 describe('GET - health ', () => {

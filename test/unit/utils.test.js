@@ -1,13 +1,12 @@
 'use strict';
 
-import { sizeObject, checkPath, writeFileByData, createFileInPath, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties } from './../../src/utils/utils.cli';
-import { unlinkSync, statSync, existsSync, readdirSync, readFileSync, rmdirSync } from 'fs';
+import { sizeObject, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties, convertArrayToJsonProperties, arrayToJson, arrayToArrayValues, buildUrl } from './../../src/utils/utils.cli';
+import { unlinkSync } from 'fs';
 import { expect, assert } from 'chai';
-import { join } from 'path';
 
 const chalk = require('chalk');
 
-describe.only('Utils', () => {
+describe('Utils', () => {
 
   it('should pass', () => {
     expect(true).to.be.true;
@@ -34,119 +33,6 @@ describe.only('Utils', () => {
         });
       });
     });
-  });
-
-  describe('#checkPath', () => {
-    context('when the patch exits', () => {
-      it('should return true', () => {
-        const path = './test';
-
-        const result = checkPath(path);
-
-        expect(result).to.be.true;
-      });
-    });
-
-    ['/noPath', undefined, null].forEach(path => {
-      context(`when the path is ${path}`, () => {
-        it('should return false', () => {
-          const result = checkPath(path);
-
-          expect(result).to.be.false;
-        });
-      });
-    });
-  });
-
-  describe('#writeFileByData', () => {
-    context('when the path exits and the data is correct', () => {
-      /**
-       * TO BE REVIEWED
-       * this test is failing in the pipeline, 
-       */
-      it.skip('should write a file with the data provided', (done) => {
-        const file = 'temporal';
-        const data = 'hello world';
-
-        writeFileByData(file, data);
-        done();
-
-        if (!checkPath(file)) {
-          done(new Error("Make test fail"));
-        } else {
-          unlinkSync(file)
-        }
-      });
-    });
-
-    [
-      [undefined, undefined],
-      [null, null],
-      [undefined, 'temporal'],
-      [null, 'temporal'],
-      ['temporal', null],
-      ['temporal', undefined],
-      []
-
-    ].forEach(value => {
-      context(`when:
-          -file name: `+ chalk.magenta(`${value[0]}`) + `
-          -data:      `+ chalk.magenta(`${value[1]}`), () => {
-        it('should return false', () => {
-          const fn = () => writeFileByData(value[0], value[1]);
-
-          assert.throws(fn, Error, `It couldn't create a file`);
-        });
-
-        afterEach((done) => {
-          done();
-          unlinkSync(value[0])
-        })
-      });
-    });
-
-  });
-
-  describe('#createFileInPath', () => {
-    context('when the fileName exits and path is correct', () => {
-      /**
-       * @description I need some research to know how to test the file creation properly
-       */
-      it('should create a file in the correct path', () => {
-        const fileName = 'tempFile';
-        const path = 'temp';
-
-        createFileInPath(fileName, path);
-      });
-    });
-
-
-    [
-      [undefined, undefined],
-      [null, null],
-      [undefined, 'temporal'],
-      [null, 'temporal'],
-      ['temporal', null],
-      ['temporal', undefined],
-      []
-
-    ].forEach(value => {
-      context(`when:
-          -file name: `+ chalk.magenta(`${value[0]}`) + `
-          -data:      `+ chalk.magenta(`${value[1]}`), () => {
-        it('should return false', () => {
-          const fn = () => createFileInPath(value[0], value[1]);
-
-          assert.throws(fn, Error, `It couldn't create a file`);
-        });
-
-        afterEach((done) => {
-          done();
-          unlinkSync(value[0])
-        })
-      });
-    });
-
   });
 
   describe('#sanitizeRootFile', () => {
@@ -389,22 +275,121 @@ describe.only('Utils', () => {
   });
 
   describe('#convertIdsToJsonProperties', () => {
-    it('should convert to json properties an array', () => {
-      const idsFormatted = ['id', 'param'];
+    it('should convert array  to this format: "_id":"idTBD", "_param":"paramTBD"', () => {
+      const array = ['id', 'param'];
 
-      const result = convertIdsToJsonProperties(idsFormatted);
+      const result = convertIdsToJsonProperties(array);
 
-      expect(result).to.equal(`'_id': 'idTBD', '_param': 'paramTBD', `);
+      expect(result).to.equal(`"_id": "idTBD","_param": "paramTBD",`);
     });
 
-    context('when idsFormatted is not defined', () => {
+    context('when array is not defined', () => {
       [undefined, null, []].forEach(value => {
         it(`should return empty for ${value}`, () => {
-          const idsFormatted = value;
+          const array = value;
 
-          const result = convertIdsToJsonProperties(idsFormatted);
+          const result = convertIdsToJsonProperties(array);
 
           expect(result).to.be.empty;
+        });
+      });
+    });
+  });
+
+  describe('#convertArrayToJsonProperties', () => {
+    it('should convert array  to this format: "id", "param"', () => {
+      const array = ['id', 'param'];
+
+      const result = convertArrayToJsonProperties(array);
+
+      expect(result).to.equal(`"id","param"`);
+    });
+
+    context('when array is not defined', () => {
+      [undefined, null, []].forEach(value => {
+        it(`should return empty for ${value}`, () => {
+          const array = value;
+
+          const result = convertArrayToJsonProperties(array);
+
+          expect(result).to.be.empty;
+        });
+      });
+    });
+  });
+
+  describe('#arrayToJson', () => {
+    it('should convert array to this format: "id":"any value", "param":"any value"', () => {
+      const array = ['id', 'param'];
+
+      const result = arrayToJson(array);
+
+      expect(result).to.equal(`"id": "any value","param": "any value"`);
+    });
+
+    context('when array is not defined', () => {
+      [undefined, null, []].forEach(value => {
+        it(`should return empty for ${value}`, () => {
+          const array = value;
+
+          const result = arrayToJson(array);
+
+          expect(result).to.be.empty;
+        });
+      });
+    });
+  });
+
+  describe('#arrayToArrayValues', () => {
+    it('should convert array to this format: "id=anyValue", "param=anyValue"', () => {
+      const array = ['id', 'param'];
+
+      const result = arrayToArrayValues(array);
+
+      expect(result).to.equal(`"id=anyValue","param=anyValue"`);
+    });
+
+    context('when array is not defined', () => {
+      [undefined, null, []].forEach(value => {
+        it(`should return empty for ${value}`, () => {
+          const array = value;
+
+          const result = arrayToArrayValues(array);
+
+          expect(result).to.be.empty;
+        });
+      });
+    });
+  });
+
+  describe('#buildUrl', () => {
+    it('should build a path with ramdon values', () => {
+      const path = '/data-one/{id}/data-two?product={param}';
+      const ids = ['id', 'param'];
+
+      const result = buildUrl(path, ids);
+
+      expect(result).to.equal('/data-one/idTBD/data-two?product=paramTBD');
+    });
+
+    context('when ids is not defined', () => {
+      [undefined, null, []].forEach(value => {
+        it(`should return same path for ${value}`, () => {
+          const array = '/data-one';
+
+          const result = buildUrl(array, value);
+
+          expect(result).to.equal(array);
+        });
+      });
+    });;
+
+    context('when path is not defined', () => {
+      [undefined, null, ''].forEach(value => {
+        it(`should throw error for ${value}`, () => {
+          const fn = () => buildUrl(value, null);
+
+          assert.throws(fn, Error, chalk.red('no path'));
         });
       });
     });
