@@ -1,6 +1,6 @@
 'use strict';
 
-import { sizeObject, checkPath, writeFileByData, createFileInPath, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus } from './../../src/utils/utils.cli';
+import { sizeObject, checkPath, writeFileByData, createFileInPath, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties } from './../../src/utils/utils.cli';
 import { unlinkSync, statSync, existsSync, readdirSync, readFileSync, rmdirSync } from 'fs';
 import { expect, assert } from 'chai';
 import { join } from 'path';
@@ -384,6 +384,28 @@ describe.only('Utils', () => {
             expect(result).to.be.null;
           });
         })
+      });
+    });
+  });
+
+  describe('#convertIdsToJsonProperties', () => {
+    it('should convert to json properties an array', () => {
+      const idsFormatted = ['id', 'param'];
+
+      const result = convertIdsToJsonProperties(idsFormatted);
+
+      expect(result).to.equal(`'_id': 'idTBD', '_param': 'paramTBD', `);
+    });
+
+    context('when idsFormatted is not defined', () => {
+      [undefined, null, []].forEach(value => {
+        it(`should return empty for ${value}`, () => {
+          const idsFormatted = value;
+
+          const result = convertIdsToJsonProperties(idsFormatted);
+
+          expect(result).to.be.empty;
+        });
       });
     });
   });

@@ -127,7 +127,7 @@ export const convertIdsToJsonProperties = (idsFormatted) => {
     var ids = '';
     if (idsFormatted) {
         idsFormatted.forEach(id => {
-            ids = ids + `"_${id}": "${id}TBD", `;
+            ids = ids + `'_${id}': '${id}TBD', `;
         });
     }
     return ids;
