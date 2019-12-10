@@ -4,6 +4,7 @@ import { sanitizeRootFile, getIdFormatted } from './utils.cli';
 import { checkPath, writeFileByData } from './file-utils.cli';
 
 const chalk = require('chalk');
+
 const RESOURCES_PATH = 'resources';
 
 export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
@@ -23,5 +24,6 @@ export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) 
 
     } else {
         warn(chalk.yellow('\nInfo: Please, navigate to package.json file level and run the command from there.'));
+        throw new Error;
     }
 }
