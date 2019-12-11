@@ -12,7 +12,6 @@ describe('GET - health ', () => {
 					'STATUS': 'UP'
 				});
 				done();
-			});
+		});
 	});
-});
-`;
+});`;

@@ -1,10 +1,10 @@
 'use strict';
 
 import { expect } from 'chai';
-import { getTemplate } from '../../../src/utils/templates/resources/get.template';
-import { getTestTemplate } from '../../../src/utils/templates/tests/get.template';
+import { headTemplate } from '../../../src/utils/templates/resources/head.template';
+import { headTestTemplate } from '../../../src/utils/templates/tests/head.template';
 
-describe('get-template', () => {
+describe('head-template', () => {
   describe('resources', () => {
     let args;
     let ids
@@ -17,16 +17,15 @@ describe('get-template', () => {
     });
 
     it('should return the resource scenario', () => {
-      const result = getTemplate(args, ids);
+      const result = headTemplate(args, ids);
 
       expect(result).to.equal(`{
-  "_get" : {
+  "_head" : {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
         "_headers" : [  ],
         "_cookies" : [  ],
-        "_body" : { "body": "To be defined" },
         
         "_description" : "Description to be defined" 
       }
@@ -50,7 +49,7 @@ describe('get-template', () => {
 
     it('should return a test template',()=>{
 
-      const result = getTestTemplate(args, ids);
+      const result = headTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
     
@@ -60,18 +59,16 @@ var request = require('supertest');
     
 var expect = chai.expect;
 
-describe('GET - /any-path/{id}/data ', () => {
+describe('HEAD - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
-      .get('/any-path/idTBD/data')
+      .head('/any-path/idTBD/data')
       
       
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(200);
-          expect(res.body).to.deep.equal({
-            'body' : 'To be defined'
-          });
+          expect(res.body).to.be.empty;
           done();
       });
   });

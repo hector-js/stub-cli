@@ -10,8 +10,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --recursive --require esm --exit",
-    "coverage": "nyc --reporter=html --reporter=text mocha --recursive --require esm --exit"
+    "test": "mocha --recursive --require esm --exit"
   },
   "keywords": [
     "cli",
