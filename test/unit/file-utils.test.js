@@ -2,51 +2,71 @@
 
 import { unlinkSync } from 'fs';
 import { expect, assert } from 'chai';
-import { checkPath, writeFileByData, createFileInPath } from '../../src/utils/file-utils.cli';
+import { stub , match} from 'sinon';
 
+const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 
 describe('file-utils', () => {
-  describe('#checkPath', () => {
+  describe('#checkPath', () => {    let pq;
+    let existsSyncStub;
+
+    beforeEach(()=>{
+      existsSyncStub = stub();
+      pq = proxyquire('../../src/utils/file-utils.cli', {
+        'fs': {
+          existsSync: existsSyncStub,
+        }
+      });
+    });
+
     context('when the patch exits', () => {
       it('should return true', () => {
         const path = './test';
+        existsSyncStub.returns(true);
 
-        const result = checkPath(path);
+        const result = pq.checkPath(path);
 
         expect(result).to.be.true;
+        assert.ok(existsSyncStub.calledOnceWith(path));
       });
     });
 
     ['/noPath', undefined, null].forEach(path => {
       context(`when the path is ${path}`, () => {
         it('should return false', () => {
-          const result = checkPath(path);
+          existsSyncStub.throws(new Error);
+
+          const result = pq.checkPath(path);
 
           expect(result).to.be.false;
+          assert.ok(existsSyncStub.calledOnceWith(path));
         });
       });
     });
   });
 
   describe('#writeFileByData', () => {
+    let pq;
+    let writeFileStub;
+
+    beforeEach(()=>{
+      writeFileStub = stub();
+      pq = proxyquire('../../src/utils/file-utils.cli', {
+        'fs': {
+          writeFile: writeFileStub,
+        }
+      });
+    });
+
     context('when the path exits and the data is correct', () => {
-      /**
-       * TO BE REVIEWED
-       * this test is failing in the pipeline, 
-       */
-      it.skip('should write a file with the data provided', (done) => {
+      it('should write a file with the data provided', () => {
         const file = 'temporal';
         const data = 'hello world';
 
-        writeFileByData(file, data);
-        done();
+        pq.writeFileByData(file, data);
 
-        if (!checkPath(file)) {
-          done(new Error("Make test fail"));
-        } else {
-          unlinkSync(file)
-        }
+        assert.ok(writeFileStub.calledOnceWith(file, data, match.any));
       });
     });
 
@@ -58,36 +78,49 @@ describe('file-utils', () => {
       ['temporal', null],
       ['temporal', undefined],
       []
-
     ].forEach(value => {
       context(`when:
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
         it('should return false', () => {
-          const fn = () => writeFileByData(value[0], value[1]);
+          const fn = () => pq.writeFileByData(value[0], value[1]);
 
           assert.throws(fn, Error, `It couldn't create a file`);
         });
-
-        afterEach((done) => {
-          done();
-          unlinkSync(value[0])
-        })
       });
     });
 
   });
 
   describe('#createFileInPath', () => {
+    let pq;
+    let cdStub;
+    let mkdirStub;
+    let touchStub;
+
+    beforeEach(()=>{
+      cdStub = stub();
+      mkdirStub = stub();
+      touchStub = stub();
+      pq = proxyquire('../../src/utils/file-utils.cli', {
+        'shelljs': {
+          cd: cdStub,
+          mkdir: mkdirStub,
+          touch: touchStub
+        }
+      });
+    });
+
     context('when the fileName exits and path is correct', () => {
-      /**
-       * @description I need some research to know how to test the file creation properly
-       */
       it('should create a file in the correct path', () => {
         const fileName = 'tempFile';
         const path = 'temp';
 
-        createFileInPath(fileName, path);
+        pq.createFileInPath(fileName, path);
+
+        assert.ok(cdStub.calledOnceWith(path));
+        assert.ok(mkdirStub.calledOnceWith(path));
+        assert.ok(touchStub.calledOnceWith(fileName));
       });
     });
 
@@ -106,7 +139,7 @@ describe('file-utils', () => {
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
         it('should return false', () => {
-          const fn = () => createFileInPath(value[0], value[1]);
+          const fn = () => pq.createFileInPath(value[0], value[1]);
 
           assert.throws(fn, Error, `It couldn't create a file`);
         });
