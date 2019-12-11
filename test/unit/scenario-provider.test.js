@@ -32,6 +32,8 @@ describe('scenario-provider', () => {
       }).scenarioGenerator;
     });
 
+    afterEach(()=>proxyquire.callThru());
+
     describe('a template with package.json and resources folder', () => {
       let args;
 

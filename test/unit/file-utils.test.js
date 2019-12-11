@@ -20,6 +20,8 @@ describe('file-utils', () => {
       });
     });
 
+    afterEach(()=>proxyquire.callThru());
+
     context('when the patch exits', () => {
       it('should return true', () => {
         const path = './test';
