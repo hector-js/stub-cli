@@ -11,23 +11,25 @@ describe('scenario-provider', () => {
     let writeFileByDataStub;
     let createFileStub;
     let cdStub;
-    let pq;
+    let scenarioGenerator;
 
     beforeEach(() => {
       checkStub = stub();
       writeFileByDataStub = stub();
       createFileStub = stub();
       cdStub = stub();
-      pq = proxyquire('../../src/utils/scenario-finder.cli', {
+      scenarioGenerator = proxyquire('../../src/utils/scenario-finder.cli', {
         './file-utils.cli': {
           checkPath: checkStub,
           writeFileByData: writeFileByDataStub,
-          createFileInPath: createFileStub
+          createFileInPath: createFileStub, '@noCallThru': true
+
         },
         'shelljs': {
           cd: cdStub
+          , '@noCallThru': true
         }
-      });
+      }).scenarioGenerator;
     });
 
     describe('a template with package.json and resources folder', () => {
@@ -39,19 +41,22 @@ describe('scenario-provider', () => {
         }
         checkStub.withArgs('./package.json').returns(true);
         checkStub.withArgs('./resources/').returns(true);
+        scenarioGenerator = proxyquire('../../src/utils/scenario-finder.cli', {
+          './file-utils.cli': {
+            checkPath: checkStub,
+            writeFileByData: writeFileByDataStub,
+            createFileInPath: createFileStub
+  
+          },
+          'shelljs': {
+            cd: cdStub
+          }
+        }).scenarioGenerator;
       });
 
-      describe('navigation path', () => {
-        /**
-         * @description We need to run this test to make proxy works
-         * @fixme
-         */
-        it('should navigate to the proper file', () => {
-          pq.scenarioGenerator(args, stub(), stub(), null);
-        });      
-
+      describe('navigation path', () => {  
          it('should navigate to the proper file', () => {
-          pq.scenarioGenerator(args, stub(), stub(), null);
+          scenarioGenerator(args, stub(), stub(), null);
 
           assert.ok(cdStub.withArgs('resources'));
           assert.ok(cdStub.withArgs('..').calledOnce);
@@ -64,7 +69,7 @@ describe('scenario-provider', () => {
           const resourceTemplateStub = stub();
           resourceTemplateStub.withArgs(args, ['id']).returns('any template')
 
-          pq.scenarioGenerator(args, resourceTemplateStub, stub(), 'get');
+          scenarioGenerator(args, resourceTemplateStub, stub(), 'get');
 
           assert.ok(resourceTemplateStub.calledOnceWith(args, ['id']));
           assert.ok(writeFileByDataStub.withArgs('any-path-id-data.get.json', 'any template').calledOnce);
@@ -76,7 +81,7 @@ describe('scenario-provider', () => {
           const testTemplateStub = stub();
           testTemplateStub.withArgs(args, ['id']).returns('any template')
 
-          pq.scenarioGenerator(args, stub(), testTemplateStub, 'get');
+          scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
           assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
           assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
@@ -89,7 +94,7 @@ describe('scenario-provider', () => {
         it('should throw an error', () => {
           checkStub.withArgs('./resources/').returns(true);
   
-          assert.throws(() => pq.scenarioGenerator(null, null, null, null), Error, '');
+          assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
         });
       });
   
@@ -97,7 +102,7 @@ describe('scenario-provider', () => {
         it('should throw an error', () => {
           checkStub.withArgs('./package.json').returns(true);
 
-          assert.throws(() => pq.scenarioGenerator(null, null, null, null), Error, '');
+          assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
         });
       });
     });
