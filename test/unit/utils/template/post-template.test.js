@@ -1,10 +1,10 @@
 'use strict';
 
 import { expect } from 'chai';
-import { deleteTemplate } from './../../../src/utils/templates/resources/delete.template';
-import { deleteTestTemplate } from '../../../src/utils/templates/tests/delete.template';
+import { postTemplate } from '../../../../src/utils/templates/resources/post.template';
+import { postTestTemplate } from '../../../../src/utils/templates/tests/post.template';
 
-describe('delete-template', () => {
+describe('post-template', () => {
   describe('resources', () => {
     let args;
     let ids
@@ -17,10 +17,10 @@ describe('delete-template', () => {
     });
 
     it('should add the resource scenatio', () => {
-      const result = deleteTemplate(args, ids);
+      const result = postTemplate(args, ids);
 
       expect(result).to.equal(`{
-  "_delete" : {
+  "_post" : {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
@@ -53,7 +53,7 @@ describe('delete-template', () => {
 
     it('should return a test template',()=>{
 
-      const result = deleteTestTemplate(args, ids);
+      const result = postTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
     
@@ -63,10 +63,10 @@ var request = require('supertest');
     
 var expect = chai.expect;
 
-describe('DELETE - /any-path/{id}/data ', () => {
+describe('POST - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
-      .delete('/any-path/idTBD/data')
+      .post('/any-path/idTBD/data')
       
       
       .send({'dummy': 'dummy'})

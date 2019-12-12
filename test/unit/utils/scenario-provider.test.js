@@ -18,7 +18,7 @@ describe('scenario-provider', () => {
       writeFileByDataStub = stub();
       createFileStub = stub();
       cdStub = stub();
-      scenarioGenerator = proxyquire('../../src/utils/scenario-finder.cli', {
+      scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
         './file-utils.cli': {
           checkPath: checkStub,
           writeFileByData: writeFileByDataStub,
@@ -43,7 +43,7 @@ describe('scenario-provider', () => {
         }
         checkStub.withArgs('./package.json').returns(true);
         checkStub.withArgs('./resources/').returns(true);
-        scenarioGenerator = proxyquire('../../src/utils/scenario-finder.cli', {
+        scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
           './file-utils.cli': {
             checkPath: checkStub,
             writeFileByData: writeFileByDataStub,

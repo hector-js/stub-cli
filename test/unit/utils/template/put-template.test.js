@@ -1,10 +1,10 @@
 'use strict';
 
 import { expect } from 'chai';
-import { traceTemplate } from '../../../src/utils/templates/resources/trace.template';
-import { traceTestTemplate } from '../../../src/utils/templates/tests/trace.template';
+import { putTemplate } from '../../../../src/utils/templates/resources/put.template';
+import { putTestTemplate } from '../../../../src/utils/templates/tests/put.template';
 
-describe('trace-template', () => {
+describe('put-template', () => {
   describe('resources', () => {
     let args;
     let ids
@@ -17,15 +17,19 @@ describe('trace-template', () => {
     });
 
     it('should add the resource scenatio', () => {
-      const result = traceTemplate(args, ids);
+      const result = putTemplate(args, ids);
 
       expect(result).to.equal(`{
-  "_trace" : {
+  "_put" : {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
+        "_requestBody":{
+          "dummy": "dummy"
+        },
         "_headers" : [  ],
         "_cookies" : [  ],
+        "_body" : { "dummyResponse": "dummyResponse" },
         
         "_description" : "Description to be defined" 
       }
@@ -49,7 +53,7 @@ describe('trace-template', () => {
 
     it('should return a test template',()=>{
 
-      const result = traceTestTemplate(args, ids);
+      const result = putTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
     
@@ -59,16 +63,20 @@ var request = require('supertest');
     
 var expect = chai.expect;
 
-describe('TRACE - /any-path/{id}/data ', () => {
+describe('PUT - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
-      .trace('/any-path/idTBD/data')
+      .put('/any-path/idTBD/data')
       
       
+      .send({'dummy': 'dummy'})
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(200);
-          expect(res.body).to.be.empty;
+          expect(res.body).to.deep.equal({
+            'dummyResponse': 'dummyResponse'
+ 
+          });
           done();
       });
   });

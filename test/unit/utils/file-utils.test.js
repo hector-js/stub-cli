@@ -13,7 +13,7 @@ describe('file-utils', () => {
 
     beforeEach(()=>{
       existsSyncStub = stub();
-      pq = proxyquire('../../src/utils/file-utils.cli', {
+      pq = proxyquire('../../../src/utils/file-utils.cli', {
         'fs': {
           existsSync: existsSyncStub,
         }
@@ -54,7 +54,7 @@ describe('file-utils', () => {
 
     beforeEach(()=>{
       writeFileStub = stub();
-      pq = proxyquire('../../src/utils/file-utils.cli', {
+      pq = proxyquire('../../../src/utils/file-utils.cli', {
         'fs': {
           writeFile: writeFileStub,
         }
@@ -104,7 +104,7 @@ describe('file-utils', () => {
       cdStub = stub();
       mkdirStub = stub();
       touchStub = stub();
-      pq = proxyquire('../../src/utils/file-utils.cli', {
+      pq = proxyquire('../../../src/utils/file-utils.cli', {
         'shelljs': {
           cd: cdStub,
           mkdir: mkdirStub,

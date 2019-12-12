@@ -1,7 +1,6 @@
 'use strict';
 
-import { sizeObject, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties, convertArrayToJsonProperties, arrayToJson, arrayToArrayValues, buildUrl } from './../../src/utils/utils.cli';
-import { unlinkSync } from 'fs';
+import { sizeObject, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties, convertArrayToJsonProperties, arrayToJson, arrayToArrayValues, buildUrl } from '../../../src/utils/utils.cli';
 import { expect, assert } from 'chai';
 
 const chalk = require('chalk');

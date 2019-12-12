@@ -1,8 +1,8 @@
 'use strict';
 
 import { expect } from 'chai';
-import { healthData } from '../../../src/utils/templates/resources/health.template';
-import { healthTest } from '../../../src/utils/templates/tests/health.template';
+import { healthData } from '../../../../src/utils/templates/resources/health.template';
+import { healthTest } from '../../../../src/utils/templates/tests/health.template';
 
 describe('health-template', () => {
   describe('resources', () => {

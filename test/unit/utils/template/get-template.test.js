@@ -1,10 +1,10 @@
 'use strict';
 
 import { expect } from 'chai';
-import { patchTemplate } from '../../../src/utils/templates/resources/patch.template';
-import { patchTestTemplate } from '../../../src/utils/templates/tests/patch.template';
+import { getTemplate } from '../../../../src/utils/templates/resources/get.template';
+import { getTestTemplate } from '../../../../src/utils/templates/tests/get.template';
 
-describe('patch-template', () => {
+describe('get-template', () => {
   describe('resources', () => {
     let args;
     let ids
@@ -16,20 +16,17 @@ describe('patch-template', () => {
       ids = ['id'];
     });
 
-    it('should add the resource scenatio', () => {
-      const result = patchTemplate(args, ids);
+    it('should return the resource scenario', () => {
+      const result = getTemplate(args, ids);
 
       expect(result).to.equal(`{
-  "_patch" : {
+  "_get" : {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
-        "_requestBody":{
-          "dummy": "dummy"
-        },
         "_headers" : [  ],
         "_cookies" : [  ],
-        "_body" : { "dummyResponse": "dummyResponse" },
+        "_body" : { "body": "To be defined" },
         
         "_description" : "Description to be defined" 
       }
@@ -53,7 +50,7 @@ describe('patch-template', () => {
 
     it('should return a test template',()=>{
 
-      const result = patchTestTemplate(args, ids);
+      const result = getTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
     
@@ -63,19 +60,17 @@ var request = require('supertest');
     
 var expect = chai.expect;
 
-describe('PATCH - /any-path/{id}/data ', () => {
+describe('GET - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
-      .patch('/any-path/idTBD/data')
+      .get('/any-path/idTBD/data')
       
       
-      .send({'dummy': 'dummy'})
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(200);
           expect(res.body).to.deep.equal({
-            'dummyResponse': 'dummyResponse'
- 
+            'body' : 'To be defined'
           });
           done();
       });
