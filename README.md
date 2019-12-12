@@ -92,17 +92,17 @@ The service will be running in the port *3005* waiting for a request.
 Make a request:
 
 ```sh
-curl http://localhost:3005/stories/nathan/person
+curl http://localhost:3005/health
 ```
 
 The response will be like this:
 
 ```json
 {
-    "name": "Nathan"
+    "STATUS": "UP"
 }
 ```
 
 # Respository
 
-https://github.com/HecJimSan/stub-backend
+https://github.com/HecJimSan/stub-cli
