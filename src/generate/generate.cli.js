@@ -73,10 +73,7 @@ export function generateCli(args) {
         warn(chalk.yellow('\nMethod not found :(\n'));
     }
   }
-
-
 }
-
 
 function displayGeneratorOpts() {
   info(chalk.green('\nGenerate options:\n'));

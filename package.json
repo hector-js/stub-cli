@@ -19,7 +19,7 @@
     "stub-backend",
     "frontend"
   ],
-  "author": "hectorjs",
+  "author": "Hector Jimenez Sanchez",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
@@ -32,7 +32,11 @@
     "mocha": "^5.2.0",
     "proxyquire": "^2.1.3",
     "sinon": "^7.5.0",
-    "sinon-chai": "^3.3.0",
-    "supertest": "^3.4.2"
-  }
+    "sinon-chai": "^3.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HecJimSan/stub-cli.git"
+  },
+  "homepage": "https://hectorjs.herokuapp.com"
 }
