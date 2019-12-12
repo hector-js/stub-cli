@@ -39,42 +39,42 @@ export function generateCli(args) {
     if (!args.description && !args.headers && !args.cookies && !args.status) {
       displayGeneratorOpts();
     }
-
-    process.exit();
+  } else {
+    switch (args._[1]) {
+      case 'get':
+      case 'g':
+        getCli(args);
+        break;
+      case 'post':
+      case 'p':
+        postCli(args);
+        break;
+      case 'put':
+      case 'pu':
+        putCli(args);
+        break;
+      case 'delete':
+      case 'd':
+        deleteCli(args);
+        break;
+      case 'head':
+      case 'h':
+        headCli(args);
+        break;
+      case 'patch':
+      case 'pa':
+        patchCli(args);
+        break;
+      case 'trace':
+      case 't':
+        traceCli(args);
+        break;
+      default:
+        warn(chalk.yellow('\nMethod not found :(\n'));
+    }
   }
 
-  switch (args._[1]) {
-    case 'get':
-    case 'g':
-      getCli(args);
-      break;
-    case 'post':
-    case 'p':
-      postCli(args);
-      break;
-    case 'put':
-    case 'pu':
-      putCli(args);
-      break;
-    case 'delete':
-    case 'd':
-      deleteCli(args);
-      break;
-    case 'head':
-    case 'h':
-      headCli(args);
-      break;
-    case 'patch':
-    case 'pa':
-      patchCli(args);
-      break;
-    case 'trace':
-    case 't':
-      traceCli(args);
-      break;
-    default:
-      warn(chalk.yellow('\nMethod not found :(\n'));
-  }
+
 }
 
 
