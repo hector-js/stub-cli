@@ -1,0 +1,16 @@
+{
+    "branches": 80,
+    "lines": 95,
+    "functions": 95,
+    "statements": 95,
+    "all": true,
+    "check-coverage": true,
+    "include": [
+        "src/**"
+    ],
+    "exclude": [
+        "**/file-utils.cli.js",
+        "**/node_modules/**",
+        "**/test/**"
+    ]
+}

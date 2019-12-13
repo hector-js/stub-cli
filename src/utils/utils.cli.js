@@ -82,18 +82,6 @@ export const buildUrl = (path, ids) => {
     return path;
 }
 
-const handleAnswer = (resolve, reject, readline, value) => {
-    if (!value) {
-        warn(chalk.red(` You must add a value  :(`));
-        readline.close();
-        reject();
-    } else {
-        info(chalk.green(` Well done  :)`));
-        readline.close();
-        resolve(value);
-    }
-}
-
 const arToCus = (array, fn, lastElement) => {
     var resultArray = '';
     if (array) {
