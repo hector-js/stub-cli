@@ -7,7 +7,7 @@ import { start } from './start/start.cli';
 import { exec } from 'shelljs';
 
 const chalk = require('chalk');
-const VERSION = '0.81.0';
+const VERSION = '0.82.0';
 
 export function cli(args) {
     switch (args._[0]) {
@@ -32,12 +32,10 @@ export function cli(args) {
 
     if (args.version) {
         info(chalk.yellow(`\nVersion: ${VERSION}\n`));
-        process.exit();
     }
 
     if (args.license) {
         info(chalk.yellow(`\nLicense: MIT\n`));
-        process.exit();
     }
 
     if (args.help) {
@@ -53,11 +51,9 @@ export function cli(args) {
         info(chalk.green(` -  --license : MIT\n\n`));
         info(chalk.green(`Example: hjs new mock-service --vs\n`));
         info(chalk.yellow(`version: ${VERSION}\n`));
-        process.exit();
     }
 
     if(args._.length===0 && sizeObject(args) === 1){
         warn(chalk.red('\nSorry, you missed a parameter (hjs --help)'));
-        process.exit();
     }
 }
