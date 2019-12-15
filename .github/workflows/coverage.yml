@@ -1,4 +1,4 @@
-name: '@hectorjs/stub-cli'
+name: 'Coverage'
 
 on:
   push:
@@ -24,12 +24,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Unit test
-      run: |
-        npm ci
-        npm test
-      env:
-        CI: true
     - name: Coverage
       run: |
         npm ci
