@@ -1,4 +1,4 @@
-name: '@hectorjs/stub-cli'
+name: 'Coverage'
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 8.x , 10.x]
+        node-version: [ 8.x , 10.x , 12.x ]
 
     steps:
     - uses: actions/checkout@v1
@@ -24,12 +24,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Unit test
-      run: |
-        npm ci
-        npm test
-      env:
-        CI: true
     - name: Coverage
       run: |
         npm ci
