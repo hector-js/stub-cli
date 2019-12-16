@@ -11,6 +11,8 @@ describe('get-template', () => {
 
     beforeEach(() => {
       args = {
+        description: 'customDescription',
+        status: 404,
         _: ['', '', '/any-path/{id}/data']
       };
       ids = ['id'];
@@ -27,8 +29,8 @@ describe('get-template', () => {
         "_headers" : [  ],
         "_cookies" : [  ],
         "_body" : { "body": "To be defined" },
-        
-        "_description" : "Description to be defined" 
+        "_status": 404,
+        "_description" : "customDescription" 
       }
     ]
   }
@@ -43,6 +45,7 @@ describe('get-template', () => {
 
     beforeEach(() => {
       args = {
+        status: 404,
         _: ['', '', '/any-path/{id}/data']
       };
       ids = ['id'];
@@ -68,7 +71,7 @@ describe('GET - /any-path/{id}/data ', () => {
       
       .end((err, res) => {
           expect(err).to.not.exist;
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(404);
           expect(res.body).to.deep.equal({
             'body' : 'To be defined'
           });

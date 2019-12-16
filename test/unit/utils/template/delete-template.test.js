@@ -11,7 +11,7 @@ describe('delete-template', () => {
 
     beforeEach(() => {
       args = {
-        _: ['', '', '/any-path/{id}/data']
+        _: ['', '', 'any-path/{id}/data']
       };
       ids = ['id'];
     });

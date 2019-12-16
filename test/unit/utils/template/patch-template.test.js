@@ -46,7 +46,9 @@ describe('patch-template', () => {
 
     beforeEach(() => {
       args = {
-        _: ['', '', '/any-path/{id}/data']
+        cookies: 'sec',
+        headers: 'authorization,clientId',
+        _: ['', '', 'any-path/{id}/data']
       };
       ids = ['id'];
     });
@@ -63,12 +65,12 @@ var request = require('supertest');
     
 var expect = chai.expect;
 
-describe('PATCH - /any-path/{id}/data ', () => {
+describe('PATCH - any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .patch('/any-path/idTBD/data')
-      
-      
+      .set({"authorization": "any value","clientId": "any value"})
+      .set('Cookie', ["sec=anyValue"])
       .send({'dummy': 'dummy'})
       .end((err, res) => {
           expect(err).to.not.exist;

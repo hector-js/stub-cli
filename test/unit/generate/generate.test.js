@@ -11,7 +11,7 @@ describe('generate', () => {
   describe('#generateCli', () => {
     describe('methods', () => {
       let generateCli;
-      let getCliStub, deleteCliStub, headCliStub;
+      let getCliStub, deleteCliStub, headCliStub, warnStub;
       let patchCliStub, postCliStub, putCliStub, traceCliStub;
 
       beforeEach(() => {
@@ -22,6 +22,7 @@ describe('generate', () => {
         postCliStub = stub();
         putCliStub = stub();
         traceCliStub = stub();
+        warnStub = stub();
         generateCli = proxyquire('../../../src/generate/generate.cli', {
           './methods/delete.cli': { deleteCli: deleteCliStub },
           './methods/get.cli': { getCli: getCliStub },
@@ -29,7 +30,8 @@ describe('generate', () => {
           './methods/patch.cli': { patchCli: patchCliStub },
           './methods/post.cli': { postCli: postCliStub },
           './methods/put.cli': { putCli: putCliStub },
-          './methods/trace.cli': { traceCli: traceCliStub }
+          './methods/trace.cli': { traceCli: traceCliStub },
+          'console': { warn: warnStub }
         }).generateCli;
       });
 
@@ -142,6 +144,22 @@ describe('generate', () => {
               generateCli(args);
 
               assert.ok(traceCliStub.calledOnceWith(args));
+            });
+          });
+        });
+      });
+
+      describe('no method found', () => {
+        context('when no method is found', () => {
+          ['any', 'other'].forEach(method => {
+            it(`should show warning message for "${method}"`, () => {
+              const args = {
+                _: ['generate', method]
+              };
+
+              generateCli(args);
+
+              assert.ok(chalk.yellow('\nMethod not found :(\n'));
             });
           });
         });
