@@ -115,7 +115,7 @@ describe('cli', () => {
 
         cli(args);
 
-        assert.ok(infoStub.withArgs(chalk.yellow(`\nVersion: 0.82.0\n`)).calledOnce);
+        assert.ok(infoStub.withArgs(chalk.yellow(`\nVersion: 0.83.0\n`)).calledOnce);
       });
     });
   });
@@ -156,7 +156,7 @@ describe('cli', () => {
         assert.ok(infoStub.withArgs(chalk.green(` -  --headers : add headers to check in the request`)).calledOnce);
         assert.ok(infoStub.withArgs(chalk.green(` -  --license : MIT\n\n`)).calledOnce);
         assert.ok(infoStub.withArgs(chalk.green(`Example: hjs new mock-service --vs\n`)).calledOnce);
-        assert.ok(infoStub.withArgs(chalk.yellow(`version: 0.82.0\n`)).calledOnce);
+        assert.ok(infoStub.withArgs(chalk.yellow(`version: 0.83.0\n`)).calledOnce);
       });
     });
   });

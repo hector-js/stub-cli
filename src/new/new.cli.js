@@ -41,7 +41,7 @@ export async function newCli(args) {
     readFile('./package.json', 'utf8', (err, data) => {
         if (err) return error('Error while package.json was opening!');
 
-        const replacement = `"test": "mocha --exit"`;
+        const replacement = `"test": "mocha --recursive --exit"`;
         var result = data.replace('\"test\"\: \"echo \\\"Error\: no test specified\\\" \&\& exit 1\"', replacement);
 
         writeFile('./package.json', result, 'utf8', (err) => {

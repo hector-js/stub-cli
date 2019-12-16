@@ -83,7 +83,7 @@ function displayGeneratorOpts() {
   info(chalk.grey(` -  hjs generate head [url]: scenario for a HEAD request`));
   info(chalk.grey(` -  hjs generate put [url]: scenario for a PUT request`));
   info(chalk.grey(` -  hjs generate patch [url]: scenario for a PATCH request`));
-  info(chalk.green(`\nYou can use the following abreviatures:\n`));
+  info(chalk.green(`\nYou can use the following abreviations:\n`));
   info(chalk.grey(` -  generate = g  (hjs g get ...)`));
   info(chalk.grey(` -  get = g       (hjs g g ...)`));
   info(chalk.grey(` -  post = p      (hjs g p ...)`));
