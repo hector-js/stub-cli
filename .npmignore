@@ -1,6 +1,4 @@
 /test/
-/lib/app/environment/test.js
-/scripts/
 .eslintrc.js
 .nycrc.json
 /coverage/
@@ -8,5 +6,4 @@
 /.github/
 CODE_OF_CONDUCT.md
 changelog.md
-initializer.sh
 README.md
