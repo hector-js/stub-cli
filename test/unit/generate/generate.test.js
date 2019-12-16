@@ -194,7 +194,7 @@ describe('generate', () => {
           assert.ok(infoStub.withArgs(chalk.grey(` -  hjs generate head [url]: scenario for a HEAD request`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  hjs generate put [url]: scenario for a PUT request`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  hjs generate patch [url]: scenario for a PATCH request`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.green(`\nYou can use the following abreviatures:\n`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green(`\nYou can use the following abreviations:\n`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  generate = g  (hjs g get ...)`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  get = g       (hjs g g ...)`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  post = p      (hjs g p ...)`)).calledOnce);
