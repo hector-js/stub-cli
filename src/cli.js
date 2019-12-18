@@ -7,7 +7,7 @@ import { start } from './start/start.cli';
 import { exec } from 'shelljs';
 
 const chalk = require('chalk');
-const VERSION = '0.83.0';
+const VERSION = '0.84.0';
 
 export function cli(args) {
     switch (args._[0]) {
@@ -38,18 +38,18 @@ export function cli(args) {
         info(chalk.yellow(`\nLicense: MIT\n`));
     }
 
-    if (args.help) {
-        info(chalk.green('\nBelow, you can see different options for your mock:\n\n'));
-        info(chalk.green(` -  new/n [name-project]  : create new mock project `));
-        info(chalk.green(` -  generate/g  get/g/post/p/delete/d  [url]: create url section `));
-        info(chalk.green(` -  start     : run mock service `));
-        info(chalk.green(` -  test      : execute the tests `));
-        info(chalk.green(` -  --version : know version hjs`));
-        info(chalk.green(` -  --vs      : open visual code studio if exists`));
-        info(chalk.green(` -  --idea    : open intelliJ studio if exists`));
-        info(chalk.green(` -  --headers : add headers to check in the request`));
-        info(chalk.green(` -  --license : MIT\n\n`));
-        info(chalk.green(`Example: hjs new mock-service --vs\n`));
+    if (args.help&&!args._[0]) {
+        info(chalk.green('\nBelow, you can see different options for your mock:\n'));
+        info(chalk.grey(` -  new/n [name-project]  : create new mock project `));
+        info(chalk.grey(` -  generate/g  get/g/post/p/delete/d  [url]: create url section `));
+        info(chalk.grey(` -  start     : run mock service `));
+        info(chalk.grey(` -  test      : execute the tests `));
+        info(chalk.grey(` -  --version : know version hjs`));
+        info(chalk.grey(` -  --vs      : open visual code studio if exists`));
+        info(chalk.grey(` -  --idea    : open intelliJ studio if exists`));
+        info(chalk.grey(` -  --headers : add headers to check in the request`));
+        info(chalk.grey(` -  --license : MIT\n\n`));
+        info(chalk.grey(`Example: hjs new mock-service --vs\n`));
         info(chalk.yellow(`version: ${VERSION}\n`));
     }
 
