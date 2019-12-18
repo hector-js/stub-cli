@@ -36,12 +36,12 @@ export async function newCli(args) {
 
     exec('npm init -y --silent');
     exec('npm install @hectorjs/stub-backend --silent');
-    exec('npm install chai mocha supertest  --save-dev --silent');
+    exec('npm install chai mocha supertest nodemon --save-dev --silent');
 
     readFile('./package.json', 'utf8', (err, data) => {
         if (err) return error('Error while package.json was opening!');
 
-        const replacement = `"test": "mocha --recursive --exit"`;
+        const replacement = `"test": "mocha --recursive --exit",\n    "start-listen": "nodemon app.js"`;
         var result = data.replace('\"test\"\: \"echo \\\"Error\: no test specified\\\" \&\& exit 1\"', replacement);
 
         writeFile('./package.json', result, 'utf8', (err) => {
