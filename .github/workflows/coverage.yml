@@ -25,8 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Coverage
-      run: |
-        npm i
+      run: 
         npm ci
         npm run coverage
       env:
