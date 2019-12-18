@@ -207,7 +207,7 @@ describe('generate', () => {
         });
       });
 
-      context('when help has headers as well like "hjs --help --headers"',()=>{
+      context('when help has headers as well like "hjs g --help --headers"',()=>{
         it('should show common options',()=>{
           const args = {
             help: true,
@@ -223,7 +223,7 @@ describe('generate', () => {
         });
       });
 
-      context('when help has cookies as well like "hjs --help --cookies"',()=>{
+      context('when help has cookies as well like "hjs g --help --cookies"',()=>{
         it('should show common options',()=>{
           const args = {
             help: true,
@@ -239,7 +239,7 @@ describe('generate', () => {
         });
       });
 
-      context('when help has status as well like "hjs --help --status"',()=>{
+      context('when help has status as well like "hjs g --help --status"',()=>{
         it('should show common options',()=>{
           const args = {
             help: true,
@@ -255,7 +255,7 @@ describe('generate', () => {
         });
       });
 
-      context('when help has description as well like "hjs --help --description"',()=>{
+      context('when help has description as well like "hjs g --help --description"',()=>{
         it('should show common options',()=>{
           const args = {
             help: true,
@@ -268,6 +268,23 @@ describe('generate', () => {
           assert.ok(infoStub.withArgs(chalk.grey(`  --description "[status]"`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --description "Hello world!"`)).calledOnce);
           expect(infoStub.callCount).to.equal(3);
+        });
+      });
+
+      context('when help has path as well like "hjs g --help --path"',()=>{
+        it('should show common options',()=>{
+          const args = {
+            help: true,
+            path: 'cases/whatever'
+          }
+
+          generateCli(args);
+
+          assert.ok(infoStub.withArgs(chalk.green(`\nGenerate the file resource and test under the path.`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('> Path options:\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --path "[status]"`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --path cases/whatever`)).calledOnce);
+          expect(infoStub.callCount).to.equal(4);
         });
       });
     });

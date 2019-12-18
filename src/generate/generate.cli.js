@@ -36,7 +36,14 @@ export function generateCli(args) {
       info(chalk.grey(`    Example: hjs g g customrers --description "Hello world!"`));
     }
 
-    if (!args.description && !args.headers && !args.cookies && !args.status) {
+    if (args.path) {
+      info(chalk.green(`\nGenerate the file resource and test under the path.`));
+      info(chalk.green('> Path options:\n'));
+      info(chalk.grey(`  --path "[status]"`));
+      info(chalk.grey(`    Example: hjs g g customrers --path cases/whatever`));
+    }
+
+    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status) {
       displayGeneratorOpts();
     }
   } else {

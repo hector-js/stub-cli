@@ -46,7 +46,8 @@ describe('get-template', () => {
     beforeEach(() => {
       args = {
         status: 404,
-        _: ['', '', '/any-path/{id}/data']
+        _: ['', '', '/any-path/{id}/data'],
+        path: 'cases/hey'
       };
       ids = ['id'];
     });
@@ -57,7 +58,7 @@ describe('get-template', () => {
 
       expect(result).to.equal(`'use strict';
     
-var app = require('../app');
+var app = require('../../../app');
 var chai = require('chai');
 var request = require('supertest');
     
