@@ -46,7 +46,7 @@ describe('Utils', () => {
     });
 
     ['}', '/'].forEach(value => {
-      it(`should replace ${value} for ""`, () => {
+      it(`should replace ${value} for "-"`, () => {
         const path = `my-name${value}-hulk`;
 
         const result = sanitizeRootFile(path);

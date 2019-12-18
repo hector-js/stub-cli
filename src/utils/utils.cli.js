@@ -18,7 +18,7 @@ export const sanitizeRootFile = (path) => {
     }
     let rootFile = path
         .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
-        .replace(/\}|\//g, '')
+        .replace(/\}|\//g, '-')
         .replace(/\-\-\-/g, '-')
         .replace(/\-\-/g, '-');
     if (rootFile) {

@@ -1,16 +1,14 @@
 'use strict';
 
-import { assert } from 'chai';
+import { assert, expect } from 'chai';
 import { stub } from 'sinon';
 
 const proxyquire = require('proxyquire');
 
 describe('scenario-provider', () => {
   describe('#scenarioGenerator', () => {
-    let checkStub;
     let writeFileByDataStub;
-    let createFileStub;
-    let cdStub;
+    let createFileStub ,cdStub , mkdirStub, checkStub;
     let scenarioGenerator;
 
     beforeEach(() => {
@@ -18,6 +16,7 @@ describe('scenario-provider', () => {
       writeFileByDataStub = stub();
       createFileStub = stub();
       cdStub = stub();
+      mkdirStub = stub();
       scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
         './file-utils.cli': {
           checkPath: checkStub,
@@ -26,13 +25,13 @@ describe('scenario-provider', () => {
 
         },
         'shelljs': {
-          cd: cdStub
-          , '@noCallThru': true
+          cd: cdStub,
+          mkdir: mkdirStub
         }
       }).scenarioGenerator;
     });
 
-    afterEach(()=>proxyquire.callThru());
+    afterEach(() => proxyquire.callThru());
 
     describe('a template with package.json and resources folder', () => {
       let args;
@@ -48,7 +47,7 @@ describe('scenario-provider', () => {
             checkPath: checkStub,
             writeFileByData: writeFileByDataStub,
             createFileInPath: createFileStub
-  
+
           },
           'shelljs': {
             cd: cdStub
@@ -56,11 +55,12 @@ describe('scenario-provider', () => {
         }).scenarioGenerator;
       });
 
-      describe('navigation path', () => {  
-         it('should navigate to the proper file', () => {
+      describe('navigation path', () => {
+        it('should navigate to the proper file', () => {
           scenarioGenerator(args, stub(), stub(), null);
 
-          assert.ok(cdStub.withArgs('resources'));
+          expect(cdStub.callCount).to.equals(3);
+          assert.ok(cdStub.withArgs('resources').calledOnce);
           assert.ok(cdStub.withArgs('..').calledOnce);
           assert.ok(cdStub.withArgs('test').calledOnce);
         });
@@ -73,6 +73,7 @@ describe('scenario-provider', () => {
 
           scenarioGenerator(args, resourceTemplateStub, stub(), 'get');
 
+          expect(cdStub.callCount).to.equals(3);
           assert.ok(resourceTemplateStub.calledOnceWith(args, ['id']));
           assert.ok(writeFileByDataStub.withArgs('any-path-id-data.get.json', 'any template').calledOnce);
         });
@@ -85,26 +86,111 @@ describe('scenario-provider', () => {
 
           scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
+          expect(cdStub.callCount).to.equals(3);
+          assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
+          assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
+        });
+      });
+
+      describe('path is set', () => {
+        it('should generate the file under two levels', () => {
+          args = {
+            _: ['', '', '/any-path/{id}/data'],
+            path: 'cases/data'
+          }
+          const testTemplateStub = stub();
+          checkStub.withArgs('./cases').returns(false);
+          checkStub.withArgs('./data').returns(false);
+          mkdirStub.withArgs('cases').returns(false);
+          mkdirStub.withArgs('data').returns(false);
+          testTemplateStub.withArgs(args, ['id']).returns('any template')
+
+          scenarioGenerator(args, stub(), testTemplateStub, 'get');
+
+          expect(cdStub.callCount).to.equals(13);
+          assert.ok(cdStub.withArgs('cases/data').calledTwice);
+          expect(cdStub.withArgs('../..').callCount).to.equals(4);
+          assert.ok(cdStub.withArgs('cases').calledTwice);
+          assert.ok(cdStub.withArgs('data').calledTwice);
+          assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
+          assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
+        });
+
+        context('when the path starts with /', () => {
+          it('should generate the file under two levels', () => {
+            args = {
+              _: ['', '', '/any-path/{id}/data'],
+              path: '/cases/data'
+            }
+            const testTemplateStub = stub();
+            testTemplateStub.withArgs(args, ['id']).returns('any template')
+
+            scenarioGenerator(args, stub(), testTemplateStub, 'get');
+
+            expect(cdStub.callCount).to.equals(13);
+            assert.ok(cdStub.withArgs('cases/data').calledTwice);
+            expect(cdStub.withArgs('../..').callCount).to.equals(4);
+            assert.ok(cdStub.withArgs('cases').calledTwice);
+            assert.ok(cdStub.withArgs('data').calledTwice);
+            assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
+            assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
+          });
+        });
+
+        context('when the path ends with /', () => {
+          it('should generate the file under two levels', () => {
+            args = {
+              _: ['', '', '/any-path/{id}/data'],
+              path: 'cases/data/'
+            }
+            const testTemplateStub = stub();
+            testTemplateStub.withArgs(args, ['id']).returns('any template')
+
+            scenarioGenerator(args, stub(), testTemplateStub, 'get');
+
+            expect(cdStub.callCount).to.equals(13);
+            assert.ok(cdStub.withArgs('cases/data').calledTwice);
+            expect(cdStub.withArgs('../..').callCount).to.equals(4);
+            assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
+            assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
+          });
+        });
+
+        it('should generate the file under one level', () => {
+          args = {
+            _: ['', '', '/any-path/{id}/data'],
+            path: 'cases'
+          }
+          const testTemplateStub = stub();
+          testTemplateStub.withArgs(args, ['id']).returns('any template')
+
+          scenarioGenerator(args, stub(), testTemplateStub, 'get');
+
+          expect(cdStub.callCount).to.equals(11);
+          expect(cdStub.withArgs('cases').callCount).to.equals(4);
+          expect(cdStub.withArgs('..').callCount).to.equals(5);
           assert.ok(testTemplateStub.withArgs(args, ['id']).calledOnce);
           assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
         });
       });
     });
 
-    describe('location is not right',()=>{
+    describe('location is not right', () => {
       context('when the package.json is not at the same level', () => {
         it('should throw an error', () => {
           checkStub.withArgs('./resources/').returns(true);
-  
+
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
+          expect(cdStub.callCount).to.equals(0);
         });
       });
-  
+
       context('when the resource package does not exist', () => {
         it('should throw an error', () => {
           checkStub.withArgs('./package.json').returns(true);
 
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
+          expect(cdStub.callCount).to.equals(0);
         });
       });
     });
