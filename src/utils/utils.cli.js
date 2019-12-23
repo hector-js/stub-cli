@@ -1,4 +1,4 @@
-import { info, warn, error } from 'console';
+import {  error } from 'console';
 
 const chalk = require('chalk');
 
