@@ -12,6 +12,7 @@
   "scripts": {
     "test": "mocha --recursive --require esm --exit",
     "eslint": "eslint ./src/**/*.js ./test/**/*.js",
+    "test-all": "npm run eslint && npm run coverage",
     "coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit"
   },
   "keywords": [
