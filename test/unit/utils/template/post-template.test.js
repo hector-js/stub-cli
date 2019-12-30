@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 import { expect } from 'chai';
 import { postTemplate } from '../../../../src/utils/templates/resources/post.template';
@@ -7,7 +7,7 @@ import { postTestTemplate } from '../../../../src/utils/templates/tests/post.tem
 describe('post-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -40,9 +40,9 @@ describe('post-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -51,8 +51,7 @@ describe('post-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = postTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -81,7 +80,7 @@ describe('POST - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

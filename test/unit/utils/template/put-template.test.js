@@ -7,7 +7,7 @@ import { putTestTemplate } from '../../../../src/utils/templates/tests/put.templ
 describe('put-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -40,9 +40,9 @@ describe('put-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -51,8 +51,7 @@ describe('put-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = putTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -81,7 +80,7 @@ describe('PUT - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

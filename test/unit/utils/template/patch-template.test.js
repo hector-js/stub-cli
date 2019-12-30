@@ -7,7 +7,7 @@ import { patchTestTemplate } from '../../../../src/utils/templates/tests/patch.t
 describe('patch-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -40,9 +40,9 @@ describe('patch-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -53,8 +53,7 @@ describe('patch-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = patchTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -83,7 +82,7 @@ describe('PATCH - any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

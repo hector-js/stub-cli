@@ -1,4 +1,4 @@
-import { convertIdsToJsonProperties } from "../../../../utils.cli";
+import { convertIdsToJsonProperties } from '../../../../utils.cli';
 
 export function ids(ids) {
   return `

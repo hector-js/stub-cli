@@ -8,7 +8,7 @@ const chalk = require('chalk');
 
 describe('start', () => {
   let start;
-  let execCliStub, infoStub;
+  let execCliStub; let infoStub;
 
   beforeEach(() => {
     execCliStub = stub();
@@ -24,8 +24,8 @@ describe('start', () => {
   context('when start cli is called', () => {
     it(`should call exec with the correct args`, () => {
       const args = {
-        _: ['start'],
-      }
+        _: ['start']
+      };
 
       start(args);
 
@@ -38,7 +38,7 @@ describe('start', () => {
       const args = {
         _: ['start'],
         dev: true
-      }
+      };
 
       start(args);
 
@@ -51,7 +51,7 @@ describe('start', () => {
       const args = {
         _: ['start'],
         help: true
-      }
+      };
 
       start(args);
 
@@ -69,12 +69,12 @@ describe('start', () => {
             _: ['start'],
             logs: 'tiny',
             dev: true
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --logs tiny'));
-        })
+        });
       });
 
       context('when the argument is "--port 8080"', () => {
@@ -83,12 +83,12 @@ describe('start', () => {
             _: ['start'],
             port: '8080',
             dev: true
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --port 8080'));
-        })
+        });
       });
 
       context('when the argument is "--cors business.uk.org,localhost"', () => {
@@ -97,12 +97,12 @@ describe('start', () => {
             _: ['start'],
             cors: 'business.uk.org,localhost',
             dev: true
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --cors business.uk.org,localhost'));
-        })
+        });
       });
     });
 
@@ -112,12 +112,12 @@ describe('start', () => {
           const args = {
             _: ['start'],
             logs: 'tiny'
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('node app.js --logs tiny'));
-        })
+        });
       });
 
       context('when the argument is "--port 8080"', () => {
@@ -125,12 +125,12 @@ describe('start', () => {
           const args = {
             _: ['start'],
             port: '8080'
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('node app.js --port 8080'));
-        })
+        });
       });
 
       context('when the argument is "--cors business.uk.org,localhost"', () => {
@@ -138,12 +138,12 @@ describe('start', () => {
           const args = {
             _: ['start'],
             cors: 'business.uk.org,localhost'
-          }
+          };
 
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('node app.js --cors business.uk.org,localhost'));
-        })
+        });
       });
     });
   });

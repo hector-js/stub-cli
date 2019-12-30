@@ -8,8 +8,8 @@ const chalk = require('chalk');
 
 describe('cli', () => {
   let cli;
-  let sizeObjectStub, generateCliStub, newCliStub;
-  let startStub, execStub, infoStub, warnStub;
+  let sizeObjectStub; let generateCliStub; let newCliStub;
+  let startStub; let execStub; let infoStub; let warnStub;
   let args;
 
   beforeEach(() => {
@@ -29,15 +29,15 @@ describe('cli', () => {
       'console': { info: infoStub, warn: warnStub }
     }).cli;
     args = {
-      _:['']
-    }
+      _: ['']
+    };
   });
 
   afterEach(() => proxyquire.callThru());
 
   describe('#newCli', () => {
     context('when new/n command is added', () => {
-      ['new', 'n'].forEach(command => {
+      ['new', 'n'].forEach((command) => {
         it(`should call newCli with the args for "${command}"`, () => {
           args = {
             _: [command, 'any name']
@@ -53,7 +53,7 @@ describe('cli', () => {
 
   describe('#generateCli', () => {
     context('when generate/g command is added', () => {
-      ['generate', 'g'].forEach(command => {
+      ['generate', 'g'].forEach((command) => {
         it(`should call generateCli with the args for "${command}"`, () => {
           args = {
             _: [command, 'any name']
@@ -69,7 +69,7 @@ describe('cli', () => {
 
   describe('#start', () => {
     context('when start/s command is added', () => {
-      ['start', 's'].forEach(command => {
+      ['start', 's'].forEach((command) => {
         it(`should call start with the args for "${command}"`, () => {
           args = {
             _: [command, 'any name']
@@ -85,7 +85,7 @@ describe('cli', () => {
 
   describe('#test', () => {
     context('when test/t command is added', () => {
-      ['test', 't'].forEach(command => {
+      ['test', 't'].forEach((command) => {
         it(`should call test with the args for "${command}"`, () => {
           args = {
             _: [command, 'any name']

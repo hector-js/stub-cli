@@ -7,7 +7,7 @@ import { headTestTemplate } from '../../../../src/utils/templates/tests/head.tem
 describe('head-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -36,9 +36,9 @@ describe('head-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -47,8 +47,7 @@ describe('head-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = headTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -73,7 +72,7 @@ describe('HEAD - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

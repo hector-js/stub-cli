@@ -5,5 +5,5 @@ import { scenarioGenerator } from '../../utils/scenario-finder.cli';
 const METHOD = 'get';
 
 export function getCli(args) {
-  scenarioGenerator(args, getTemplate, getTestTemplate,METHOD )
+  scenarioGenerator(args, getTemplate, getTestTemplate, METHOD );
 }

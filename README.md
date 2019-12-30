@@ -1,8 +1,17 @@
 # @hectorjs/stub-cli
 
-Pipeline:
+# Install
+
+```sh
+npm install -g @hectorjs/stub-cli
+```
+
+## Quality measures
 
 ![](https://github.com/HecJimSan/stub-cli/workflows/%40hectorjs%2Fstub%2Dcli/badge.svg)
+ - ![](https://github.com/HecJimSan/stub-cli/workflows/eslint%2Dconfig%2Dgoogle/badge.svg)
+ - ![](https://github.com/HecJimSan/stub-backend/workflows/Unit%20tests/badge.svg)
+ - ![](https://github.com/HecJimSan/stub-backend/workflows/Coverage/badge.svg)
 
  Others measures
 
@@ -11,7 +20,6 @@ Pipeline:
  - ![](https://img.shields.io/snyk/vulnerabilities/npm/@hectorjs/stub-cli?logo=snyk)
  - ![](https://img.shields.io/github/last-commit/HecJimSan/stub-cli?logo=github)
 
-
 # Description
 
 The aim of this project is to mock backend services building different responses for a given authentication, cookie or request among others.
@@ -19,12 +27,6 @@ The aim of this project is to mock backend services building different responses
 _stub-cli_ is a command line which helps you to create new projects, generate methods and test template.
 
 Keep it simple :smile:
-
-# Install
-
-```sh
-npm install -g @hectorjs/stub-cli
-```
 
 # CLI
 

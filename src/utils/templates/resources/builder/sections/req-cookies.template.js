@@ -1,4 +1,4 @@
-import { convertArrayToJsonProperties } from "../../../../utils.cli";
+import { convertArrayToJsonProperties } from '../../../../utils.cli';
 
 export function reqCookies(cookies) {
   return `

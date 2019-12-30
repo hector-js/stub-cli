@@ -7,7 +7,7 @@ import { deleteTestTemplate } from '../../../../src/utils/templates/tests/delete
 describe('delete-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -40,9 +40,9 @@ describe('delete-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -51,8 +51,7 @@ describe('delete-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = deleteTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -81,7 +80,7 @@ describe('DELETE - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

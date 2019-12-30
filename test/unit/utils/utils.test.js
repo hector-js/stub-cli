@@ -1,12 +1,23 @@
 'use strict';
 
-import { sizeObject, sanitizeRootFile, getIdFormatted, getHeaders, getCookies, getStatus, convertIdsToJsonProperties, convertArrayToJsonProperties, arrayToJson, arrayToArrayValues, buildUrl } from '../../../src/utils/utils.cli';
+import {
+  sizeObject,
+  sanitizeRootFile,
+  getIdFormatted,
+  getHeaders,
+  getCookies,
+  getStatus,
+  convertIdsToJsonProperties,
+  convertArrayToJsonProperties,
+  arrayToJson,
+  arrayToArrayValues,
+  buildUrl
+} from '../../../src/utils/utils.cli';
 import { expect, assert } from 'chai';
 
 const chalk = require('chalk');
 
 describe('Utils', () => {
-
   it('should pass', () => {
     expect(true).to.be.true;
   });
@@ -16,14 +27,14 @@ describe('Utils', () => {
       const obj = {
         keyOne: 'anyOne',
         keyTwo: 'anyTwo'
-      }
+      };
 
       const result = sizeObject(obj);
 
       expect(result).to.equal(2);
     });
 
-    [{}, undefined, null].forEach(value => {
+    [{}, undefined, null].forEach((value) => {
       context(`when the object is ${JSON.stringify(value)}`, () => {
         it('should return 0', () => {
           const result = sizeObject(value);
@@ -35,27 +46,27 @@ describe('Utils', () => {
   });
 
   describe('#sanitizeRootFile', () => {
-    ['/{', '}/', '=', '?', '&', '{'].forEach(value => {
+    ['/{', '}/', '=', '?', '&', '{'].forEach((value) => {
       it(`should replace ${value} for "-"`, () => {
         const path = `my-name${value}is-hulk`;
 
         const result = sanitizeRootFile(path);
 
-        expect(result).to.equal(`my-name-is-hulk`)
+        expect(result).to.equal(`my-name-is-hulk`);
       });
     });
 
-    ['}', '/'].forEach(value => {
+    ['}', '/'].forEach((value) => {
       it(`should replace ${value} for "-"`, () => {
         const path = `my-name${value}-hulk`;
 
         const result = sanitizeRootFile(path);
 
-        expect(result).to.equal(`my-name-hulk`)
+        expect(result).to.equal(`my-name-hulk`);
       });
     });
 
-    ['--', '---'].forEach(value => {
+    ['--', '---'].forEach((value) => {
       it(`should replace ${value} for "-"`, () => {
         const path = `my-name${value}hulk`;
 
@@ -65,7 +76,7 @@ describe('Utils', () => {
       });
     });
 
-    [undefined, null].forEach(value => {
+    [undefined, null].forEach((value) => {
       context(`when the path is ${value}`, () => {
         it(`should throw an error`, () => {
           const fn = () => sanitizeRootFile(value);
@@ -96,7 +107,7 @@ describe('Utils', () => {
     });
 
     context('the path comes with multiple - at the front and at the end', () => {
-      ['-', '--', '---', '-------'].forEach(value => {
+      ['-', '--', '---', '-------'].forEach((value) => {
         it(`should omit for ${value}`, () => {
           const path = `${value}my-name-is-hulk${value}`;
 
@@ -145,7 +156,7 @@ describe('Utils', () => {
           const fn = () => getIdFormatted(path);
 
           assert.throws(fn, Error,
-            chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
+              chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
         });
       });
 
@@ -167,7 +178,7 @@ describe('Utils', () => {
         it('should return an array with the values', () => {
           const args = {
             headers: 'header1,header2'
-          }
+          };
 
           const result = getHeaders(args);
 
@@ -179,7 +190,7 @@ describe('Utils', () => {
         it('should return an array with the value', () => {
           const args = {
             headers: 'header1'
-          }
+          };
 
           const result = getHeaders(args);
 
@@ -192,13 +203,13 @@ describe('Utils', () => {
           it(`should return null for ${value}`, () => {
             const args = {
               headers: value
-            }
+            };
 
             const result = getHeaders(args);
 
             expect(result).to.be.null;
           });
-        })
+        });
       });
     });
 
@@ -207,7 +218,7 @@ describe('Utils', () => {
         it('should return an array with the values', () => {
           const args = {
             cookies: 'cookie1,cookie2'
-          }
+          };
 
           const result = getCookies(args);
 
@@ -219,7 +230,7 @@ describe('Utils', () => {
         it('should return an array with the value', () => {
           const args = {
             cookies: 'cookie1'
-          }
+          };
 
           const result = getCookies(args);
 
@@ -232,13 +243,13 @@ describe('Utils', () => {
           it(`should return null for ${value}`, () => {
             const args = {
               cookies: value
-            }
+            };
 
             const result = getCookies(args);
 
             expect(result).to.be.null;
           });
-        })
+        });
       });
     });
 
@@ -248,7 +259,7 @@ describe('Utils', () => {
           it(`should return the value for ${value}`, () => {
             const args = {
               status: value
-            }
+            };
 
             const result = getStatus(args);
 
@@ -262,13 +273,13 @@ describe('Utils', () => {
           it(`should return null for ${value}`, () => {
             const args = {
               status: value
-            }
+            };
 
             const result = getStatus(args);
 
             expect(result).to.be.null;
           });
-        })
+        });
       });
     });
   });
@@ -283,7 +294,7 @@ describe('Utils', () => {
     });
 
     context('when array is not defined', () => {
-      [undefined, null, []].forEach(value => {
+      [undefined, null, []].forEach((value) => {
         it(`should return empty for ${value}`, () => {
           const array = value;
 
@@ -305,7 +316,7 @@ describe('Utils', () => {
     });
 
     context('when array is not defined', () => {
-      [undefined, null, []].forEach(value => {
+      [undefined, null, []].forEach((value) => {
         it(`should return empty for ${value}`, () => {
           const array = value;
 
@@ -327,7 +338,7 @@ describe('Utils', () => {
     });
 
     context('when array is not defined', () => {
-      [undefined, null, []].forEach(value => {
+      [undefined, null, []].forEach((value) => {
         it(`should return empty for ${value}`, () => {
           const array = value;
 
@@ -349,7 +360,7 @@ describe('Utils', () => {
     });
 
     context('when array is not defined', () => {
-      [undefined, null, []].forEach(value => {
+      [undefined, null, []].forEach((value) => {
         it(`should return empty for ${value}`, () => {
           const array = value;
 
@@ -372,7 +383,7 @@ describe('Utils', () => {
     });
 
     context('when ids is not defined', () => {
-      [undefined, null, []].forEach(value => {
+      [undefined, null, []].forEach((value) => {
         it(`should return same path for ${value}`, () => {
           const array = '/data-one';
 
@@ -381,10 +392,10 @@ describe('Utils', () => {
           expect(result).to.equal(array);
         });
       });
-    });;
+    }); ;
 
     context('when path is not defined', () => {
-      [undefined, null, ''].forEach(value => {
+      [undefined, null, ''].forEach((value) => {
         it(`should throw error for ${value}`, () => {
           const fn = () => buildUrl(value, null);
 

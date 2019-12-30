@@ -7,7 +7,7 @@ import { traceTestTemplate } from '../../../../src/utils/templates/tests/trace.t
 describe('trace-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -36,9 +36,9 @@ describe('trace-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -47,8 +47,7 @@ describe('trace-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = traceTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -73,7 +72,7 @@ describe('TRACE - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });
