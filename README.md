@@ -9,6 +9,7 @@ npm install -g @hectorjs/stub-cli
 ## Quality measures
 
 ![](https://github.com/HecJimSan/stub-cli/workflows/%40hectorjs%2Fstub%2Dcli/badge.svg)
+ - ![](https://github.com/HecJimSan/stub-cli/workflows/eslint%2Dconfig%2Dgoogle/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Unit%20tests/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Coverage/badge.svg)
 
