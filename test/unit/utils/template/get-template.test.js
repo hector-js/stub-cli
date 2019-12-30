@@ -7,7 +7,7 @@ import { getTestTemplate } from '../../../../src/utils/templates/tests/get.templ
 describe('get-template', () => {
   describe('resources', () => {
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -39,9 +39,9 @@ describe('get-template', () => {
     });
   });
 
-  describe('test',()=>{
+  describe('test', ()=>{
     let args;
-    let ids
+    let ids;
 
     beforeEach(() => {
       args = {
@@ -52,8 +52,7 @@ describe('get-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template',()=>{
-
+    it('should return a test template', ()=>{
       const result = getTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';
@@ -80,7 +79,7 @@ describe('GET - /any-path/{id}/data ', () => {
       });
   });
 });`
-            );
+      );
     });
   });
 });

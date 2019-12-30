@@ -2,20 +2,21 @@
 
 import { unlinkSync } from 'fs';
 import { expect, assert } from 'chai';
-import { stub , match} from 'sinon';
+import { stub, match } from 'sinon';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 
 describe('file-utils', () => {
-  describe('#checkPath', () => {    let pq;
+  describe('#checkPath', () => {
+    let pq;
     let existsSyncStub;
 
     beforeEach(()=>{
       existsSyncStub = stub();
       pq = proxyquire('../../../src/utils/file-utils.cli', {
         'fs': {
-          existsSync: existsSyncStub,
+          existsSync: existsSyncStub
         }
       });
     });
@@ -34,7 +35,7 @@ describe('file-utils', () => {
       });
     });
 
-    ['/noPath', undefined, null].forEach(path => {
+    ['/noPath', undefined, null].forEach((path) => {
       context(`when the path is ${path}`, () => {
         it('should return false', () => {
           existsSyncStub.throws(new Error);
@@ -56,7 +57,7 @@ describe('file-utils', () => {
       writeFileStub = stub();
       pq = proxyquire('../../../src/utils/file-utils.cli', {
         'fs': {
-          writeFile: writeFileStub,
+          writeFile: writeFileStub
         }
       });
     });
@@ -80,7 +81,7 @@ describe('file-utils', () => {
       ['temporal', null],
       ['temporal', undefined],
       []
-    ].forEach(value => {
+    ].forEach((value) => {
       context(`when:
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
@@ -91,7 +92,6 @@ describe('file-utils', () => {
         });
       });
     });
-
   });
 
   describe('#createFileInPath', () => {
@@ -136,7 +136,7 @@ describe('file-utils', () => {
       ['temporal', undefined],
       []
 
-    ].forEach(value => {
+    ].forEach((value) => {
       context(`when:
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
@@ -148,8 +148,8 @@ describe('file-utils', () => {
 
         afterEach((done) => {
           done();
-          unlinkSync(value[0])
-        })
+          unlinkSync(value[0]);
+        });
       });
     });
   });

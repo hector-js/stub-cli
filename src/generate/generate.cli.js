@@ -1,16 +1,15 @@
-import { getCli } from "./methods/get.cli";
-import { headCli } from "./methods/head.cli";
-import { postCli } from "./methods/post.cli";
-import { putCli } from "./methods/put.cli";
-import { deleteCli } from "./methods/delete.cli";
-import { patchCli } from "./methods/patch.cli";
-import { traceCli } from "./methods/trace.cli";
+import { getCli } from './methods/get.cli';
+import { headCli } from './methods/head.cli';
+import { postCli } from './methods/post.cli';
+import { putCli } from './methods/put.cli';
+import { deleteCli } from './methods/delete.cli';
+import { patchCli } from './methods/patch.cli';
+import { traceCli } from './methods/trace.cli';
 import { info, warn } from 'console';
 
 const chalk = require('chalk');
 
 export function generateCli(args) {
-
   if (args.help) {
     if (args.headers) {
       info(chalk.green('\nHeader options:\n'));

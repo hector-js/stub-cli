@@ -11,8 +11,8 @@ describe('generate', () => {
   describe('#generateCli', () => {
     describe('methods', () => {
       let generateCli;
-      let getCliStub, deleteCliStub, headCliStub, warnStub;
-      let patchCliStub, postCliStub, putCliStub, traceCliStub;
+      let getCliStub; let deleteCliStub; let headCliStub; let warnStub;
+      let patchCliStub; let postCliStub; let putCliStub; let traceCliStub;
 
       beforeEach(() => {
         deleteCliStub = stub();
@@ -39,7 +39,7 @@ describe('generate', () => {
 
       describe('delete', () => {
         context('when delete/d command is added', () => {
-          ['delete', 'd'].forEach(method => {
+          ['delete', 'd'].forEach((method) => {
             it(`should call deleteCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -55,7 +55,7 @@ describe('generate', () => {
 
       describe('get', () => {
         context('when get/g command is added', () => {
-          ['get', 'g'].forEach(method => {
+          ['get', 'g'].forEach((method) => {
             it(`should call getCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -71,7 +71,7 @@ describe('generate', () => {
 
       describe('head', () => {
         context('when head/h command is added', () => {
-          ['head', 'h'].forEach(method => {
+          ['head', 'h'].forEach((method) => {
             it(`should call headCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -87,7 +87,7 @@ describe('generate', () => {
 
       describe('patch', () => {
         context('when patch/pa command is added', () => {
-          ['patch', 'pa'].forEach(method => {
+          ['patch', 'pa'].forEach((method) => {
             it(`should call patchCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -103,7 +103,7 @@ describe('generate', () => {
 
       describe('post', () => {
         context('when post/p command is added', () => {
-          ['post', 'p'].forEach(method => {
+          ['post', 'p'].forEach((method) => {
             it(`should call postCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -119,7 +119,7 @@ describe('generate', () => {
 
       describe('put', () => {
         context('when put/pu command is added', () => {
-          ['put', 'pu'].forEach(method => {
+          ['put', 'pu'].forEach((method) => {
             it(`should call putCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -135,7 +135,7 @@ describe('generate', () => {
 
       describe('trace', () => {
         context('when trace/t command is added', () => {
-          ['trace', 't'].forEach(method => {
+          ['trace', 't'].forEach((method) => {
             it(`should call traceCli with the args for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -151,7 +151,7 @@ describe('generate', () => {
 
       describe('no method found', () => {
         context('when no method is found', () => {
-          ['any', 'other'].forEach(method => {
+          ['any', 'other'].forEach((method) => {
             it(`should show warning message for "${method}"`, () => {
               const args = {
                 _: ['generate', method]
@@ -166,7 +166,7 @@ describe('generate', () => {
       });
     });
 
-    describe('help',()=>{
+    describe('help', ()=>{
       let generateCli;
       let infoStub;
 
@@ -179,11 +179,11 @@ describe('generate', () => {
 
       afterEach(() => proxyquire.callThru());
 
-      context('when just help is added "hjs --help"',()=>{
-        it('should show common options',()=>{
+      context('when just help is added "hjs --help"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true
-          }
+          };
 
           generateCli(args);
 
@@ -207,12 +207,12 @@ describe('generate', () => {
         });
       });
 
-      context('when help has headers as well like "hjs g --help --headers"',()=>{
-        it('should show common options',()=>{
+      context('when help has headers as well like "hjs g --help --headers"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true,
             headers: true
-          }
+          };
 
           generateCli(args);
 
@@ -223,12 +223,12 @@ describe('generate', () => {
         });
       });
 
-      context('when help has cookies as well like "hjs g --help --cookies"',()=>{
-        it('should show common options',()=>{
+      context('when help has cookies as well like "hjs g --help --cookies"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true,
             cookies: true
-          }
+          };
 
           generateCli(args);
 
@@ -239,12 +239,12 @@ describe('generate', () => {
         });
       });
 
-      context('when help has status as well like "hjs g --help --status"',()=>{
-        it('should show common options',()=>{
+      context('when help has status as well like "hjs g --help --status"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true,
             status: true
-          }
+          };
 
           generateCli(args);
 
@@ -255,12 +255,12 @@ describe('generate', () => {
         });
       });
 
-      context('when help has description as well like "hjs g --help --description"',()=>{
-        it('should show common options',()=>{
+      context('when help has description as well like "hjs g --help --description"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true,
             description: true
-          }
+          };
 
           generateCli(args);
 
@@ -271,12 +271,12 @@ describe('generate', () => {
         });
       });
 
-      context('when help has path as well like "hjs g --help --path"',()=>{
-        it('should show common options',()=>{
+      context('when help has path as well like "hjs g --help --path"', ()=>{
+        it('should show common options', ()=>{
           const args = {
             help: true,
             path: 'cases/whatever'
-          }
+          };
 
           generateCli(args);
 

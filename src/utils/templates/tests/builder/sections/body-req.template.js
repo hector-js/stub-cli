@@ -1,4 +1,4 @@
 
-export function bodyReq(){
-    return `\n      .send({'dummy': 'dummy'})`;
+export function bodyReq() {
+  return `\n      .send({'dummy': 'dummy'})`;
 }

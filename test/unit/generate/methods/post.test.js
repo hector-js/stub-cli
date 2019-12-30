@@ -6,7 +6,6 @@ import { stub } from 'sinon';
 const proxyquire = require('proxyquire');
 
 describe('post', () => {
-
   let postCli;
   let postCliStub;
   let postTemplateStub;

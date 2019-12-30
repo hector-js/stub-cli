@@ -8,7 +8,7 @@ const proxyquire = require('proxyquire');
 describe('scenario-provider', () => {
   describe('#scenarioGenerator', () => {
     let writeFileByDataStub;
-    let createFileStub ,cdStub , mkdirStub, checkStub;
+    let createFileStub; let cdStub; let mkdirStub; let checkStub;
     let scenarioGenerator;
 
     beforeEach(() => {
@@ -19,9 +19,9 @@ describe('scenario-provider', () => {
       mkdirStub = stub();
       scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
         './file-utils.cli': {
-          checkPath: checkStub,
-          writeFileByData: writeFileByDataStub,
-          createFileInPath: createFileStub, '@noCallThru': true
+          'checkPath': checkStub,
+          'writeFileByData': writeFileByDataStub,
+          'createFileInPath': createFileStub, '@noCallThru': true
 
         },
         'shelljs': {
@@ -39,7 +39,7 @@ describe('scenario-provider', () => {
       beforeEach(() => {
         args = {
           _: ['', '', '/any-path/{id}/data']
-        }
+        };
         checkStub.withArgs('./package.json').returns(true);
         checkStub.withArgs('./resources/').returns(true);
         scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
@@ -69,7 +69,7 @@ describe('scenario-provider', () => {
       describe('resource template', () => {
         it('should write a file with the proper name and template', () => {
           const resourceTemplateStub = stub();
-          resourceTemplateStub.withArgs(args, ['id']).returns('any template')
+          resourceTemplateStub.withArgs(args, ['id']).returns('any template');
 
           scenarioGenerator(args, resourceTemplateStub, stub(), 'get');
 
@@ -82,7 +82,7 @@ describe('scenario-provider', () => {
       describe('test template', () => {
         it('should write a file with the proper name and template', () => {
           const testTemplateStub = stub();
-          testTemplateStub.withArgs(args, ['id']).returns('any template')
+          testTemplateStub.withArgs(args, ['id']).returns('any template');
 
           scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
@@ -97,13 +97,13 @@ describe('scenario-provider', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
             path: 'cases/data'
-          }
+          };
           const testTemplateStub = stub();
           checkStub.withArgs('./cases').returns(false);
           checkStub.withArgs('./data').returns(false);
           mkdirStub.withArgs('cases').returns(false);
           mkdirStub.withArgs('data').returns(false);
-          testTemplateStub.withArgs(args, ['id']).returns('any template')
+          testTemplateStub.withArgs(args, ['id']).returns('any template');
 
           scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
@@ -121,9 +121,9 @@ describe('scenario-provider', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
               path: '/cases/data'
-            }
+            };
             const testTemplateStub = stub();
-            testTemplateStub.withArgs(args, ['id']).returns('any template')
+            testTemplateStub.withArgs(args, ['id']).returns('any template');
 
             scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
@@ -142,9 +142,9 @@ describe('scenario-provider', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
               path: 'cases/data/'
-            }
+            };
             const testTemplateStub = stub();
-            testTemplateStub.withArgs(args, ['id']).returns('any template')
+            testTemplateStub.withArgs(args, ['id']).returns('any template');
 
             scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
@@ -160,9 +160,9 @@ describe('scenario-provider', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
             path: 'cases'
-          }
+          };
           const testTemplateStub = stub();
-          testTemplateStub.withArgs(args, ['id']).returns('any template')
+          testTemplateStub.withArgs(args, ['id']).returns('any template');
 
           scenarioGenerator(args, stub(), testTemplateStub, 'get');
 
