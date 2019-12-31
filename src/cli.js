@@ -38,7 +38,7 @@ export function cli(args) {
     info(chalk.yellow(`\nLicense: MIT\n`));
   }
 
-  if (args.help&&!args._[0]) {
+  if (args.help && !args._[0]) {
     info(chalk.green('\nBelow, you can see different options for your mock:\n'));
     info(chalk.grey(` -  new/n [name-project]  : create new mock project `));
     info(chalk.grey(` -  generate/g  get/g/post/p/delete/d  [url]: create url section `));
@@ -53,7 +53,7 @@ export function cli(args) {
     info(chalk.yellow(`version: ${VERSION}\n`));
   }
 
-  if (args._.length===0 && sizeObject(args) === 1) {
+  if (args._.length === 0 && sizeObject(args) === 1) {
     warn(chalk.red('\nSorry, you missed a parameter (hjs --help)'));
   }
 }

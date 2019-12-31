@@ -8,13 +8,16 @@ const chalk = require('chalk');
 
 describe('start', () => {
   let start;
-  let execCliStub; let infoStub;
+  let execCliStub;
+  let cdCliStub;
+  let infoStub;
 
   beforeEach(() => {
     execCliStub = stub();
+    cdCliStub = stub();
     infoStub = stub();
     start = proxyquire('../../../src/start/start.cli', {
-      'shelljs': { exec: execCliStub },
+      'shelljs': { exec: execCliStub, cd: cdCliStub },
       'console': { info: infoStub }
     }).start;
   });
@@ -58,6 +61,8 @@ describe('start', () => {
       assert.ok(infoStub.withArgs(chalk.green('\nStart options:\n')).calledOnce);
       assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`)).calledOnce);
       assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start       : run service`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --path: run service from different directory`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`)).calledOnce);
     });
   });
 
@@ -88,6 +93,20 @@ describe('start', () => {
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --port 8080'));
+        });
+      });
+
+      context('when the argument is "--path path/to/navigate"', () => {
+        it('should navigate to the directory from where you are first', () => {
+          const args = {
+            _: ['start'],
+            path: 'path/to/navigate'
+          };
+
+          start(args);
+
+          assert.ok(execCliStub.calledOnceWith('node app.js'));
+          assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
         });
       });
 
