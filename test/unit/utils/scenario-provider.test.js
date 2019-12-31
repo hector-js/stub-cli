@@ -8,7 +8,10 @@ const proxyquire = require('proxyquire');
 describe('scenario-provider', () => {
   describe('#scenarioGenerator', () => {
     let writeFileByDataStub;
-    let createFileStub; let cdStub; let mkdirStub; let checkStub;
+    let createFileStub;
+    let cdStub;
+    let mkdirStub;
+    let checkStub;
     let scenarioGenerator;
 
     beforeEach(() => {
@@ -50,7 +53,8 @@ describe('scenario-provider', () => {
 
           },
           'shelljs': {
-            cd: cdStub
+            cd: cdStub,
+            mkdir: mkdirStub
           }
         }).scenarioGenerator;
       });

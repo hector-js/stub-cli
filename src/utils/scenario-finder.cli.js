@@ -1,5 +1,4 @@
-import { cd } from 'shelljs';
-import { mkdir } from 'shelljs';
+import { cd, mkdir } from 'shelljs';
 import { warn } from 'console';
 import { sanitizeRootFile, getIdFormatted } from './utils.cli';
 import { checkPath, writeFileByData } from './file-utils.cli';

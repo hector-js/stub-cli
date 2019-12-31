@@ -1,4 +1,4 @@
-import { exec } from 'shelljs';
+import { exec, cd } from 'shelljs';
 import { info } from 'console';
 
 const chalk = require('chalk');
@@ -8,8 +8,16 @@ export function start(args) {
     info(chalk.green('\nStart options:\n'));
     info(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`));
     info(chalk.grey(` -  hjs start       : run service`));
+    info(chalk.grey(` -  hjs start --path: run service from different directory`));
+    info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
   } else {
     const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+
+
+    if (args.path) {
+      cd(args.path);
+    }
+
     let command;
     if (args.dev) {
       const root = `npm run start-dev`;
