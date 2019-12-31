@@ -1,5 +1,6 @@
 import { exec, cd } from 'shelljs';
 import { info } from 'console';
+import { argsBy } from '../utils/utils.cli';
 
 const chalk = require('chalk');
 
@@ -27,6 +28,3 @@ export function start(args) {
   }
 }
 
-function argsBy(argKey, argValue) {
-  return argValue ? ` --${argKey} ${argValue}` : '';
-}
