@@ -12,6 +12,7 @@ npm install -g @hectorjs/stub-cli
  - ![](https://github.com/HecJimSan/stub-cli/workflows/eslint%2Dconfig%2Dgoogle/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Unit%20tests/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Coverage/badge.svg)
+ - [![codecov](https://codecov.io/gh/HecJimSan/stub-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/HecJimSan/stub-cli)
 
  Others measures
 
