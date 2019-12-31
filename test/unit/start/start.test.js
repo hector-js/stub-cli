@@ -80,7 +80,7 @@ describe('start', () => {
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
-    
+
     describe('dev mode', () => {
       context('when the argument is "--logs tiny"', () => {
         it('should execute a command with the logs in tiny mode', () => {
