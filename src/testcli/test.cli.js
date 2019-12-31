@@ -14,8 +14,18 @@ export function testcli(args) {
       cd(args.path);
     }
 
-    exec('npm test');
+    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+
+    let command;
+    if (argumens) {
+      command = `npm test --${argumens}`;
+    } else {
+      command = `npm test`;
+    }
+    exec(command);
   }
 }
 
-
+function argsBy(argKey, argValue) {
+  return argValue ? ` --${argKey} ${argValue}` : '';
+}

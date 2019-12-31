@@ -67,6 +67,20 @@ describe('start', () => {
   });
 
   describe('arguments', () => {
+    context('when the argument is "--path path/to/navigate"', () => {
+      it('should navigate to the directory from where you are first', () => {
+        const args = {
+          _: ['start'],
+          path: 'path/to/navigate'
+        };
+
+        start(args);
+
+        assert.ok(execCliStub.calledOnceWith('node app.js'));
+        assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
+      });
+    });
+    
     describe('dev mode', () => {
       context('when the argument is "--logs tiny"', () => {
         it('should execute a command with the logs in tiny mode', () => {
@@ -93,20 +107,6 @@ describe('start', () => {
           start(args);
 
           assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --port 8080'));
-        });
-      });
-
-      context('when the argument is "--path path/to/navigate"', () => {
-        it('should navigate to the directory from where you are first', () => {
-          const args = {
-            _: ['start'],
-            path: 'path/to/navigate'
-          };
-
-          start(args);
-
-          assert.ok(execCliStub.calledOnceWith('node app.js'));
-          assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
         });
       });
 

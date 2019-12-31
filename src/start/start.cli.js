@@ -11,13 +11,12 @@ export function start(args) {
     info(chalk.grey(` -  hjs start --path: run service from different directory`));
     info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
   } else {
-    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
-
-
+    
     if (args.path) {
       cd(args.path);
     }
-
+    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+    
     let command;
     if (args.dev) {
       const root = `npm run start-dev`;
