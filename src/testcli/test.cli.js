@@ -1,5 +1,6 @@
 import { exec, cd } from 'shelljs';
 import { info } from 'console';
+import { argsBy } from '../utils/utils.cli';
 
 const chalk = require('chalk');
 
@@ -14,8 +15,15 @@ export function testcli(args) {
       cd(args.path);
     }
 
-    exec('npm test');
+    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+
+    let command;
+    if (argumens) {
+      command = `npm test --${argumens}`;
+    } else {
+      command = `npm test`;
+    }
+    exec(command);
   }
 }
-
 

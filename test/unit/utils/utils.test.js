@@ -127,6 +127,16 @@ describe('Utils', () => {
         expect(result).to.equal(`to-be-defined`);
       });
     });
+
+    context('when the path does not have any value', () => {
+      it('should return to-be-define', () => {
+        const path = ` `;
+
+        const result = sanitizeRootFile(path);
+
+        expect(result).to.equal(`to-be-defined`);
+      });
+    });
   });
 
   describe('#getIdFormatted', () => {

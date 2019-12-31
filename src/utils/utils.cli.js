@@ -3,11 +3,7 @@ import { error } from 'console';
 const chalk = require('chalk');
 
 export function sizeObject(obj) {
-  let size = 0; let key;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) size++;
-  }
-  return size;
+  return obj? Object.keys(obj).length: 0;
 };
 
 export const sanitizeRootFile = (path) => {
@@ -20,7 +16,8 @@ export const sanitizeRootFile = (path) => {
       .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
       .replace(/\}|\//g, '-')
       .replace(/\-\-\-/g, '-')
-      .replace(/\-\-/g, '-');
+      .replace(/\-\-/g, '-')
+      .replace(/ /g, '');
   if (rootFile) {
     while (rootFile.startsWith('-') || rootFile.slice(-1) === '-') {
       if (rootFile.startsWith('-')) {
@@ -81,6 +78,10 @@ export const buildUrl = (path, ids) => {
   }
   return path;
 };
+
+export function argsBy(argKey, argValue) {
+  return argValue ? ` --${argKey} ${argValue}` : '';
+}
 
 const arToCus = (array, fn, lastElement) => {
   let resultArray = '';

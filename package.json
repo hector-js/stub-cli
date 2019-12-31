@@ -13,6 +13,7 @@
     "test": "mocha --recursive --require esm --exit",
     "eslint": "eslint ./src/**/*.js ./test/**/*.js",
     "test-all": "npm run eslint && npm run coverage",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit"
   },
   "keywords": [
@@ -38,7 +39,7 @@
     "nyc": "^14.1.1",
     "proxyquire": "^2.1.3",
     "sinon": "^7.5.0",
-    "sinon-chai": "^3.3.0"
+    "sinon-chai": "^3.4.0"
   },
   "repository": {
     "type": "git",

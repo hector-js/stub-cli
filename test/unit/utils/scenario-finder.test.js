@@ -177,6 +177,16 @@ describe('scenario-provider', () => {
           assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.test.js', 'any template').calledOnce);
         });
       });
+
+      [null, undefined, ''].forEach((value) => it(`should return the same value for ${value}`, () => {
+        args = {
+          _: ['', '', value]
+        };
+        const resourceTemplateStub = stub();
+        resourceTemplateStub.returns('any template');
+
+        assert.throws(() => scenarioGenerator(args, stub(), stub(), null), Error, '');
+      }));
     });
 
     describe('location is not right', () => {
