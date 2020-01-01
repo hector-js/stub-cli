@@ -5,8 +5,8 @@ import { reqHeaders } from './sections/req-headers.template';
 import { getHeaders, getCookies, getStatus } from '../../../utils.cli';
 import { reqCookies } from './sections/req-cookies.template';
 import { description } from './sections/description.template';
-import { reqBody } from './sections/req-body.template';
-import { resBody, resBodyG, resBodyGXml } from './sections/res-body.template';
+import { reqBody, reqBodyXml } from './sections/req-body.template';
+import { resBody, resBodyG, resBodyGXml, resBodyXml } from './sections/res-body.template';
 import { status } from './sections/status.template';
 
 export class ResourceBuilder {
@@ -38,12 +38,14 @@ export class ResourceBuilder {
   }
 
   reqBody() {
-    this.template = this.template + reqBody();
+    const body = this.args.xml? reqBodyXml(): reqBody();
+    this.template = this.template + body;
     return this;
   }
 
   resBody() {
-    this.template = this.template + resBody();
+    const body = this.args.xml? resBodyXml(): resBody();
+    this.template = this.template + body;
     return this;
   }
 

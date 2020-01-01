@@ -8,6 +8,7 @@ describe('delete-template', () => {
   describe('resources', () => {
     let args;
     let ids;
+    let result;
 
     beforeEach(() => {
       args = {
@@ -16,10 +17,11 @@ describe('delete-template', () => {
       ids = ['id'];
     });
 
-    it('should add the resource scenatio', () => {
-      const result = deleteTemplate(args, ids);
+    describe('json', ()=>{
+      it('should add the resource scenatio', () => {
+        result = deleteTemplate(args, ids);
 
-      expect(result).to.equal(`{
+        expect(result).to.equal(`{
   "_delete" : {
     "/any-path/{id}/data" : [
       {
@@ -36,7 +38,34 @@ describe('delete-template', () => {
     ]
   }
 }`
-      );
+        );
+      });
+    });
+
+    describe('xml', ()=>{
+      it('should add the resource scenatio', () => {
+        args.xml = true;
+
+        result = deleteTemplate(args, ids);
+
+        expect(result).to.equal(`{
+  "_delete" : {
+    "/any-path/{id}/data" : [
+      {
+        "_xml": true,
+        "_id": "idTBD",
+        "_requestBody": "<xml><tbd>Xml request to be defined</tbd></xml>",
+        "_headers" : [  ],
+        "_cookies" : [  ],
+        "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
+        
+        "_description" : "Description to be defined" 
+      }
+    ]
+  }
+}`
+        );
+      });
     });
   });
 
