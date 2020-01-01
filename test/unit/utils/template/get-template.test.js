@@ -8,6 +8,7 @@ describe('get-template', () => {
   describe('resources', () => {
     let args;
     let ids;
+    let result;
 
     beforeEach(() => {
       args = {
@@ -18,10 +19,11 @@ describe('get-template', () => {
       ids = ['id'];
     });
 
-    it('should return the resource scenario', () => {
-      const result = getTemplate(args, ids);
+    describe('json', () => {
+      it('should return the resource scenario', () => {
+        result = getTemplate(args, ids);
 
-      expect(result).to.equal(`{
+        expect(result).to.equal(`{
   "_get" : {
     "/any-path/{id}/data" : [
       {
@@ -35,11 +37,37 @@ describe('get-template', () => {
     ]
   }
 }`
-      );
+        );
+      });
+    });
+
+    describe('xml', () => {
+      it('should return the resource scenario', () => {
+        args.xml = true;
+
+        result = getTemplate(args, ids);
+
+        expect(result).to.equal(`{
+  "_get" : {
+    "/any-path/{id}/data" : [
+      {
+        "_xml": true,
+        "_id": "idTBD",
+        "_headers" : [  ],
+        "_cookies" : [  ],
+        "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
+        "_status": 404,
+        "_description" : "customDescription" 
+      }
+    ]
+  }
+}`
+        );
+      });
     });
   });
 
-  describe('test', ()=>{
+  describe('test', () => {
     let args;
     let ids;
 
@@ -52,7 +80,7 @@ describe('get-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template', ()=>{
+    it('should return a test template', () => {
       const result = getTestTemplate(args, ids);
 
       expect(result).to.equal(`'use strict';

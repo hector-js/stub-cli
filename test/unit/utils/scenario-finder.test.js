@@ -24,8 +24,7 @@ describe('scenario-provider', () => {
         './file-utils.cli': {
           'checkPath': checkStub,
           'writeFileByData': writeFileByDataStub,
-          'createFileInPath': createFileStub, '@noCallThru': true
-
+          'createFileInPath': createFileStub
         },
         'shelljs': {
           cd: cdStub,
