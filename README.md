@@ -61,6 +61,8 @@ You can generate different methods like get, head, post, delete among others.
 
 For each method, it creates a test with dummy data. It will reduce the time to test the mock. Give it a try. 
 
+The request and response are json by default. If you want to create a scenario for xml, you have to include ```--xml``` in you cli.
+
 _NOTE:_ The endpoint should not start with '/' for the cli and you should escape '&' like the next example:
 
 ```hjs g post customers/{id}/products?query={param1}\&identifier={identifier}```

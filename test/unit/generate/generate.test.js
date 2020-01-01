@@ -203,7 +203,9 @@ describe('generate', () => {
           assert.ok(infoStub.withArgs(chalk.grey(` -  put = pu      (hjs g pu ...)`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  patch = pa    (hjs g pa ...)\n`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  trace = t     (hjs g t ...)\n`)).calledOnce);
-          expect(infoStub.callCount).to.equal(16);
+          assert.ok(infoStub.withArgs(chalk.green(`\nOther options:\n`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(` -  --xml         request and response are xml\n`)).calledOnce);
+          expect(infoStub.callCount).to.equal(18);
         });
       });
 
