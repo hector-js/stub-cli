@@ -17,7 +17,7 @@ describe('delete-template', () => {
       ids = ['id'];
     });
 
-    describe('json', ()=>{
+    describe('json', () => {
       it('should add the resource scenatio', () => {
         result = deleteTemplate(args, ids);
 
@@ -42,7 +42,7 @@ describe('delete-template', () => {
       });
     });
 
-    describe('xml', ()=>{
+    describe('xml', () => {
       it('should add the resource scenatio', () => {
         args.xml = true;
 
@@ -69,9 +69,10 @@ describe('delete-template', () => {
     });
   });
 
-  describe('test', ()=>{
+  describe('test', () => {
     let args;
     let ids;
+    let result;
 
     beforeEach(() => {
       args = {
@@ -80,10 +81,11 @@ describe('delete-template', () => {
       ids = ['id'];
     });
 
-    it('should return a test template', ()=>{
-      const result = deleteTestTemplate(args, ids);
+    describe('json', () => {
+      it('should return a test template', () => {
+        result = deleteTestTemplate(args, ids);
 
-      expect(result).to.equal(`'use strict';
+        expect(result).to.equal(`'use strict';
     
 var app = require('../app');
 var chai = require('chai');
@@ -109,7 +111,44 @@ describe('DELETE - /any-path/{id}/data ', () => {
       });
   });
 });`
-      );
+        );
+      });
+    });
+
+    describe('xml', () => {
+      it('should return a test template', () => {
+        args.xml = true;
+
+        result = deleteTestTemplate(args, ids);
+
+        expect(result).to.equal(`'use strict';
+    
+var app = require('../app');
+var chai = require('chai');
+var request = require('supertest');
+    
+var expect = chai.expect;
+
+describe('DELETE - /any-path/{id}/data ', () => {
+  it('should exist', (done) => {
+    request(app)
+      .delete('/any-path/idTBD/data')
+      
+      
+      .set('Accept', 'text/xml; charset=utf-8')
+      .type('application/xml')
+      .send('<xml><tbd>Xml request to be defined</tbd></xml>')
+      .end((err, res) => {
+          expect(err).to.not.exist;
+          expect(res.status).to.equal(200);
+          expect(res.get('Content-Type')).to.equal('text/xml; charset=utf-8');
+          expect(res.text).to.equal('<xml><tbd>Xml response to be defined</tbd></xml>');
+          done();
+      });
+  });
+});`
+        );
+      });
     });
   });
 });
