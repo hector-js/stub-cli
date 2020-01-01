@@ -3,7 +3,7 @@ import { it } from './sections/it.template';
 import { methodReq } from './sections/method.template';
 import { headers } from './sections/headers.template';
 import { bodyReq } from './sections/body-req.template';
-import { assert, status, noErrors, body, endAssert, bodyG, emptyBody } from './sections/assert.template';
+import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
 import { libraries } from './sections/libraries.template';
 import { cookies } from './sections/cookies.template';
 
@@ -78,7 +78,8 @@ export class TestBuilder {
   }
 
   bodyG() {
-    this.template = this.template + bodyG();
+    const body = this.args.xml? bodyGXml(): bodyG();
+    this.template = this.template + body;
     return this;
   }
 
