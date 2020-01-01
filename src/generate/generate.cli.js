@@ -98,4 +98,6 @@ function displayGeneratorOpts() {
   info(chalk.grey(` -  put = pu      (hjs g pu ...)`));
   info(chalk.grey(` -  patch = pa    (hjs g pa ...)\n`));
   info(chalk.grey(` -  trace = t     (hjs g t ...)\n`));
+  info(chalk.green(`\nOther options:\n`));
+  info(chalk.grey(` -  --xml         request and response are xml\n`));
 }

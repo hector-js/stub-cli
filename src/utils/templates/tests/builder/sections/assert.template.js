@@ -26,6 +26,10 @@ export function bodyG() {
             'body' : 'To be defined'
           });`;
 }
+export function bodyGXml() {
+  return `\n          expect(res.get('Content-Type')).to.equal('text/xml; charset=utf-8');
+          expect(res.text).to.equal('<xml><tbd>Xml response to be defined</tbd></xml>');`;
+}
 
 export function emptyBody() {
   return `\n          expect(res.body).to.be.empty;`;

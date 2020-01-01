@@ -5,21 +5,23 @@ import { traceTemplate } from '../../../../src/utils/templates/resources/trace.t
 import { traceTestTemplate } from '../../../../src/utils/templates/tests/trace.template';
 
 describe('trace-template', () => {
+  let args;
+  let ids;
+  let result;
+
+  beforeEach(() => {
+    args = {
+      _: ['', '', '/any-path/{id}/data']
+    };
+    ids = ['id'];
+  });
+
   describe('resources', () => {
-    let args;
-    let ids;
+    describe('json', () => {
+      it('should add the resource scenatio', () => {
+        result = traceTemplate(args, ids);
 
-    beforeEach(() => {
-      args = {
-        _: ['', '', '/any-path/{id}/data']
-      };
-      ids = ['id'];
-    });
-
-    it('should add the resource scenatio', () => {
-      const result = traceTemplate(args, ids);
-
-      expect(result).to.equal(`{
+        expect(result).to.equal(`{
   "_trace" : {
     "/any-path/{id}/data" : [
       {
@@ -32,25 +34,41 @@ describe('trace-template', () => {
     ]
   }
 }`
-      );
+        );
+      });
+    });
+
+    describe('xml', () => {
+      it('should add the resource scenatio', () => {
+        args.xml = true;
+
+        result = traceTemplate(args, ids);
+
+        expect(result).to.equal(`{
+  "_trace" : {
+    "/any-path/{id}/data" : [
+      {
+        "_xml": true,
+        "_id": "idTBD",
+        "_headers" : [  ],
+        "_cookies" : [  ],
+        
+        "_description" : "Description to be defined" 
+      }
+    ]
+  }
+}`
+        );
+      });
     });
   });
 
-  describe('test', ()=>{
-    let args;
-    let ids;
+  describe('test', () => {
+    describe('json', () => {
+      it('should return a test template', () => {
+        result = traceTestTemplate(args, ids);
 
-    beforeEach(() => {
-      args = {
-        _: ['', '', '/any-path/{id}/data']
-      };
-      ids = ['id'];
-    });
-
-    it('should return a test template', ()=>{
-      const result = traceTestTemplate(args, ids);
-
-      expect(result).to.equal(`'use strict';
+        expect(result).to.equal(`'use strict';
     
 var app = require('../app');
 var chai = require('chai');
@@ -72,7 +90,40 @@ describe('TRACE - /any-path/{id}/data ', () => {
       });
   });
 });`
-      );
+        );
+      });
+    });
+
+    describe('xml', () => {
+      it('should return a test template', () => {
+        args.xml = true;
+
+        result = traceTestTemplate(args, ids);
+
+        expect(result).to.equal(`'use strict';
+    
+var app = require('../app');
+var chai = require('chai');
+var request = require('supertest');
+    
+var expect = chai.expect;
+
+describe('TRACE - /any-path/{id}/data ', () => {
+  it('should exist', (done) => {
+    request(app)
+      .trace('/any-path/idTBD/data')
+      
+      
+      .end((err, res) => {
+          expect(err).to.not.exist;
+          expect(res.status).to.equal(200);
+          expect(res.body).to.be.empty;
+          done();
+      });
+  });
+});`
+        );
+      });
     });
   });
 });

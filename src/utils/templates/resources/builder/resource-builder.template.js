@@ -1,12 +1,12 @@
 import { method, endMethod } from './sections/method.template';
-import { path, endPath } from './sections/path.template';
+import { path, endPath, pathXml } from './sections/path.template';
 import { ids } from './sections/ids.template';
 import { reqHeaders } from './sections/req-headers.template';
 import { getHeaders, getCookies, getStatus } from '../../../utils.cli';
 import { reqCookies } from './sections/req-cookies.template';
 import { description } from './sections/description.template';
-import { reqBody } from './sections/req-body.template';
-import { resBody, resBodyG } from './sections/res-body.template';
+import { reqBody, reqBodyXml } from './sections/req-body.template';
+import { resBody, resBodyG, resBodyGXml, resBodyXml } from './sections/res-body.template';
 import { status } from './sections/status.template';
 
 export class ResourceBuilder {
@@ -27,7 +27,8 @@ export class ResourceBuilder {
   }
 
   path() {
-    this.template = this.template + path(this.args._[2]);
+    const pathString = this.args.xml ? pathXml(this.args._[2]) : path(this.args._[2]);
+    this.template = this.template + pathString;
     return this;
   }
 
@@ -37,17 +38,20 @@ export class ResourceBuilder {
   }
 
   reqBody() {
-    this.template = this.template + reqBody();
+    const body = this.args.xml? reqBodyXml(): reqBody();
+    this.template = this.template + body;
     return this;
   }
 
   resBody() {
-    this.template = this.template + resBody();
+    const body = this.args.xml? resBodyXml(): resBody();
+    this.template = this.template + body;
     return this;
   }
 
   resBodyG() {
-    this.template = this.template + resBodyG();
+    const bodyGet = this.args.xml ? resBodyGXml() : resBodyG();
+    this.template = this.template + bodyGet;
     return this;
   }
 

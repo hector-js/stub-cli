@@ -2,8 +2,8 @@ import { describe } from './sections/describe.template';
 import { it } from './sections/it.template';
 import { methodReq } from './sections/method.template';
 import { headers } from './sections/headers.template';
-import { bodyReq } from './sections/body-req.template';
-import { assert, status, noErrors, body, endAssert, bodyG, emptyBody } from './sections/assert.template';
+import { bodyReq, bodyReqXml } from './sections/body-req.template';
+import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
 import { libraries } from './sections/libraries.template';
 import { cookies } from './sections/cookies.template';
 
@@ -53,7 +53,8 @@ export class TestBuilder {
   }
 
   bodyReq() {
-    this.template = this.template + bodyReq();
+    const body = this.args.xml? bodyReqXml() : bodyReq();
+    this.template = this.template + body;
     return this;
   }
 
@@ -73,12 +74,14 @@ export class TestBuilder {
   }
 
   body() {
-    this.template = this.template + body();
+    const bod = this.args.xml? bodyGXml(): body();
+    this.template = this.template + bod;
     return this;
   }
 
   bodyG() {
-    this.template = this.template + bodyG();
+    const body = this.args.xml? bodyGXml(): bodyG();
+    this.template = this.template + body;
     return this;
   }
 
