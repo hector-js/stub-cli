@@ -70,7 +70,7 @@ describe('get-template', () => {
   });
 
   describe('test', () => {
-    describe('json', ()=>{
+    describe('json', () => {
       it('should return a test template', () => {
         result = getTestTemplate(args, ids);
 
@@ -102,7 +102,7 @@ describe('GET - /any-path/{id}/data ', () => {
       });
     });
 
-    describe('xml', ()=>{
+    describe('xml', () => {
       it('should return a test template', () => {
         args.xml = true;
 
