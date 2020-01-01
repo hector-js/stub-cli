@@ -5,18 +5,18 @@ import { deleteTemplate } from './../../../../src/utils/templates/resources/dele
 import { deleteTestTemplate } from '../../../../src/utils/templates/tests/delete.template';
 
 describe('delete-template', () => {
+  let args;
+  let ids;
+  let result;
+
+  beforeEach(() => {
+    args = {
+      _: ['', '', '/any-path/{id}/data']
+    };
+    ids = ['id'];
+  });
+
   describe('resources', () => {
-    let args;
-    let ids;
-    let result;
-
-    beforeEach(() => {
-      args = {
-        _: ['', '', 'any-path/{id}/data']
-      };
-      ids = ['id'];
-    });
-
     describe('json', () => {
       it('should add the resource scenatio', () => {
         result = deleteTemplate(args, ids);
@@ -70,17 +70,6 @@ describe('delete-template', () => {
   });
 
   describe('test', () => {
-    let args;
-    let ids;
-    let result;
-
-    beforeEach(() => {
-      args = {
-        _: ['', '', '/any-path/{id}/data']
-      };
-      ids = ['id'];
-    });
-
     describe('json', () => {
       it('should return a test template', () => {
         result = deleteTestTemplate(args, ids);

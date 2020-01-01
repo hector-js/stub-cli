@@ -5,19 +5,21 @@ import { getTemplate } from '../../../../src/utils/templates/resources/get.templ
 import { getTestTemplate } from '../../../../src/utils/templates/tests/get.template';
 
 describe('get-template', () => {
-  describe('resources', () => {
-    let args;
-    let ids;
-    let result;
+  let args;
+  let ids;
+  let result;
 
-    beforeEach(() => {
-      args = {
-        description: 'customDescription',
-        status: 404,
-        _: ['', '', '/any-path/{id}/data']
-      };
-      ids = ['id'];
-    });
+  beforeEach(() => {
+    args = {
+      status: 404,
+      _: ['', '', '/any-path/{id}/data'],
+      path: 'cases/hey'
+    };
+    ids = ['id'];
+  });
+
+  describe('resources', () => {
+    beforeEach(() => args.description = 'customDescription');
 
     describe('json', () => {
       it('should return the resource scenario', () => {
@@ -68,19 +70,6 @@ describe('get-template', () => {
   });
 
   describe('test', () => {
-    let args;
-    let ids;
-    let result;
-
-    beforeEach(() => {
-      args = {
-        status: 404,
-        _: ['', '', '/any-path/{id}/data'],
-        path: 'cases/hey'
-      };
-      ids = ['id'];
-    });
-
     describe('json', ()=>{
       it('should return a test template', () => {
         result = getTestTemplate(args, ids);
