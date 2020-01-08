@@ -1,4 +1,4 @@
-import { cd, exec, mkdir, touch } from 'shelljs';
+import { cd, exec, mkdir } from 'shelljs';
 import { writeFile, readFile } from 'fs';
 import { info, error } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
@@ -41,7 +41,11 @@ export async function newCli(args) {
   readFile('./package.json', 'utf8', (err, data) => {
     if (err) return error('Error while package.json was opening!');
 
-    const replacement = `"test": "env KEY=local mocha --recursive --exit",\n    "start-dev": "nodemon app.js"`;
+    const appJS = '.\\\\node_modules\\\\@hectorjs\\\\stub-backend\\\\lib\\\\app.js';
+    const startScript = `"start":"node ${appJS}",`;
+    const testScript = `\n    "test": "env KEY=local mocha --recursive --exit",`;
+    const startDevScript = `\n    "start-dev": "nodemon ${appJS}"`;
+    const replacement = `${startScript}${testScript}${startDevScript}`;
     const result = data.replace('\"test\"\: \"echo \\\"Error\: no test specified\\\" \&\& exit 1\"', replacement);
 
     writeFile('./package.json', result, 'utf8', (err) => {
@@ -49,10 +53,6 @@ export async function newCli(args) {
     });
   });
 
-  touch('app.js');
-
-  const appData = 'module.exports = require(\'@hectorjs/stub-backend\')';
-  writeFileByData('app.js', appData);
   createFileInPath('health.json', 'resources');
   writeFileByData('health.json', healthData);
   cd('..');
@@ -63,7 +63,7 @@ export async function newCli(args) {
   checkIDE(args['vs'], 'code');
   checkIDE(args['idea'], 'idea');
 
-  info(chalk.green('The mock has been set successfully (run node app.js)'));
+  info(chalk.green('The mock has been set successfully (run hjs start)'));
   const end = new Date() - start;
   info(chalk.grey('\nExecution time: %dms \n'), end);
 }

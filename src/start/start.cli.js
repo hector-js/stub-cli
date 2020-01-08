@@ -22,7 +22,8 @@ export function start(args) {
       const root = `npm run start-dev`;
       command = argumens ? `${root} --${argumens}` : root;
     } else {
-      command = `node app.js${argumens}`;
+      const root = `npm run start`;
+      command = argumens ? `${root} --${argumens}` : root;
     }
     exec(command);
   }
