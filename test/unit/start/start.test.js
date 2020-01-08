@@ -7,6 +7,7 @@ const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 
 describe('start', () => {
+  const appHJS ='.\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js';
   let start;
   let execCliStub;
   let cdCliStub;
@@ -32,7 +33,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('npm run start'));
+      assert.ok(execCliStub.calledOnceWith(`node ${appHJS}`));
     });
   });
 
@@ -45,7 +46,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('npm run start-dev'));
+      assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js'));
     });
   });
 
@@ -76,7 +77,7 @@ describe('start', () => {
 
         start(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm run start'));
+        assert.ok(execCliStub.calledOnceWith(`node ${appHJS}`));
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
@@ -92,7 +93,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --logs tiny'));
+          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --logs tiny`));
         });
       });
 
@@ -106,7 +107,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --port 8080'));
+          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --port 8080`));
         });
       });
 
@@ -120,7 +121,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --cors business.uk.org,localhost'));
+          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --cors business.uk.org,localhost`));
         });
       });
     });
@@ -135,7 +136,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --logs tiny'));
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --logs tiny`));
         });
       });
 
@@ -148,7 +149,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --port 8080'));
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --port 8080`));
         });
       });
 
@@ -161,7 +162,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --cors business.uk.org,localhost'));
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --cors business.uk.org,localhost`));
         });
       });
     });
