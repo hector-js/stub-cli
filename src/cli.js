@@ -4,10 +4,10 @@ import { generateCli } from './generate/generate.cli';
 import { sizeObject } from './utils/utils.cli';
 import { newCli } from './new/new.cli';
 import { start } from './start/start.cli';
-import { exec } from 'shelljs';
+import { testcli } from './testcli/test.cli';
 
 const chalk = require('chalk');
-const VERSION = '0.90.0';
+const VERSION = '0.91.0';
 
 export function cli(args) {
   switch (args._[0]) {
@@ -25,7 +25,7 @@ export function cli(args) {
       break;
     case 'test':
     case 't':
-      exec('npm test');
+      testcli(args);
       break;
     default:
   }

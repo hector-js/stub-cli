@@ -18,12 +18,13 @@ export function start(args) {
     const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
 
     let command;
+    const appHJS = `.\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js`;
     if (args.dev) {
-      const root = `npm run start-dev`;
-      command = argumens ? `${root} --${argumens}` : root;
+      const root = `nodemon ${appHJS}`;
+      command = argumens ? `${root}${argumens}` : root;
     } else {
-      const root = `npm run start`;
-      command = argumens ? `${root} --${argumens}` : root;
+      const root = `node ${appHJS}`;
+      command = argumens ? `${root}${argumens}` : root;
     }
     exec(command);
   }

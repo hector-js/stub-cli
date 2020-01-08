@@ -9,7 +9,7 @@ const chalk = require('chalk');
 describe('cli', () => {
   let cli;
   let sizeObjectStub; let generateCliStub; let newCliStub;
-  let startStub; let execStub; let infoStub; let warnStub;
+  let startStub; let infoStub; let warnStub; let testcliStub;
   let args;
 
   beforeEach(() => {
@@ -17,15 +17,15 @@ describe('cli', () => {
     sizeObjectStub = stub();
     newCliStub = stub();
     startStub = stub();
-    execStub = stub();
     infoStub = stub();
     warnStub = stub();
+    testcliStub = stub();
     cli = proxyquire('../../src/cli', {
       './generate/generate.cli': { generateCli: generateCliStub },
       './utils/utils.cli': { sizeObject: sizeObjectStub },
       './new/new.cli': { newCli: newCliStub },
       './start/start.cli': { start: startStub },
-      'shelljs': { exec: execStub },
+      './testcli/test.cli': { testcli: testcliStub },
       'console': { info: infoStub, warn: warnStub }
     }).cli;
     args = {
@@ -93,7 +93,7 @@ describe('cli', () => {
 
           cli(args);
 
-          assert.ok(execStub.calledOnceWith('npm test'));
+          assert.ok(testcliStub.calledOnceWith(args));
         });
       });
     });
@@ -111,7 +111,7 @@ describe('cli', () => {
 
         cli(args);
 
-        assert.ok(infoStub.withArgs(chalk.yellow(`\nVersion: 0.90.0\n`)).calledOnce);
+        assert.ok(infoStub.withArgs(chalk.yellow(`\nVersion: 0.91.0\n`)).calledOnce);
       });
     });
   });
@@ -156,7 +156,7 @@ describe('cli', () => {
         assert.ok(infoStub.withArgs(chalk.grey(` -  --headers : add headers to check in the request`)).calledOnce);
         assert.ok(infoStub.withArgs(chalk.grey(` -  --license : MIT\n\n`)).calledOnce);
         assert.ok(infoStub.withArgs(chalk.grey(`Example: hjs new mock-service --vs\n`)).calledOnce);
-        assert.ok(infoStub.withArgs(chalk.yellow(`version: 0.90.0\n`)).calledOnce);
+        assert.ok(infoStub.withArgs(chalk.yellow(`version: 0.91.0\n`)).calledOnce);
       });
     });
   });
