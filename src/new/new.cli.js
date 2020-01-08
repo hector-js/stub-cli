@@ -27,8 +27,8 @@ export async function newCli(args) {
   }
   info(chalk.green(`\n----------------------------------------------------\n`));
   info(chalk.green(` Init hectorjs ...\n`));
-  info(chalk.green(` -> Project name: ${nameProject}`));
-  info(chalk.green(` -> Root path: ${pathProject}\n`));
+  info(chalk.green(` -> Project name  : ${nameProject}`));
+  info(chalk.green(` -> Root path     : ${pathProject}\n`));
   info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
 
   mkdir(nameProject);
@@ -41,10 +41,9 @@ export async function newCli(args) {
   readFile('./package.json', 'utf8', (err, data) => {
     if (err) return error('Error while package.json was opening!');
 
-    const appJS = '.\\\\node_modules\\\\@hectorjs\\\\stub-backend\\\\lib\\\\app.js';
-    const startScript = `"start":"node ${appJS}",`;
+    const startScript = `"start":"hjs start",`;
     const testScript = `\n    "test": "env KEY=local mocha --recursive --exit",`;
-    const startDevScript = `\n    "start-dev": "nodemon ${appJS}"`;
+    const startDevScript = `\n    "start-dev": "hjs start --dev"`;
     const replacement = `${startScript}${testScript}${startDevScript}`;
     const result = data.replace('\"test\"\: \"echo \\\"Error\: no test specified\\\" \&\& exit 1\"', replacement);
 

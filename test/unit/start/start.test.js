@@ -32,7 +32,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('npm run start'));
+      assert.ok(execCliStub.calledOnceWith('node .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js'));
     });
   });
 
@@ -45,7 +45,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('npm run start-dev'));
+      assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js'));
     });
   });
 
@@ -76,7 +76,7 @@ describe('start', () => {
 
         start(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm run start'));
+        assert.ok(execCliStub.calledOnceWith('node .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js'));
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
@@ -92,7 +92,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --logs tiny'));
+          assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --logs tiny'));
         });
       });
 
@@ -106,7 +106,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --port 8080'));
+          assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --port 8080'));
         });
       });
 
@@ -120,7 +120,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start-dev -- --cors business.uk.org,localhost'));
+          assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --cors business.uk.org,localhost'));
         });
       });
     });
@@ -135,7 +135,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --logs tiny'));
+          assert.ok(execCliStub.calledOnceWith('node .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --logs tiny'));
         });
       });
 
@@ -148,7 +148,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --port 8080'));
+          assert.ok(execCliStub.calledOnceWith('node .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --port 8080'));
         });
       });
 
@@ -161,7 +161,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('npm run start -- --cors business.uk.org,localhost'));
+          assert.ok(execCliStub.calledOnceWith('node .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js --cors business.uk.org,localhost'));
         });
       });
     });
