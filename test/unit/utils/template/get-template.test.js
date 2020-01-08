@@ -76,7 +76,7 @@ describe('get-template', () => {
 
         expect(result).to.equal(`'use strict';
     
-var app = require('../../../app');
+var app = require('@hectorjs/stub-backend');
 var chai = require('chai');
 var request = require('supertest');
     
@@ -110,7 +110,7 @@ describe('GET - /any-path/{id}/data ', () => {
 
         expect(result).to.equal(`'use strict';
     
-var app = require('../../../app');
+var app = require('@hectorjs/stub-backend');
 var chai = require('chai');
 var request = require('supertest');
     

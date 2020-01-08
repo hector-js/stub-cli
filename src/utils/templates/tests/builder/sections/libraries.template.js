@@ -1,13 +1,7 @@
-export function libraries(args) {
-  let pathToApp = '';
-
-  if (args && args.path) {
-    args.path.split('/').forEach(() => pathToApp = pathToApp + '../');
-  }
-
+export function libraries() {
   return `'use strict';
     
-var app = require('${pathToApp}../app');
+var app = require('@hectorjs/stub-backend');
 var chai = require('chai');
 var request = require('supertest');
     

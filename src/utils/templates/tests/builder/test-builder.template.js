@@ -19,7 +19,7 @@ export class TestBuilder {
   }
 
   libraries() {
-    this.template = this.template + libraries(this.args);
+    this.template = this.template + libraries();
     return this;
   }
 

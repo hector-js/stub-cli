@@ -32,7 +32,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('node app.js'));
+      assert.ok(execCliStub.calledOnceWith('npm run start'));
     });
   });
 
@@ -76,7 +76,7 @@ describe('start', () => {
 
         start(args);
 
-        assert.ok(execCliStub.calledOnceWith('node app.js'));
+        assert.ok(execCliStub.calledOnceWith('npm run start'));
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
@@ -135,7 +135,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('node app.js --logs tiny'));
+          assert.ok(execCliStub.calledOnceWith('npm run start -- --logs tiny'));
         });
       });
 
@@ -148,7 +148,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('node app.js --port 8080'));
+          assert.ok(execCliStub.calledOnceWith('npm run start -- --port 8080'));
         });
       });
 
@@ -161,7 +161,7 @@ describe('start', () => {
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith('node app.js --cors business.uk.org,localhost'));
+          assert.ok(execCliStub.calledOnceWith('npm run start -- --cors business.uk.org,localhost'));
         });
       });
     });
