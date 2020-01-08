@@ -10,21 +10,26 @@ export function start(args) {
     info(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`));
     info(chalk.grey(` -  hjs start       : run service`));
     info(chalk.grey(` -  hjs start --path: run service from different directory`));
+    info(chalk.grey(` -  hjs start --ui  : open chrome browser`));
     info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
   } else {
     if (args.path) {
       cd(args.path);
     }
-    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+    let argsCli = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+
+    if (args.ui) {
+      argsCli = `${argsCli} --ui`;
+    }
 
     let command;
     const appHJS = `.\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js`;
     if (args.dev) {
       const root = `nodemon ${appHJS}`;
-      command = argumens ? `${root}${argumens}` : root;
+      command = argsCli ? `${root}${argsCli}` : root;
     } else {
       const root = `node ${appHJS}`;
-      command = argumens ? `${root}${argumens}` : root;
+      command = argsCli ? `${root}${argsCli}` : root;
     }
     exec(command);
   }
