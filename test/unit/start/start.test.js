@@ -124,6 +124,20 @@ describe('start', () => {
           assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --cors business.uk.org,localhost`));
         });
       });
+
+      context('when the argument is "--ui"', () => {
+        it('should execute a command with the ui', () => {
+          const args = {
+            _: ['start'],
+            ui: true,
+            dev: true
+          };
+
+          start(args);
+
+          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --ui`));
+        });
+      });
     });
 
     describe('normal mode', () => {
@@ -163,6 +177,19 @@ describe('start', () => {
           start(args);
 
           assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --cors business.uk.org,localhost`));
+        });
+      });
+
+      context('when the argument is "--ui"', () => {
+        it('should execute a command with the ui', () => {
+          const args = {
+            _: ['start'],
+            ui: true
+          };
+
+          start(args);
+
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --ui`));
         });
       });
     });
