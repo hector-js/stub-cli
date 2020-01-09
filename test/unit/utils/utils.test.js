@@ -186,11 +186,7 @@ describe('Utils', () => {
     describe('#getHeaders', () => {
       context('more than one header is set', () => {
         it('should return an array with the values', () => {
-          const args = {
-            headers: 'header1,header2'
-          };
-
-          const result = getHeaders(args);
+          const result = getHeaders('header1,header2');
 
           expect(result).to.deep.equal(['header1', 'header2']);
         });
@@ -198,24 +194,18 @@ describe('Utils', () => {
 
       context('one header is set', () => {
         it('should return an array with the value', () => {
-          const args = {
-            headers: 'header1'
-          };
+          const headers = 'header1';
 
-          const result = getHeaders(args);
+          const result = getHeaders(headers);
 
-          expect(result).to.deep.equal(['header1']);
+          expect(result).to.deep.equal([headers]);
         });
       });
 
       context('no headers are set', () => {
         [undefined, null, ''].forEach((value) => {
           it(`should return null for ${value}`, () => {
-            const args = {
-              headers: value
-            };
-
-            const result = getHeaders(args);
+            const result = getHeaders(value);
 
             expect(result).to.be.null;
           });
@@ -226,11 +216,7 @@ describe('Utils', () => {
     describe('#getCookies', () => {
       context('more than one cookie is set', () => {
         it('should return an array with the values', () => {
-          const args = {
-            cookies: 'cookie1,cookie2'
-          };
-
-          const result = getCookies(args);
+          const result = getCookies('cookie1,cookie2');
 
           expect(result).to.deep.equal(['cookie1', 'cookie2']);
         });
@@ -238,24 +224,18 @@ describe('Utils', () => {
 
       context('one cookie is set', () => {
         it('should return an array with the value', () => {
-          const args = {
-            cookies: 'cookie1'
-          };
+          const cookies = 'cookie1';
 
-          const result = getCookies(args);
+          const result = getCookies(cookies);
 
-          expect(result).to.deep.equal(['cookie1']);
+          expect(result).to.deep.equal([cookies]);
         });
       });
 
       context('no cookies are set', () => {
         [undefined, null, ''].forEach((value) => {
           it(`should return null for ${value}`, () => {
-            const args = {
-              cookies: value
-            };
-
-            const result = getCookies(args);
+            const result = getCookies(value);
 
             expect(result).to.be.null;
           });
@@ -267,13 +247,11 @@ describe('Utils', () => {
       context('a value exist', () => {
         ['404', 404].forEach((value) => {
           it(`should return the value for ${value}`, () => {
-            const args = {
-              status: value
-            };
+            const status = value;
 
-            const result = getStatus(args);
+            const result = getStatus(status);
 
-            expect(result).to.equal(value);
+            expect(result).to.equal(status);
           });
         });
       });
@@ -281,11 +259,9 @@ describe('Utils', () => {
       context('there is no value', () => {
         [undefined, null, '', 'foo'].forEach((value) => {
           it(`should return null for ${value}`, () => {
-            const args = {
-              status: value
-            };
+            const status = value;
 
-            const result = getStatus(args);
+            const result = getStatus(status);
 
             expect(result).to.be.null;
           });

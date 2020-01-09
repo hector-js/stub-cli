@@ -1,6 +1,6 @@
 import { getHeaders, arrayToJson } from '../../../../utils.cli';
 
-export function headers(args) {
-  const headers = getHeaders(args);
+export function headers(headersArg) {
+  const headers = getHeaders(headersArg);
   return `\n      ${headers ? `.set({${arrayToJson(headers)}})` : ''}`;
 }

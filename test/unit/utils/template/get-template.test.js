@@ -30,8 +30,6 @@ describe('get-template', () => {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
-        "_headers" : [  ],
-        "_cookies" : [  ],
         "_body" : { "body": "To be defined" },
         "_status": 404,
         "_description" : "customDescription" 
@@ -55,8 +53,6 @@ describe('get-template', () => {
       {
         "_xml": true,
         "_id": "idTBD",
-        "_headers" : [  ],
-        "_cookies" : [  ],
         "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
         "_status": 404,
         "_description" : "customDescription" 
@@ -86,8 +82,6 @@ describe('GET - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .get('/any-path/idTBD/data')
-      
-      
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(404);
@@ -120,8 +114,6 @@ describe('GET - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .get('/any-path/idTBD/data')
-      
-      
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(404);

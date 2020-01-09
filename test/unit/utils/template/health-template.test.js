@@ -42,7 +42,7 @@ describe('GET - health ', () => {
 				expect(res.body).to.deep.equal({
 					'STATUS': 'UP'
 				});
-				done();
+        done();
 		});
 	});
 });`

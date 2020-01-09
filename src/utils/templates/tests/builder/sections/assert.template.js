@@ -8,8 +8,8 @@ export function noErrors() {
   return `\n          expect(err).to.not.exist;`;
 }
 
-export function status(args) {
-  const status = getStatus(args);
+export function status(statusArg) {
+  const status = getStatus(statusArg);
   return `\n          expect(res.status).to.equal(${status ? status : '200'});`;
 }
 
