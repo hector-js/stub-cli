@@ -49,16 +49,16 @@ export const getIdFormatted = (path) => {
   return idsFormatted;
 };
 
-export const getHeaders = (args) => {
-  return args.headers ? args.headers.replace(' ', '').split(',') : null;
+export const getHeaders = (headers) => {
+  return headers ? headers.replace(' ', '').split(',') : null;
 };
 
-export const getCookies = (args) => {
-  return args.cookies ? args.cookies.replace(' ', '').split(',') : null;
+export const getCookies = (cookies) => {
+  return cookies ? cookies.replace(' ', '').split(',') : null;
 };
 
-export const getStatus = (args) => {
-  return args.status && parseInt(args.status) ? args.status : null;
+export const getStatus = (status) => {
+  return status && parseInt(status) ? status : null;
 };
 
 export const convertIdsToJsonProperties = (array) => arToCus(array, (id) => `"_${id}": "${id}TBD",`, true);

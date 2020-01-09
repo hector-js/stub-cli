@@ -38,13 +38,13 @@ export class ResourceBuilder {
   }
 
   reqBody() {
-    const body = this.args.xml? reqBodyXml(): reqBody();
+    const body = this.args.xml ? reqBodyXml() : reqBody();
     this.template = this.template + body;
     return this;
   }
 
   resBody() {
-    const body = this.args.xml? resBodyXml(): resBody();
+    const body = this.args.xml ? resBodyXml() : resBody();
     this.template = this.template + body;
     return this;
   }
@@ -56,17 +56,26 @@ export class ResourceBuilder {
   }
 
   reqHeaders() {
-    this.template = this.template + reqHeaders(getHeaders(this.args));
+    const headersArg = this.args.headers;
+    if (headersArg) {
+      this.template = this.template + reqHeaders(getHeaders(headersArg));
+    }
     return this;
   }
 
   reqCookies() {
-    this.template = this.template + reqCookies(getCookies(this.args));
+    const cookiesArg = this.args.cookies;
+    if (cookiesArg) {
+      this.template = this.template + reqCookies(getCookies(cookiesArg));
+    }
     return this;
   }
 
   status() {
-    this.template = this.template + status(getStatus(this.args));
+    const statusArg = this.args.status;
+    if (statusArg) {
+      this.template = this.template + status(getStatus(statusArg));
+    }
     return this;
   }
 

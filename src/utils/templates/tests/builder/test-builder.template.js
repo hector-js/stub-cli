@@ -44,17 +44,25 @@ export class TestBuilder {
   }
 
   headers() {
-    this.template = this.template + headers(this.args);
+    const headersArg = this.args.headers;
+    if (headersArg) {
+      this.template = this.template + headers(headersArg);
+    }
     return this;
   }
   cookies() {
-    this.template = this.template + cookies(this.args);
+    const cookiesArg = this.args.cookies;
+    if (cookiesArg) {
+      this.template = this.template + cookies(cookiesArg);
+    }
     return this;
   }
 
   bodyReq() {
-    const body = this.args.xml? bodyReqXml() : bodyReq();
-    this.template = this.template + body;
+    const body = this.args.xml ? bodyReqXml() : bodyReq();
+    if (body) {
+      this.template = this.template + body;
+    }
     return this;
   }
 
@@ -69,18 +77,18 @@ export class TestBuilder {
   }
 
   status() {
-    this.template = this.template + status(this.args);
+    this.template = this.template + status(this.args.status);
     return this;
   }
 
   body() {
-    const bod = this.args.xml? bodyGXml(): body();
+    const bod = this.args.xml ? bodyGXml() : body();
     this.template = this.template + bod;
     return this;
   }
 
   bodyG() {
-    const body = this.args.xml? bodyGXml(): bodyG();
+    const body = this.args.xml ? bodyGXml() : bodyG();
     this.template = this.template + body;
     return this;
   }

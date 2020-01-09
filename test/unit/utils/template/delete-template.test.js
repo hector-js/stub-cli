@@ -29,10 +29,7 @@ describe('delete-template', () => {
         "_requestBody":{
           "dummy": "dummy"
         },
-        "_headers" : [  ],
-        "_cookies" : [  ],
         "_body" : { "dummyResponse": "dummyResponse" },
-        
         "_description" : "Description to be defined" 
       }
     ]
@@ -55,10 +52,7 @@ describe('delete-template', () => {
         "_xml": true,
         "_id": "idTBD",
         "_requestBody": "<xml><tbd>Xml request to be defined</tbd></xml>",
-        "_headers" : [  ],
-        "_cookies" : [  ],
         "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
-        
         "_description" : "Description to be defined" 
       }
     ]
@@ -86,8 +80,6 @@ describe('DELETE - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .delete('/any-path/idTBD/data')
-      
-      
       .send({'dummy': 'dummy'})
       .end((err, res) => {
           expect(err).to.not.exist;
@@ -122,8 +114,6 @@ describe('DELETE - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .delete('/any-path/idTBD/data')
-      
-      
       .set('Accept', 'text/xml; charset=utf-8')
       .type('application/xml')
       .send('<xml><tbd>Xml request to be defined</tbd></xml>')

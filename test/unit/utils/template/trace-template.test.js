@@ -26,9 +26,6 @@ describe('trace-template', () => {
     "/any-path/{id}/data" : [
       {
         "_id": "idTBD",
-        "_headers" : [  ],
-        "_cookies" : [  ],
-        
         "_description" : "Description to be defined" 
       }
     ]
@@ -50,9 +47,6 @@ describe('trace-template', () => {
       {
         "_xml": true,
         "_id": "idTBD",
-        "_headers" : [  ],
-        "_cookies" : [  ],
-        
         "_description" : "Description to be defined" 
       }
     ]
@@ -80,8 +74,6 @@ describe('TRACE - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .trace('/any-path/idTBD/data')
-      
-      
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(200);
@@ -112,8 +104,6 @@ describe('TRACE - /any-path/{id}/data ', () => {
   it('should exist', (done) => {
     request(app)
       .trace('/any-path/idTBD/data')
-      
-      
       .end((err, res) => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(200);
