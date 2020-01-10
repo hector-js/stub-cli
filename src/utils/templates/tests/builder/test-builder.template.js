@@ -60,9 +60,7 @@ export class TestBuilder {
 
   bodyReq() {
     const body = this.args.xml ? bodyReqXml() : bodyReq();
-    if (body) {
-      this.template = this.template + body;
-    }
+    this.template = this.template + body;
     return this;
   }
 

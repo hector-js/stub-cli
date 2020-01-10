@@ -11,7 +11,9 @@ describe('patch-template', () => {
 
   beforeEach(() => {
     args = {
-      _: ['', '', '/any-path/{id}/data']
+      _: ['', '', 'any-path/{id}/data'],
+      cookies: 'sec',
+      headers: 'authorization,clientId'
     };
     ids = ['id'];
   });
@@ -29,6 +31,8 @@ describe('patch-template', () => {
         "_requestBody":{
           "dummy": "dummy"
         },
+        "_headers" : [ "authorization","clientId" ],
+        "_cookies" : [ "sec" ],
         "_body" : { "dummyResponse": "dummyResponse" },
         "_description" : "Description to be defined" 
       }
@@ -52,6 +56,8 @@ describe('patch-template', () => {
         "_xml": true,
         "_id": "idTBD",
         "_requestBody": "<xml><tbd>Xml request to be defined</tbd></xml>",
+        "_headers" : [ "authorization","clientId" ],
+        "_cookies" : [ "sec" ],
         "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
         "_description" : "Description to be defined" 
       }
