@@ -2,7 +2,6 @@
 
 import { assert } from 'chai';
 import { stub } from 'sinon';
-import { config } from 'shelljs';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
