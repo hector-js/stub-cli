@@ -2,6 +2,7 @@
 
 import { assert, expect } from 'chai';
 import { stub } from 'sinon';
+import { PACKAGE_JSON, RESOURCES_PATH } from '../../../src/utils/constants-backend';
 
 const proxyquire = require('proxyquire');
 
@@ -42,14 +43,13 @@ describe('scenario-provider', () => {
         args = {
           _: ['', '', '/any-path/{id}/data']
         };
-        checkStub.withArgs('./package.json').returns(true);
-        checkStub.withArgs('./resources/').returns(true);
+        checkStub.withArgs(PACKAGE_JSON).returns(true);
+        checkStub.withArgs(RESOURCES_PATH).returns(true);
         scenarioGenerator = proxyquire('../../../src/utils/scenario-finder.cli', {
           './file-utils.cli': {
             checkPath: checkStub,
             writeFileByData: writeFileByDataStub,
             createFileInPath: createFileStub
-
           },
           'shelljs': {
             cd: cdStub,
@@ -191,7 +191,7 @@ describe('scenario-provider', () => {
     describe('location is not right', () => {
       context('when the package.json is not at the same level', () => {
         it('should throw an error', () => {
-          checkStub.withArgs('./resources/').returns(true);
+          checkStub.withArgs(RESOURCES_PATH).returns(true);
 
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
           expect(cdStub.callCount).to.equals(0);
@@ -200,7 +200,7 @@ describe('scenario-provider', () => {
 
       context('when the resource package does not exist', () => {
         it('should throw an error', () => {
-          checkStub.withArgs('./package.json').returns(true);
+          checkStub.withArgs(PACKAGE_JSON).returns(true);
 
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
           expect(cdStub.callCount).to.equals(0);

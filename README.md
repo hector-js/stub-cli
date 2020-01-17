@@ -44,9 +44,11 @@ hjs --help
 ## Commands
 
 ### ```hjs --help```
+
  It will display posible options available in the library.
 
 ### ```hjs new/n [name-mock-service]```  
+
 It creates a new project with the name provided in the brakets.
 
 _Example:_ ```hjs new mock-service```
@@ -55,7 +57,8 @@ You can add the option ```--vs``` or ```--idea``` to open the IDE.
 
 _MORE INFO:_ ```hjs new --help```
 
-### ```hjs generate/g [method] [name-path]```  
+### ```hjs generate/g [method] [name-path]```
+
 It will generate a method template resource with a test. For example , ```hjs g get customers/{id}/business?product={param}```). More info: ```hjs g --help```.
 You can generate different methods like get, head, post, delete among others.
 
@@ -69,10 +72,19 @@ _NOTE:_ The endpoint should not start with '/' for the cli and you should escape
 _MORE INFO:_ ```hjs generate --help```
 
 ### ```hjs test```
+
 Execute the tests which have been created by each method generate command (```hjs g get ...```).
 
 _NOTE_: you can run ```npm test``` as well.
 _MORE INFO:_ ```hjs test --help```
+
+### ```hjs config [prop]```
+
+Create a config file (_.hjs.config.json_) where you can set the logs, port, among others. 
+
+```hjs config --port 8090 --logs tiny```
+
+_MORE INFO:_ ```hjs config --help```
 
 ### ```hjs start```
 If you want to run the mock ```hjs start```.

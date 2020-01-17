@@ -2,14 +2,15 @@ import { cd, mkdir } from 'shelljs';
 import { warn } from 'console';
 import { sanitizeRootFile, getIdFormatted } from './utils.cli';
 import { checkPath, writeFileByData } from './file-utils.cli';
+import { PACKAGE_JSON, RESOURCES_PATH } from './constants-backend';
 
 const chalk = require('chalk');
 
-const RESOURCES_PATH = 'resources';
 
 export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
-  if (checkPath('./package.json') && checkPath(`./${RESOURCES_PATH}/`)) {
-    cd(RESOURCES_PATH);
+  if (checkPath(PACKAGE_JSON) && checkPath(RESOURCES_PATH)) {
+    const filterDocSlash =RESOURCES_PATH.replace(/\.|\//g, '');
+    cd(filterDocSlash);
     const path = args._[2];
     const pathForResources = sanitizePath(args.path);
 
@@ -56,19 +57,19 @@ const createFolderBase = (path) => {
   return path;
 };
 
-const goTest =()=>{
+const goTest = () => {
   cd('..');
   cd('test');
 };
 
-const goPath = (path)=>{
+const goPath = (path) => {
   if (path) {
     createFolderBase(path);
     cd(path);
   }
 };
 
-const goRoot = (path)=>{
+const goRoot = (path) => {
   if (path) {
     let stringBuild = '';
     path.split('/').forEach(() => stringBuild = stringBuild + '../');

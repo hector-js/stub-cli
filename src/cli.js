@@ -5,6 +5,7 @@ import { sizeObject } from './utils/utils.cli';
 import { newCli } from './new/new.cli';
 import { start } from './start/start.cli';
 import { testcli } from './testcli/test.cli';
+import { config } from './config/config.cli';
 
 const chalk = require('chalk');
 const VERSION = '0.92.0';
@@ -26,6 +27,10 @@ export function cli(args) {
     case 'test':
     case 't':
       testcli(args);
+      break;
+    case 'config':
+    case 'c':
+      config(args);
       break;
     default:
   }
