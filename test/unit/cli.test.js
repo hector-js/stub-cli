@@ -2,6 +2,7 @@
 
 import { assert } from 'chai';
 import { stub } from 'sinon';
+import { config } from 'shelljs';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
@@ -9,7 +10,7 @@ const chalk = require('chalk');
 describe('cli', () => {
   let cli;
   let sizeObjectStub; let generateCliStub; let newCliStub;
-  let startStub; let infoStub; let warnStub; let testcliStub;
+  let startStub; let infoStub; let warnStub; let testcliStub; let configStub;
   let args;
 
   beforeEach(() => {
@@ -20,12 +21,14 @@ describe('cli', () => {
     infoStub = stub();
     warnStub = stub();
     testcliStub = stub();
+    configStub = stub();
     cli = proxyquire('../../src/cli', {
       './generate/generate.cli': { generateCli: generateCliStub },
       './utils/utils.cli': { sizeObject: sizeObjectStub },
       './new/new.cli': { newCli: newCliStub },
       './start/start.cli': { start: startStub },
       './testcli/test.cli': { testcli: testcliStub },
+      './config/config.cli': { config: configStub },
       'console': { info: infoStub, warn: warnStub }
     }).cli;
     args = {
@@ -35,68 +38,92 @@ describe('cli', () => {
 
   afterEach(() => proxyquire.callThru());
 
-  describe('#newCli', () => {
-    context('when new/n command is added', () => {
-      ['new', 'n'].forEach((command) => {
-        it(`should call newCli with the args for "${command}"`, () => {
-          args = {
-            _: [command, 'any name']
-          };
+  describe('first arg', () => {
+    describe('#newCli', () => {
+      context('when new/n command is added', () => {
+        ['new', 'n'].forEach((command) => {
+          it(`should call newCli with the args for "${command}"`, () => {
+            args = {
+              _: [command, 'any name']
+            };
 
-          cli(args);
+            cli(args);
 
-          assert.ok(newCliStub.calledOnceWith(args));
+            assertStubBy(newCliStub);
+          });
         });
       });
     });
-  });
 
-  describe('#generateCli', () => {
-    context('when generate/g command is added', () => {
-      ['generate', 'g'].forEach((command) => {
-        it(`should call generateCli with the args for "${command}"`, () => {
-          args = {
-            _: [command, 'any name']
-          };
+    describe('#generateCli', () => {
+      context('when generate/g command is added', () => {
+        ['generate', 'g'].forEach((command) => {
+          it(`should call generateCli with the args for "${command}"`, () => {
+            args = {
+              _: [command, 'any name']
+            };
 
-          cli(args);
+            cli(args);
 
-          assert.ok(generateCliStub.calledOnceWith(args));
+            assertStubBy(generateCliStub);
+          });
         });
       });
     });
-  });
 
-  describe('#start', () => {
-    context('when start/s command is added', () => {
-      ['start', 's'].forEach((command) => {
-        it(`should call start with the args for "${command}"`, () => {
-          args = {
-            _: [command, 'any name']
-          };
+    describe('#start', () => {
+      context('when start/s command is added', () => {
+        ['start', 's'].forEach((command) => {
+          it(`should call start with the args for "${command}"`, () => {
+            args = {
+              _: [command, 'any name']
+            };
 
-          cli(args);
+            cli(args);
 
-          assert.ok(startStub.calledOnceWith(args));
+            assertStubBy(startStub);
+          });
         });
       });
     });
-  });
 
-  describe('#test', () => {
-    context('when test/t command is added', () => {
-      ['test', 't'].forEach((command) => {
-        it(`should call test with the args for "${command}"`, () => {
-          args = {
-            _: [command, 'any name']
-          };
+    describe('#test', () => {
+      context('when test/t command is added', () => {
+        ['test', 't'].forEach((command) => {
+          it(`should call test with the args for "${command}"`, () => {
+            args = {
+              _: [command, 'any name']
+            };
 
-          cli(args);
+            cli(args);
 
-          assert.ok(testcliStub.calledOnceWith(args));
+            assertStubBy(testcliStub);
+          });
         });
       });
     });
+
+    describe('#config', () => {
+      context('when the second param is config', () => {
+        ['config', 'c'].forEach((arg) => {
+          it(`should call with ${arg}`, () => {
+            args = {
+              _: [arg, 'any value']
+            };
+
+            cli(args);
+
+            assertStubBy(configStub);
+          });
+        });
+      });
+    });
+
+    function assertStubBy(stubToCompare) {
+      const stubs = [configStub, testcliStub, startStub, generateCliStub, newCliStub];
+      stubs.filter((value) => value === stubToCompare).forEach((stub) => assert.ok(stub.calledOnceWith(args)));
+      stubs.filter((value) => value !== stubToCompare).forEach((stub) => assert.ok(stub.notCalled));
+    }
   });
 
   describe('#version', () => {

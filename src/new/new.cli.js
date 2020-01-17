@@ -4,6 +4,7 @@ import { info, error } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
 import { handleQuestion, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
+import { PACKAGE_JSON } from '../utils/constants-backend';
 
 const chalk = require('chalk');
 
@@ -38,7 +39,7 @@ export async function newCli(args) {
   exec('npm install @hectorjs/stub-backend --silent');
   exec('npm install chai mocha supertest nodemon --save-dev --silent');
 
-  readFile('./package.json', 'utf8', (err, data) => {
+  readFile(PACKAGE_JSON, 'utf8', (err, data) => {
     if (err) return error('Error while package.json was opening!');
 
     const startScript = `"start":"hjs start",`;
@@ -47,7 +48,7 @@ export async function newCli(args) {
     const replacement = `${startScript}${testScript}${startDevScript}`;
     const result = data.replace('\"test\"\: \"echo \\\"Error\: no test specified\\\" \&\& exit 1\"', replacement);
 
-    writeFile('./package.json', result, 'utf8', (err) => {
+    writeFile(PACKAGE_JSON, result, 'utf8', (err) => {
       if (err) return error(err);
     });
   });
