@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { getTemplate } from '../../../../src/utils/templates/resources/get.template';
 import { getTestTemplate } from '../../../../src/utils/templates/tests/get.template';
 
-describe('get-template', () => {
+describe.only('get-template', () => {
   let args;
   let ids;
   let result;
@@ -29,9 +29,13 @@ describe('get-template', () => {
   "_get" : {
     "/any-path/{id}/data" : [
       {
-        "_id": "idTBD",
-        "_body" : { "body": "To be defined" },
-        "_status": 404,
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+          "_status": 404,
+          "_body" : { "body": "To be defined" }
+        },
         "_description" : "customDescription" 
       }
     ]
@@ -51,10 +55,14 @@ describe('get-template', () => {
   "_get" : {
     "/any-path/{id}/data" : [
       {
-        "_xml": true,
-        "_id": "idTBD",
-        "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
-        "_status": 404,
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+          "_xml": true,
+          "_status": 404,
+          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
+        },
         "_description" : "customDescription" 
       }
     ]

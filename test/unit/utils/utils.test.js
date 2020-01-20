@@ -11,7 +11,8 @@ import {
   convertArrayToJsonProperties,
   arrayToJson,
   arrayToArrayValues,
-  buildUrl
+  buildUrl,
+  removeLastComma
 } from '../../../src/utils/utils.cli';
 import { expect, assert } from 'chai';
 
@@ -388,6 +389,22 @@ describe('Utils', () => {
           assert.throws(fn, Error, chalk.red('no path'));
         });
       });
+    });
+  });
+
+  describe('#removeLastComma',()=>{
+
+    it.only('should remove last comma found of a string',()=>{
+
+      const data = `{
+        "_body": "whatever",
+      }`;
+
+      const result = removeLastComma(data);
+
+      expect(result).to.equal(`{
+        "_body": "whatever"
+      }`);
     });
   });
 });

@@ -3,7 +3,7 @@ import { error } from 'console';
 const chalk = require('chalk');
 
 export function sizeObject(obj) {
-  return obj? Object.keys(obj).length: 0;
+  return obj ? Object.keys(obj).length : 0;
 };
 
 export const sanitizeRootFile = (path) => {
@@ -13,18 +13,18 @@ export const sanitizeRootFile = (path) => {
     throw new Error;
   }
   let rootFile = path
-      .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
-      .replace(/\}|\//g, '-')
-      .replace(/\-\-\-/g, '-')
-      .replace(/\-\-/g, '-')
-      .replace(/ /g, '');
+    .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
+    .replace(/\}|\//g, '-')
+    .replace(/\-\-\-/g, '-')
+    .replace(/\-\-/g, '-')
+    .replace(/ /g, '');
   if (rootFile) {
     while (rootFile.startsWith('-') || rootFile.slice(-1) === '-') {
       if (rootFile.startsWith('-')) {
         rootFile = rootFile.substr(1);
       }
       if (rootFile.slice(-1) === '-') {
-        rootFile = rootFile.slice(0, -1); ;
+        rootFile = rootFile.slice(0, -1);;
       }
     }
   }
@@ -81,6 +81,16 @@ export const buildUrl = (path, ids) => {
 
 export function argsBy(argKey, argValue) {
   return argValue ? ` --${argKey} ${argValue}` : '';
+}
+
+export function removeLastComma(data) {
+  const indices = [];
+  for (let i = 0; i < data.length; i++) {
+    if (data[i] === ',') indices.push(i);
+  }
+  const lastPosition = indices[indices.length - 1];
+
+  return data.slice(0, lastPosition) + data.slice(lastPosition + 1);
 }
 
 const arToCus = (array, fn, lastElement) => {

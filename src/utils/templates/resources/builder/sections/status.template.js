@@ -1,4 +1,4 @@
 export function status(status) {
   return `
-        "_status": ${status},`;
+          "_status": ${status},`;
 }

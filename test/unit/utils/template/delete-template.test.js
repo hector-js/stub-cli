@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { deleteTemplate } from './../../../../src/utils/templates/resources/delete.template';
 import { deleteTestTemplate } from '../../../../src/utils/templates/tests/delete.template';
 
-describe('delete-template', () => {
+describe.only('delete-template', () => {
   let args;
   let ids;
   let result;
@@ -25,11 +25,15 @@ describe('delete-template', () => {
   "_delete" : {
     "/any-path/{id}/data" : [
       {
-        "_id": "idTBD",
-        "_requestBody":{
-          "dummy": "dummy"
+        "_req": {
+          "_id": "idTBD",
+          "_body":{
+            "dummy": "dummy"
+          }
         },
-        "_body" : { "dummyResponse": "dummyResponse" },
+        "_res": {
+          "_body" : { "dummyResponse": "dummyResponse" }
+        },
         "_description" : "Description to be defined" 
       }
     ]
@@ -49,10 +53,14 @@ describe('delete-template', () => {
   "_delete" : {
     "/any-path/{id}/data" : [
       {
-        "_xml": true,
-        "_id": "idTBD",
-        "_requestBody": "<xml><tbd>Xml request to be defined</tbd></xml>",
-        "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
+        "_req": {
+          "_id": "idTBD",
+          "_body": "<xml><tbd>Xml request to be defined</tbd></xml>"
+        },
+        "_res": {
+          "_xml": true,
+          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
+        },
         "_description" : "Description to be defined" 
       }
     ]
