@@ -64,7 +64,9 @@ export class ResourceBuilder {
   }
 
   ids() {
-    this.template = this.template + ids(this.idsFormatted);
+    if (this.idsFormatted && this.idsFormatted.length !== 0) {
+      this.template = this.template + ids(this.idsFormatted);
+    }
     return this;
   }
 
