@@ -25,7 +25,11 @@ describe('head-template', () => {
   "_head" : {
     "/any-path/{id}/data" : [
       {
-        "_id": "idTBD",
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+        },
         "_description" : "Description to be defined" 
       }
     ]
@@ -45,8 +49,12 @@ describe('head-template', () => {
   "_head" : {
     "/any-path/{id}/data" : [
       {
-        "_xml": true,
-        "_id": "idTBD",
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+          "_xml": true
+        },
         "_description" : "Description to be defined" 
       }
     ]

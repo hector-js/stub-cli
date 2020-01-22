@@ -4,13 +4,6 @@ export function path(path) {
       {`;
 }
 
-export function pathXml(path) {
-  return `
-    "${firstCharacterMustBeSlash(path)}" : [
-      {
-        "_xml": true,`;
-}
-
 export function endPath() {
   return ` 
       }

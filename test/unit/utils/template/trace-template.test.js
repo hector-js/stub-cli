@@ -18,14 +18,18 @@ describe('trace-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenatio', () => {
+      it('should add the resource scenario', () => {
         result = traceTemplate(args, ids);
 
         expect(result).to.equal(`{
   "_trace" : {
     "/any-path/{id}/data" : [
       {
-        "_id": "idTBD",
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+        },
         "_description" : "Description to be defined" 
       }
     ]
@@ -45,8 +49,12 @@ describe('trace-template', () => {
   "_trace" : {
     "/any-path/{id}/data" : [
       {
-        "_xml": true,
-        "_id": "idTBD",
+        "_req": {
+          "_id": "idTBD"
+        },
+        "_res": {
+          "_xml": true
+        },
         "_description" : "Description to be defined" 
       }
     ]

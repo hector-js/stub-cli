@@ -2,8 +2,12 @@ export const healthData = `{
   "_get" : {
     "/health": [
       {
-        "_body": {
-          "STATUS": "UP"
+        "_req": {
+        },
+        "_res": {
+          "_body": {
+            "STATUS": "UP"
+          }
         }
       }
     ]

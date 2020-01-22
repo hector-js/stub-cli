@@ -27,13 +27,17 @@ describe('patch-template', () => {
   "_patch" : {
     "/any-path/{id}/data" : [
       {
-        "_id": "idTBD",
-        "_requestBody":{
-          "dummy": "dummy"
+        "_req": {
+          "_id": "idTBD",
+          "_body":{
+            "dummy": "dummy"
+          },
+          "_headers" : [ "authorization","clientId" ],
+          "_cookies" : [ "sec" ]
         },
-        "_headers" : [ "authorization","clientId" ],
-        "_cookies" : [ "sec" ],
-        "_body" : { "dummyResponse": "dummyResponse" },
+        "_res": {
+          "_body" : { "dummyResponse": "dummyResponse" }
+        },
         "_description" : "Description to be defined" 
       }
     ]
@@ -53,12 +57,16 @@ describe('patch-template', () => {
   "_patch" : {
     "/any-path/{id}/data" : [
       {
-        "_xml": true,
-        "_id": "idTBD",
-        "_requestBody": "<xml><tbd>Xml request to be defined</tbd></xml>",
-        "_headers" : [ "authorization","clientId" ],
-        "_cookies" : [ "sec" ],
-        "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>",
+        "_req": {
+          "_id": "idTBD",
+          "_body": "<xml><tbd>Xml request to be defined</tbd></xml>",
+          "_headers" : [ "authorization","clientId" ],
+          "_cookies" : [ "sec" ]
+        },
+        "_res": {
+          "_xml": true,
+          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
+        },
         "_description" : "Description to be defined" 
       }
     ]

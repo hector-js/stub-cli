@@ -3,7 +3,7 @@ import { error } from 'console';
 const chalk = require('chalk');
 
 export function sizeObject(obj) {
-  return obj? Object.keys(obj).length: 0;
+  return obj ? Object.keys(obj).length : 0;
 };
 
 export const sanitizeRootFile = (path) => {
@@ -81,6 +81,35 @@ export const buildUrl = (path, ids) => {
 
 export function argsBy(argKey, argValue) {
   return argValue ? ` --${argKey} ${argValue}` : '';
+}
+
+export function removeLastCommaFromOrigin(data, startString) {
+  let finalVal;
+  let beforeText = '';
+  const splitData = data.split(startString);
+  if (startString && splitData.length > 1) {
+    splitData.forEach((value, index) => {
+      if ((splitData.length - 1) !== index) {
+        beforeText = beforeText + value;
+      }
+    });
+    finalVal = startString + splitData[splitData.length - 1];
+  } else {
+    finalVal = data;
+  }
+
+  const indices = [];
+  for (let i = 0; i < finalVal.length; i++) {
+    if (finalVal[i] === ',') indices.push(i);
+  }
+  const lastPosition = indices[indices.length - 1];
+
+  if (lastPosition) {
+    const partialText = finalVal.slice(0, lastPosition) + finalVal.slice(lastPosition + 1);
+    return beforeText ? beforeText + partialText : partialText;
+  } else {
+    return data;
+  }
 }
 
 const arToCus = (array, fn, lastElement) => {

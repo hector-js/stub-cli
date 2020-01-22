@@ -2,5 +2,5 @@ import { convertArrayToJsonProperties } from '../../../../utils.cli';
 
 export function reqCookies(cookies) {
   return `
-        "_cookies" : [ ${convertArrayToJsonProperties(cookies)} ],`;
+          "_cookies" : [ ${convertArrayToJsonProperties(cookies)} ],`;
 }
