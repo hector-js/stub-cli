@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { deleteTemplate } from './../../../../src/utils/templates/resources/delete.template';
 import { deleteTestTemplate } from '../../../../src/utils/templates/tests/delete.template';
 
-describe.only('delete-template', () => {
+describe('delete-template', () => {
   let args;
   let ids;
   let result;

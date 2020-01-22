@@ -83,14 +83,33 @@ export function argsBy(argKey, argValue) {
   return argValue ? ` --${argKey} ${argValue}` : '';
 }
 
-export function removeLastComma(data) {
+export function removeLastCommaFromOrigin(data, startString) {
+  let finalVal;
+  let beforeText = '';
+  const splitData = data.split(startString);
+  if (startString && splitData.length > 1) {
+    splitData.forEach((value, index) => {
+      if ((splitData.length - 1) !== index) {
+        beforeText = beforeText + value;
+      }
+    });
+    finalVal = startString + splitData[splitData.length - 1];
+  } else {
+    finalVal = data;
+  }
+
   const indices = [];
-  for (let i = 0; i < data.length; i++) {
-    if (data[i] === ',') indices.push(i);
+  for (let i = 0; i < finalVal.length; i++) {
+    if (finalVal[i] === ',') indices.push(i);
   }
   const lastPosition = indices[indices.length - 1];
 
-  return data.slice(0, lastPosition) + data.slice(lastPosition + 1);
+  if (lastPosition) {
+    const partialText = finalVal.slice(0, lastPosition) + finalVal.slice(lastPosition + 1);
+    return beforeText ? beforeText + partialText : partialText;
+  } else {
+    return data;
+  }
 }
 
 const arToCus = (array, fn, lastElement) => {

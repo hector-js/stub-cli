@@ -12,7 +12,7 @@ import {
   arrayToJson,
   arrayToArrayValues,
   buildUrl,
-  removeLastComma
+  removeLastCommaFromOrigin
 } from '../../../src/utils/utils.cli';
 import { expect, assert } from 'chai';
 
@@ -167,7 +167,7 @@ describe('Utils', () => {
           const fn = () => getIdFormatted(path);
 
           assert.throws(fn, Error,
-              chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
+            chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
         });
       });
 
@@ -379,7 +379,7 @@ describe('Utils', () => {
           expect(result).to.equal(array);
         });
       });
-    }); ;
+    });
 
     context('when path is not defined', () => {
       [undefined, null, ''].forEach((value) => {
@@ -392,19 +392,69 @@ describe('Utils', () => {
     });
   });
 
-  describe('#removeLastComma',()=>{
+  describe('#removeLastCommaFromOrigin', () => {
+    context('when value to start is null', () => {
+      it('should remove last comma found of a string', () => {
+        const data = `{
+          "_body": "whatever",
+        }`;
 
-    it.only('should remove last comma found of a string',()=>{
+        const result = removeLastCommaFromOrigin(data, null);
 
+        expect(result).to.equal(`{
+          "_body": "whatever"
+        }`);
+      });
+    });
+
+    context('when value does not exist in the given string', () => {
+      it('should remove last comma found of a string', () => {
+        const data = `{
+          "_body": "whatever",
+        }`;
+
+        const result = removeLastCommaFromOrigin(data, '_dev');
+
+        expect(result).to.equal(`{
+          "_body": "whatever"
+        }`);
+      });
+    });
+
+    context('when there are more than one values found',()=>{
+      it('should check from the last one found', () => {
+        const data = `"_dev":"body":"what"},"_dev":{"_body": "whatever"}`;
+  
+        const result = removeLastCommaFromOrigin(data, '"_dev"');
+  
+        expect(result).to.equal(data);
+      });
+    });
+
+    it('should remove last comma found counting from a given string', () => {
+      const data = `"body":"what"},"_dev":{"_body": "whatever"}`;
+
+      const result = removeLastCommaFromOrigin(data, '"_dev"');
+
+      expect(result).to.equal(data);
+    });
+
+    it('should remove last comma found counting from a given string', () => {
       const data = `{
-        "_body": "whatever",
-      }`;
+        "_trace" : {
+          "/any-path/{id}/data" : [
+            {
+              "_req": {
+                "_id": "idTBD",`;
 
-      const result = removeLastComma(data);
+      const result = removeLastCommaFromOrigin(data, '"_req"');
 
       expect(result).to.equal(`{
-        "_body": "whatever"
-      }`);
+        "_trace" : {
+          "/any-path/{id}/data" : [
+            {
+              "_req": {
+                "_id": "idTBD"`);
     });
   });
 });

@@ -1,8 +1,8 @@
 import { method, endMethod } from './sections/method.template';
-import { path, endPath, pathXml } from './sections/path.template';
+import { path, endPath } from './sections/path.template';
 import { ids } from './sections/ids.template';
 import { reqHeaders } from './sections/req-headers.template';
-import { getHeaders, getCookies, getStatus, removeLastComma } from '../../../utils.cli';
+import { getHeaders, getCookies, getStatus, removeLastCommaFromOrigin } from '../../../utils.cli';
 import { reqCookies } from './sections/req-cookies.template';
 import { description } from './sections/description.template';
 import { reqBody, reqBodyXml } from './sections/req-body.template';
@@ -47,7 +47,7 @@ export class ResourceBuilder {
   }
 
   endReq() {
-    this.template = removeLastComma(this.template);
+    this.template = removeLastCommaFromOrigin(this.template, '_req');
     this.template = this.template + endReq();
     return this;
   }
@@ -58,7 +58,7 @@ export class ResourceBuilder {
   }
 
   endRes() {
-    this.template = removeLastComma(this.template);
+    this.template = removeLastCommaFromOrigin(this.template, '_res');
     this.template = this.template + endRes();
     return this;
   }

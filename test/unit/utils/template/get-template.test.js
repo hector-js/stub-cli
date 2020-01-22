@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { getTemplate } from '../../../../src/utils/templates/resources/get.template';
 import { getTestTemplate } from '../../../../src/utils/templates/tests/get.template';
 
-describe.only('get-template', () => {
+describe('get-template', () => {
   let args;
   let ids;
   let result;

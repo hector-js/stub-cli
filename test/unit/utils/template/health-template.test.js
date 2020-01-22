@@ -11,8 +11,12 @@ describe('health-template', () => {
   "_get" : {
     "/health": [
       {
-        "_body": {
-          "STATUS": "UP"
+        "_req": {
+        },
+        "_res": {
+          "_body": {
+            "STATUS": "UP"
+          }
         }
       }
     ]
