@@ -6,6 +6,9 @@
 npm install -g @hectorjs/stub-cli
 ```
 
+:warning: :warning: This version is beta!! Please let me know if there is any issue. :warning: :warning:
+
+
 ## Quality measures
 
 ![](https://github.com/HecJimSan/stub-cli/workflows/%40hectorjs%2Fstub%2Dcli/badge.svg)
