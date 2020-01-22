@@ -167,7 +167,7 @@ describe('Utils', () => {
           const fn = () => getIdFormatted(path);
 
           assert.throws(fn, Error,
-            chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
+              chalk.red(`The path /customers/{id}/data?product={id}&query={param1} contains 1 ids repeated.`));
         });
       });
 
@@ -421,12 +421,12 @@ describe('Utils', () => {
       });
     });
 
-    context('when there are more than one values found',()=>{
+    context('when there are more than one values found', ()=>{
       it('should check from the last one found', () => {
         const data = `"_dev":"body":"what"},"_dev":{"_body": "whatever"}`;
-  
+
         const result = removeLastCommaFromOrigin(data, '"_dev"');
-  
+
         expect(result).to.equal(data);
       });
     });

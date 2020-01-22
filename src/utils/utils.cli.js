@@ -13,18 +13,18 @@ export const sanitizeRootFile = (path) => {
     throw new Error;
   }
   let rootFile = path
-    .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
-    .replace(/\}|\//g, '-')
-    .replace(/\-\-\-/g, '-')
-    .replace(/\-\-/g, '-')
-    .replace(/ /g, '');
+      .replace(/\/\{|\}\/|\=|\?|\&|\{/g, '-')
+      .replace(/\}|\//g, '-')
+      .replace(/\-\-\-/g, '-')
+      .replace(/\-\-/g, '-')
+      .replace(/ /g, '');
   if (rootFile) {
     while (rootFile.startsWith('-') || rootFile.slice(-1) === '-') {
       if (rootFile.startsWith('-')) {
         rootFile = rootFile.substr(1);
       }
       if (rootFile.slice(-1) === '-') {
-        rootFile = rootFile.slice(0, -1);;
+        rootFile = rootFile.slice(0, -1); ;
       }
     }
   }
