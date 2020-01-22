@@ -9,7 +9,7 @@ import { reqBody, reqBodyXml } from './sections/req-body.template';
 import { resBody, resBodyG, resBodyGXml, resBodyXml } from './sections/res-body.template';
 import { status } from './sections/status.template';
 import { req, endReq } from './sections/req.template';
-import { endRes, res } from './sections/reS.template';
+import { endRes, res } from './sections/res.template';
 import { xml } from './sections/xml.template';
 
 export class ResourceBuilder {
