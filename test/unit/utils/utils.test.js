@@ -7,12 +7,9 @@ import {
   getHeaders,
   getCookies,
   getStatus,
-  convertIdsToJsonProperties,
-  convertArrayToJsonProperties,
   arrayToJson,
   arrayToArrayValues,
-  buildUrl,
-  removeLastCommaFromOrigin
+  buildUrl
 } from '../../../src/utils/utils.cli';
 import { expect, assert } from 'chai';
 
@@ -271,50 +268,6 @@ describe('Utils', () => {
     });
   });
 
-  describe('#convertIdsToJsonProperties', () => {
-    it('should convert array  to this format: "_id":"idTBD", "_param":"paramTBD"', () => {
-      const array = ['id', 'param'];
-
-      const result = convertIdsToJsonProperties(array);
-
-      expect(result).to.equal(`"_id": "idTBD","_param": "paramTBD",`);
-    });
-
-    context('when array is not defined', () => {
-      [undefined, null, []].forEach((value) => {
-        it(`should return empty for ${value}`, () => {
-          const array = value;
-
-          const result = convertIdsToJsonProperties(array);
-
-          expect(result).to.be.empty;
-        });
-      });
-    });
-  });
-
-  describe('#convertArrayToJsonProperties', () => {
-    it('should convert array  to this format: "id", "param"', () => {
-      const array = ['id', 'param'];
-
-      const result = convertArrayToJsonProperties(array);
-
-      expect(result).to.equal(`"id","param"`);
-    });
-
-    context('when array is not defined', () => {
-      [undefined, null, []].forEach((value) => {
-        it(`should return empty for ${value}`, () => {
-          const array = value;
-
-          const result = convertArrayToJsonProperties(array);
-
-          expect(result).to.be.empty;
-        });
-      });
-    });
-  });
-
   describe('#arrayToJson', () => {
     it('should convert array to this format: "id":"any value", "param":"any value"', () => {
       const array = ['id', 'param'];
@@ -389,72 +342,6 @@ describe('Utils', () => {
           assert.throws(fn, Error, chalk.red('no path'));
         });
       });
-    });
-  });
-
-  describe('#removeLastCommaFromOrigin', () => {
-    context('when value to start is null', () => {
-      it('should remove last comma found of a string', () => {
-        const data = `{
-          "_body": "whatever",
-        }`;
-
-        const result = removeLastCommaFromOrigin(data, null);
-
-        expect(result).to.equal(`{
-          "_body": "whatever"
-        }`);
-      });
-    });
-
-    context('when value does not exist in the given string', () => {
-      it('should remove last comma found of a string', () => {
-        const data = `{
-          "_body": "whatever",
-        }`;
-
-        const result = removeLastCommaFromOrigin(data, '_dev');
-
-        expect(result).to.equal(`{
-          "_body": "whatever"
-        }`);
-      });
-    });
-
-    context('when there are more than one values found', ()=>{
-      it('should check from the last one found', () => {
-        const data = `"_dev":"body":"what"},"_dev":{"_body": "whatever"}`;
-
-        const result = removeLastCommaFromOrigin(data, '"_dev"');
-
-        expect(result).to.equal(data);
-      });
-    });
-
-    it('should remove last comma found counting from a given string', () => {
-      const data = `"body":"what"},"_dev":{"_body": "whatever"}`;
-
-      const result = removeLastCommaFromOrigin(data, '"_dev"');
-
-      expect(result).to.equal(data);
-    });
-
-    it('should remove last comma found counting from a given string', () => {
-      const data = `{
-        "_trace" : {
-          "/any-path/{id}/data" : [
-            {
-              "_req": {
-                "_id": "idTBD",`;
-
-      const result = removeLastCommaFromOrigin(data, '"_req"');
-
-      expect(result).to.equal(`{
-        "_trace" : {
-          "/any-path/{id}/data" : [
-            {
-              "_req": {
-                "_id": "idTBD"`);
     });
   });
 });

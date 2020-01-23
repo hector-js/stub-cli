@@ -8,13 +8,10 @@ export const putTemplate = (args, idsFormatted) => {
       .reqBody()
       .reqHeaders()
       .reqCookies()
-      .endReq()
       .res()
       .xml()
       .resBody()
       .status()
-      .endRes()
       .description()
-      .endPath().endMethod()
       .build();
 };

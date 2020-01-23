@@ -21,25 +21,24 @@ describe('post-template', () => {
       it('should add the resource scenatio', () => {
         result = postTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_post" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD",
-          "_body":{
-            "dummy": "dummy"
+        expect(JSON.parse(result)).to.deep.equal({
+          _post: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: {
+                    dummy: 'dummy'
+                  }
+                },
+                _res: {
+                  _body: { dummyResponse: 'dummyResponse' }
+                },
+                _description: 'Description to be defined'
+              }
+            ]
           }
-        },
-        "_res": {
-          "_body" : { "dummyResponse": "dummyResponse" }
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        });
       });
     });
 
@@ -49,24 +48,23 @@ describe('post-template', () => {
 
         result = postTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_post" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD",
-          "_body": "<xml><tbd>Xml request to be defined</tbd></xml>"
-        },
-        "_res": {
-          "_xml": true,
-          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _post: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: '<xml><tbd>Xml request to be defined</tbd></xml>'
+                },
+                _res: {
+                  _xml: true,
+                  _body: '<xml><tbd>Xml response to be defined</tbd></xml>'
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
   });

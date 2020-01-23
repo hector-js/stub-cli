@@ -21,21 +21,20 @@ describe('head-template', () => {
       it('should return the resource scenario', () => {
         result = headTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_head" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _head: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
 
@@ -45,22 +44,21 @@ describe('head-template', () => {
 
         result = headTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_head" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-          "_xml": true
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _head: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  _xml: true
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
   });
