@@ -23,27 +23,26 @@ describe('patch-template', () => {
       it('should add the resource scenatio', () => {
         const result = patchTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_patch" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD",
-          "_body":{
-            "dummy": "dummy"
-          },
-          "_headers" : [ "authorization","clientId" ],
-          "_cookies" : [ "sec" ]
-        },
-        "_res": {
-          "_body" : { "dummyResponse": "dummyResponse" }
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _patch: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: {
+                    dummy: 'dummy'
+                  },
+                  _headers: ['authorization', 'clientId'],
+                  _cookies: ['sec']
+                },
+                _res: {
+                  _body: { 'dummyResponse': 'dummyResponse' }
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
 
@@ -53,26 +52,25 @@ describe('patch-template', () => {
 
         result = patchTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_patch" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD",
-          "_body": "<xml><tbd>Xml request to be defined</tbd></xml>",
-          "_headers" : [ "authorization","clientId" ],
-          "_cookies" : [ "sec" ]
-        },
-        "_res": {
-          "_xml": true,
-          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _patch: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: '<xml><tbd>Xml request to be defined</tbd></xml>',
+                  _headers: ['authorization', 'clientId'],
+                  _cookies: ['sec']
+                },
+                _res: {
+                  _xml: true,
+                  _body: '<xml><tbd>Xml response to be defined</tbd></xml>'
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
   });

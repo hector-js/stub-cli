@@ -7,12 +7,9 @@ export const traceTemplate = (args, idsFormatted) => {
       .ids()
       .reqHeaders()
       .reqCookies()
-      .endReq()
       .res()
       .xml()
       .status()
-      .endRes()
       .description()
-      .endPath().endMethod()
       .build();
 };

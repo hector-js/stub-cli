@@ -25,23 +25,24 @@ describe('get-template', () => {
       it('should return the resource scenario', () => {
         result = getTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_get" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-          "_status": 404,
-          "_body" : { "body": "To be defined" }
-        },
-        "_description" : "customDescription" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _get: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  _status: 404,
+                  _body: {
+                    body: 'To be defined'
+                  }
+                },
+                _description: 'customDescription'
+              }
+            ]
+          }
+        });
       });
     });
 
@@ -51,24 +52,23 @@ describe('get-template', () => {
 
         result = getTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_get" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-          "_xml": true,
-          "_status": 404,
-          "_body" : "<xml><tbd>Xml response to be defined</tbd></xml>"
-        },
-        "_description" : "customDescription" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _get: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  _xml: true,
+                  _status: 404,
+                  _body: '<xml><tbd>Xml response to be defined</tbd></xml>'
+                },
+                _description: 'customDescription'
+              }
+            ]
+          }
+        });
       });
     });
   });

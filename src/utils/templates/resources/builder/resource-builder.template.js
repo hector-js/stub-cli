@@ -1,23 +1,16 @@
-import { method, endMethod } from './sections/method.template';
-import { path, endPath } from './sections/path.template';
-import { ids } from './sections/ids.template';
-import { reqHeaders } from './sections/req-headers.template';
-import { getHeaders, getCookies, getStatus, removeLastCommaFromOrigin } from '../../../utils.cli';
-import { reqCookies } from './sections/req-cookies.template';
-import { description } from './sections/description.template';
-import { reqBody, reqBodyXml } from './sections/req-body.template';
-import { resBody, resBodyG, resBodyGXml, resBodyXml } from './sections/res-body.template';
-import { status } from './sections/status.template';
-import { req, endReq } from './sections/req.template';
-import { endRes, res } from './sections/res.template';
-import { xml } from './sections/xml.template';
+import { path } from './path.template';
+import { getHeaders, getCookies, getStatus } from '../../../utils.cli';
 
 export class ResourceBuilder {
   constructor(args, methodName, idsFormatted) {
-    this.template = ``;
+    this.template = {};
     this.args = args;
     this.methodName = methodName;
     this.idsFormatted = idsFormatted;
+    this.met;
+    this.endpoint;
+    this.req;
+    this.res;
   }
 
   static aTemplate(args, methodName, idsFormatted) {
@@ -25,73 +18,69 @@ export class ResourceBuilder {
   }
 
   method() {
-    this.template = this.template + method(this.methodName);
+    this.met = this.template[this.methodName] = {};
     return this;
   }
 
   path() {
-    this.template = this.template + path(this.args._[2]);
+    path(this.args._[2], this.met);
+    this.endpoint = this.met[Object.keys(this.met)[0]][0];
     return this;
   }
 
   xml() {
     if (this.args.xml) {
-      this.template = this.template + xml();
+      this.res._xml = true;
     }
     return this;
   }
 
   req() {
-    this.template = this.template + req();
-    return this;
-  }
-
-  endReq() {
-    this.template = removeLastCommaFromOrigin(this.template, '_req');
-    this.template = this.template + endReq();
+    this.req = this.endpoint._req = {};
     return this;
   }
 
   res() {
-    this.template = this.template + res();
-    return this;
-  }
-
-  endRes() {
-    this.template = removeLastCommaFromOrigin(this.template, '_res');
-    this.template = this.template + endRes();
+    this.res = this.endpoint._res = {};
     return this;
   }
 
   ids() {
-    if (this.idsFormatted && this.idsFormatted.length !== 0) {
-      this.template = this.template + ids(this.idsFormatted);
-    }
+    this.idsFormatted.forEach((value) => this.req[`_${value}`] = `${value}TBD`);
     return this;
   }
 
   reqBody() {
-    const body = this.args.xml ? reqBodyXml() : reqBody();
-    this.template = this.template + body;
+    if (this.args.xml) {
+      this.req._body = '<xml><tbd>Xml request to be defined</tbd></xml>';
+    } else {
+      this.req._body = { dummy: 'dummy' };
+    }
     return this;
   }
 
   resBody() {
-    const body = this.args.xml ? resBodyXml() : resBody();
-    this.template = this.template + body;
+    if (this.args.xml) {
+      this.res._body = '<xml><tbd>Xml response to be defined</tbd></xml>';
+    } else {
+      this.res._body = { dummyResponse: 'dummyResponse' };
+    }
     return this;
   }
 
   resBodyG() {
-    const bodyGet = this.args.xml ? resBodyGXml() : resBodyG();
-    this.template = this.template + bodyGet;
+    if (this.args.xml) {
+      this.res._body = '<xml><tbd>Xml response to be defined</tbd></xml>';
+    } else {
+      this.res._body = { body: 'To be defined' };
+    }
     return this;
   }
 
   reqHeaders() {
     const headersArg = this.args.headers;
     if (headersArg) {
-      this.template = this.template + reqHeaders(getHeaders(headersArg));
+      this.req._headers = getHeaders(headersArg);
     }
     return this;
   }
@@ -99,7 +88,7 @@ export class ResourceBuilder {
   reqCookies() {
     const cookiesArg = this.args.cookies;
     if (cookiesArg) {
-      this.template = this.template + reqCookies(getCookies(cookiesArg));
+      this.req._cookies = getCookies(cookiesArg);
     }
     return this;
   }
@@ -107,28 +96,19 @@ export class ResourceBuilder {
   status() {
     const statusArg = this.args.status;
     if (statusArg) {
-      this.template = this.template + status(getStatus(statusArg));
+      this.res._status = getStatus(statusArg);
     }
     return this;
   }
 
   description() {
-    this.template = this.template + description(this.args.description);
-    return this;
-  }
-
-  endPath() {
-    this.template = this.template + endPath();
-    return this;
-  }
-
-  endMethod() {
-    this.template = this.template + endMethod();
+    const description = this.args.description;
+    this.endpoint._description = `${description ? description : 'Description to be defined'}`;
     return this;
   }
 
   build() {
-    return this.template;
+    return JSON.stringify(this.template, null, '  ');
   }
 }
 

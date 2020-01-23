@@ -21,21 +21,20 @@ describe('trace-template', () => {
       it('should add the resource scenario', () => {
         result = traceTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_trace" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _trace: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
 
@@ -45,22 +44,21 @@ describe('trace-template', () => {
 
         result = traceTemplate(args, ids);
 
-        expect(result).to.equal(`{
-  "_trace" : {
-    "/any-path/{id}/data" : [
-      {
-        "_req": {
-          "_id": "idTBD"
-        },
-        "_res": {
-          "_xml": true
-        },
-        "_description" : "Description to be defined" 
-      }
-    ]
-  }
-}`
-        );
+        expect(JSON.parse(result)).to.deep.equal({
+          _trace: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  '_xml': true
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
       });
     });
   });

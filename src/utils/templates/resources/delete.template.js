@@ -8,13 +8,10 @@ export const deleteTemplate = (args, idsFormatted) => {
       .reqBody()
       .reqHeaders()
       .reqCookies()
-      .endReq()
       .res()
       .xml()
       .status()
       .resBody()
-      .endRes()
       .description()
-      .endPath().endMethod()
       .build();
 };

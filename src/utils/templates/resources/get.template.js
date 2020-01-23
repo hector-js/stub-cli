@@ -7,13 +7,10 @@ export const getTemplate = (args, idsFormatted) => {
       .ids()
       .reqHeaders()
       .reqCookies()
-      .endReq()
       .res()
       .xml()
       .status()
       .resBodyG()
-      .endRes()
       .description()
-      .endPath().endMethod()
       .build();
 };
