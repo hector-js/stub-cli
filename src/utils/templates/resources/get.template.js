@@ -11,6 +11,7 @@ export const getTemplate = (args, idsFormatted) => {
       .xml()
       .status()
       .resBodyG()
+      .delay()
       .description()
       .build();
 };

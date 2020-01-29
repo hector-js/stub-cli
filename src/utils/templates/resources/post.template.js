@@ -11,6 +11,7 @@ export const postTemplate = (args, idsFormatted) => {
       .res()
       .xml()
       .resBody()
+      .delay()
       .status()
       .description()
       .build();

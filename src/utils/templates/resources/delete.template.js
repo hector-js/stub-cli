@@ -12,6 +12,7 @@ export const deleteTemplate = (args, idsFormatted) => {
       .xml()
       .status()
       .resBody()
+      .delay()
       .description()
       .build();
 };

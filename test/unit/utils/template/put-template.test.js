@@ -18,7 +18,7 @@ describe('put-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenatio', () => {
+      it('should add the resource scenario', () => {
         const result = putTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -59,6 +59,34 @@ describe('put-template', () => {
                 _res: {
                   _xml: true,
                   _body: '<xml><tbd>Xml response to be defined</tbd></xml>'
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
+      });
+    });
+
+    describe('delay', ()=>{
+      it('sets delay', () => {
+        args.delay = 10;
+
+        const result = putTemplate(args, ids);
+
+        expect(JSON.parse(result)).to.deep.equal({
+          _put: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: {
+                    dummy: 'dummy'
+                  }
+                },
+                _res: {
+                  _delay: 10,
+                  _body: { dummyResponse: 'dummyResponse' }
                 },
                 _description: 'Description to be defined'
               }
