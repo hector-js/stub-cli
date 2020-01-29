@@ -18,7 +18,7 @@ describe('delete-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenatio', () => {
+      it('should add the resource scenario', () => {
         result = deleteTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -59,6 +59,34 @@ describe('delete-template', () => {
                 _res: {
                   _xml: true,
                   _body: '<xml><tbd>Xml response to be defined</tbd></xml>'
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
+      });
+    });
+
+    describe('delay', ()=>{
+      it('include the scenario', () => {
+        args.delay = 10000;
+
+        result = deleteTemplate(args, ids);
+
+        expect(JSON.parse(result)).to.deep.equal({
+          _delete: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD',
+                  _body: {
+                    dummy: 'dummy'
+                  }
+                },
+                _res: {
+                  _delay: 10000,
+                  _body: { dummyResponse: 'dummyResponse' }
                 },
                 _description: 'Description to be defined'
               }
@@ -131,6 +159,40 @@ describe('DELETE - /any-path/{id}/data ', () => {
           done();
       });
   });
+});`
+        );
+      });
+    });
+
+    describe('delay', ()=>{
+      it('sets timeout', ()=>{
+        args.delay = 1000;
+
+        result = deleteTestTemplate(args, ids);
+
+        expect(result).to.equal(`'use strict';
+    
+var app = require('@hectorjs/stub-backend');
+var chai = require('chai');
+var request = require('supertest');
+    
+var expect = chai.expect;
+
+describe('DELETE - /any-path/{id}/data ', () => {
+  it('should exist', (done) => {
+    request(app)
+      .delete('/any-path/idTBD/data')
+      .send({'dummy': 'dummy'})
+      .end((err, res) => {
+          expect(err).to.not.exist;
+          expect(res.status).to.equal(200);
+          expect(res.body).to.deep.equal({
+            'dummyResponse': 'dummyResponse'
+ 
+          });
+          done();
+      });
+  }).timeout(1500);
 });`
         );
       });

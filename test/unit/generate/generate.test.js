@@ -204,7 +204,7 @@ describe('generate', () => {
           assert.ok(infoStub.withArgs(chalk.grey(` -  patch = pa    (hjs g pa ...)\n`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(` -  trace = t     (hjs g t ...)\n`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.green(`\nOther options:\n`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(` -  --xml         request and response are xml\n`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(` -  --xml         response is xml\n`)).calledOnce);
           expect(infoStub.callCount).to.equal(18);
         });
       });
@@ -235,7 +235,7 @@ describe('generate', () => {
           generateCli(args);
 
           assert.ok(infoStub.withArgs(chalk.green('\nCookies options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --cookies [status]`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --cookies [cookies]`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --cookies NormalCookie`)).calledOnce);
           expect(infoStub.callCount).to.equal(3);
         });
@@ -267,7 +267,7 @@ describe('generate', () => {
           generateCli(args);
 
           assert.ok(infoStub.withArgs(chalk.green('\nDescription options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --description "[status]"`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --description "[description]"`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --description "Hello world!"`)).calledOnce);
           expect(infoStub.callCount).to.equal(3);
         });
@@ -284,8 +284,25 @@ describe('generate', () => {
 
           assert.ok(infoStub.withArgs(chalk.green(`\nGenerate the file resource and test under the path.`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.green('> Path options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --path "[status]"`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --path "[path]"`)).calledOnce);
           assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --path cases/whatever`)).calledOnce);
+          expect(infoStub.callCount).to.equal(4);
+        });
+      });
+
+      context('when help has delay as well like "hjs g --help --delay"', ()=>{
+        it('should show common options', ()=>{
+          const args = {
+            help: true,
+            delay: 10
+          };
+
+          generateCli(args);
+
+          assert.ok(infoStub.withArgs(chalk.green(`\nGenerate the file resource and test adding a delay in the response.`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('> Delay options:\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --delay "[milliseconds]"`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --delay 1000`)).calledOnce);
           expect(infoStub.callCount).to.equal(4);
         });
       });

@@ -45,6 +45,13 @@ export class ResourceBuilder {
     return this;
   }
 
+  delay() {
+    if (this.args.delay) {
+      this.res._delay = this.args.delay;
+    }
+    return this;
+  }
+
   ids() {
     this.idsFormatted.forEach((value) => this.req[`_${value}`] = `${value}TBD`);
     return this;

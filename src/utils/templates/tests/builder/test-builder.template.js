@@ -107,7 +107,11 @@ export class TestBuilder {
   }
 
   endIt() {
-    this.template = this.template + `\n  });`;
+    if (this.args.delay) {
+      this.template = this.template + `\n  }).timeout(${this.args.delay + 500});`;
+    } else {
+      this.template = this.template + `\n  });`;
+    }
     return this;
   }
 

@@ -71,6 +71,34 @@ describe('get-template', () => {
         });
       });
     });
+
+    describe('delay', ()=>{
+      it('sets delay field', () => {
+        args.delay = 1000;
+
+        result = getTemplate(args, ids);
+
+        expect(JSON.parse(result)).to.deep.equal({
+          _get: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  _status: 404,
+                  _delay: 1000,
+                  _body: {
+                    body: 'To be defined'
+                  }
+                },
+                _description: 'customDescription'
+              }
+            ]
+          }
+        });
+      });
+    });
   });
 
   describe('test', () => {
@@ -130,6 +158,38 @@ describe('GET - /any-path/{id}/data ', () => {
           done();
       });
   });
+});`
+        );
+      });
+    });
+
+    describe('delay', ()=>{
+      it('sets timeout', () => {
+        args.delay = 100;
+
+        result = getTestTemplate(args, ids);
+
+        expect(result).to.equal(`'use strict';
+    
+var app = require('@hectorjs/stub-backend');
+var chai = require('chai');
+var request = require('supertest');
+    
+var expect = chai.expect;
+
+describe('GET - /any-path/{id}/data ', () => {
+  it('should exist', (done) => {
+    request(app)
+      .get('/any-path/idTBD/data')
+      .end((err, res) => {
+          expect(err).to.not.exist;
+          expect(res.status).to.equal(404);
+          expect(res.body).to.deep.equal({
+            'body' : 'To be defined'
+          });
+          done();
+      });
+  }).timeout(600);
 });`
         );
       });

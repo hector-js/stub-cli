@@ -61,6 +61,29 @@ describe('trace-template', () => {
         });
       });
     });
+
+    describe('delay', ()=>{
+      it('sets delay', () => {
+        args.delay = 10;
+        result = traceTemplate(args, ids);
+
+        expect(JSON.parse(result)).to.deep.equal({
+          _trace: {
+            '/any-path/{id}/data': [
+              {
+                _req: {
+                  _id: 'idTBD'
+                },
+                _res: {
+                  _delay: 10
+                },
+                _description: 'Description to be defined'
+              }
+            ]
+          }
+        });
+      });
+    });
   });
 
   describe('test', () => {

@@ -10,6 +10,7 @@ export const headTemplate = (args, idsFormatted) => {
       .res()
       .xml()
       .status()
+      .delay()
       .description()
       .build();
 };

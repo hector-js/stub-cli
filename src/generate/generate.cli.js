@@ -25,24 +25,31 @@ export function generateCli(args) {
 
     if (args.cookies) {
       info(chalk.green('\nCookies options:\n'));
-      info(chalk.grey(`  --cookies [status]`));
+      info(chalk.grey(`  --cookies [cookies]`));
       info(chalk.grey(`    Example: hjs g g customrers --cookies NormalCookie`));
     }
 
     if (args.description) {
       info(chalk.green('\nDescription options:\n'));
-      info(chalk.grey(`  --description "[status]"`));
+      info(chalk.grey(`  --description "[description]"`));
       info(chalk.grey(`    Example: hjs g g customrers --description "Hello world!"`));
     }
 
     if (args.path) {
       info(chalk.green(`\nGenerate the file resource and test under the path.`));
       info(chalk.green('> Path options:\n'));
-      info(chalk.grey(`  --path "[status]"`));
+      info(chalk.grey(`  --path "[path]"`));
       info(chalk.grey(`    Example: hjs g g customrers --path cases/whatever`));
     }
 
-    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status) {
+    if (args.delay) {
+      info(chalk.green(`\nGenerate the file resource and test adding a delay in the response.`));
+      info(chalk.green('> Delay options:\n'));
+      info(chalk.grey(`  --delay "[milliseconds]"`));
+      info(chalk.grey(`    Example: hjs g g customrers --delay 1000`));
+    }
+
+    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status && !args.delay) {
       displayGeneratorOpts();
     }
   } else {
@@ -99,5 +106,5 @@ function displayGeneratorOpts() {
   info(chalk.grey(` -  patch = pa    (hjs g pa ...)\n`));
   info(chalk.grey(` -  trace = t     (hjs g t ...)\n`));
   info(chalk.green(`\nOther options:\n`));
-  info(chalk.grey(` -  --xml         request and response are xml\n`));
+  info(chalk.grey(` -  --xml         response is xml\n`));
 }

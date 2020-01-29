@@ -9,6 +9,7 @@ export const traceTemplate = (args, idsFormatted) => {
       .reqCookies()
       .res()
       .xml()
+      .delay()
       .status()
       .description()
       .build();
