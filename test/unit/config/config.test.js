@@ -114,7 +114,7 @@ describe('config', () => {
             expect(infoStub.callCount).to.equal(4);
             assert.ok(infoStub.withArgs(chalk.green('\nConfig options:\n')).calledOnce);
             assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --port [port]: select port')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --logs [port]: select logs')).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --logs [logs]: select logs')).calledOnce);
             assert.ok(infoStub.withArgs(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny')).calledOnce);
           });
         });

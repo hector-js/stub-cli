@@ -8,7 +8,7 @@ export function config(args) {
   if (args.help) {
     info(chalk.green('\nConfig options:\n'));
     info(chalk.grey(' -  hjs config --port [port]: select port'));
-    info(chalk.grey(' -  hjs config --logs [port]: select logs'));
+    info(chalk.grey(' -  hjs config --logs [logs]: select logs'));
     info(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny'));
   } else {
     if (checkPath(PACKAGE_JSON) && checkPath(RESOURCES_PATH)) {
