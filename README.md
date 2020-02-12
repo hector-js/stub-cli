@@ -12,7 +12,6 @@ npm install -g @hectorjs/stub-cli
  - ![](https://github.com/HecJimSan/stub-cli/workflows/eslint%2Dconfig%2Dgoogle/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Unit%20tests/badge.svg)
  - ![](https://github.com/HecJimSan/stub-backend/workflows/Coverage/badge.svg)
- - [![codecov](https://codecov.io/gh/HecJimSan/stub-cli/branch/development/graph/badge.svg)](https://codecov.io/gh/HecJimSan/stub-cli)
 
  Others measures
 
@@ -91,17 +90,6 @@ If you want to run the mock ```hjs start```.
 
 _NOTE:_ you can run ```npm start``` as well.
 _MORE INFO:_ ```hjs start --help```
-
-## Methods availabe to mock at this moment
-
-- [x] GET
-- [x] HEAD
-- [x] POST
-- [x] PUT
-- [x] DELETE
-- [x] OPTIONS
-- [x] TRACE
-- [x] PATCH
 
 # UI
 
