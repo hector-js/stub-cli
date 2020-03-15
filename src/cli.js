@@ -1,6 +1,7 @@
 
 import { info, warn } from 'console';
 import { generateCli } from './generate/generate.cli';
+import { cd } from 'shelljs';
 import { sizeObject } from './utils/utils.cli';
 import { newCli } from './new/new.cli';
 import { start } from './start/start.cli';
@@ -18,6 +19,7 @@ export function cli(args) {
       break;
     case 'generate':
     case 'g':
+      cd('_hjs');
       generateCli(args);
       break;
     case 'start':

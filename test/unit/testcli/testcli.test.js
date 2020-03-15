@@ -32,7 +32,7 @@ describe('testcli', () => {
 
       testcli(args);
 
-      assert.ok(execCliStub.calledOnceWith('npm test'));
+      assert.ok(execCliStub.calledOnceWith('npm run _test'));
     });
   });
 
@@ -62,7 +62,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm test'));
+        assert.ok(execCliStub.calledOnceWith('npm run _test'));
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
@@ -76,7 +76,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm test -- --logs tiny'));
+        assert.ok(execCliStub.calledOnceWith('npm run _test -- --logs tiny'));
       });
     });
 
@@ -89,7 +89,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm test -- --port 8080'));
+        assert.ok(execCliStub.calledOnceWith('npm run _test -- --port 8080'));
       });
     });
 
@@ -102,7 +102,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('npm test -- --cors business.uk.org,localhost'));
+        assert.ok(execCliStub.calledOnceWith('npm run _test -- --cors business.uk.org,localhost'));
       });
     });
   });

@@ -2,7 +2,7 @@
 
 import { assert, expect } from 'chai';
 import { stub } from 'sinon';
-import { PACKAGE_JSON, RESOURCES_PATH } from '../../../src/utils/constants-backend';
+import { HJS_PATH, PACKAGE_ROOT_JSON } from '../../../src/utils/constants-backend';
 
 const proxyquire = require('proxyquire');
 
@@ -33,14 +33,14 @@ describe('config', () => {
 
       describe('generate .hjs.config.json', () => {
         beforeEach(() => {
-          checkPathStub.withArgs(PACKAGE_JSON).returns(true);
-          checkPathStub.withArgs(RESOURCES_PATH).returns(true);
+          checkPathStub.withArgs(HJS_PATH).returns(true);
+          checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(true);
         });
 
         context('when resource folder and package.json file exist', () => {
           it('is not displaying info message', () => {
-            checkPathStub.withArgs(PACKAGE_JSON).returns(true);
-            checkPathStub.withArgs(RESOURCES_PATH).returns(true);
+            checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(true);
+            checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(true);
 
             configCli(args);
 
@@ -83,7 +83,7 @@ describe('config', () => {
       describe('error creation', () => {
         context('when the root does not contain a package.json', () => {
           it('should show an info message', () => {
-            checkPathStub.withArgs(PACKAGE_JSON).returns(false);
+            checkPathStub.withArgs(HJS_PATH).returns(false);
 
             configCli(args);
 
@@ -94,7 +94,7 @@ describe('config', () => {
 
         context('when there is no resources file', () => {
           it('should show an info message', () => {
-            checkPathStub.withArgs(RESOURCES_PATH).returns(false);
+            checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(false);
 
             configCli(args);
 
