@@ -19,9 +19,9 @@ export function testcli(args) {
 
     let command;
     if (argumens) {
-      command = `npm test --${argumens}`;
+      command = `npm run _test --${argumens}`;
     } else {
-      command = `npm test`;
+      command = `npm run _test`;
     }
     exec(command);
   }

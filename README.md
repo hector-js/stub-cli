@@ -39,6 +39,8 @@ _Example:_ ```hjs new mock-service```
 
 You can add the option ```--vs``` or ```--idea``` to open the IDE.
 
+If you execute the command without project name (```hjs new```), the terminal will ask you for a new project (```Create new project? [Yn] ```). Response _y_ when you want to create it (This is like ```hjs new [name-project]```) or response _n_ when you want to set in your own package.json project.
+
 _MORE INFO:_ ```hjs new --help```
 
 ### ```hjs generate/g [method] [name-path]```

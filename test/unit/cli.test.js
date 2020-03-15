@@ -8,7 +8,7 @@ const chalk = require('chalk');
 
 describe('cli', () => {
   let cli;
-  let sizeObjectStub; let generateCliStub; let newCliStub;
+  let sizeObjectStub; let generateCliStub; let newCliStub; let cdStub;
   let startStub; let infoStub; let warnStub; let testcliStub; let configStub;
   let args;
 
@@ -21,6 +21,7 @@ describe('cli', () => {
     warnStub = stub();
     testcliStub = stub();
     configStub = stub();
+    cdStub = stub();
     cli = proxyquire('../../src/cli', {
       './generate/generate.cli': { generateCli: generateCliStub },
       './utils/utils.cli': { sizeObject: sizeObjectStub },
@@ -28,6 +29,7 @@ describe('cli', () => {
       './start/start.cli': { start: startStub },
       './testcli/test.cli': { testcli: testcliStub },
       './config/config.cli': { config: configStub },
+      'shelljs': { cd: cdStub },
       'console': { info: infoStub, warn: warnStub }
     }).cli;
     args = {
@@ -65,8 +67,19 @@ describe('cli', () => {
             cli(args);
 
             assertStubBy(generateCliStub);
+            assert.ok(cdStub.calledOnceWith('_hjs'));
           });
         });
+      });
+
+      it('should navigate to _hjs folder', () => {
+        args = {
+          _: ['g', 'any name']
+        };
+
+        cli(args);
+
+        assert.ok(true);
       });
     });
 
