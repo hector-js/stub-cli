@@ -30,7 +30,6 @@ export async function newCli(args) {
     pathProject = `./${nameProject}`;
   }
 
-
   info(chalk.green(`\n----------------------------------------------------\n`));
   info(chalk.green(` Init hjs ...\n`));
   if (nameProject) {
@@ -45,7 +44,12 @@ export async function newCli(args) {
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
   }
 
-  exec('npm install @hectorjs/stub-backend --silent');
+  if (nameProject) {
+    exec('npm install @hectorjs/stub-backend --silent');
+  } else {
+    exec('npm install @hectorjs/stub-backend --save-dev --silent');
+  }
+
   exec('npm install chai mocha supertest nodemon --save-dev --silent');
 
   readFile(PACKAGE_ROOT_JSON, 'utf8', (err, data) => {
