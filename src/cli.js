@@ -7,9 +7,9 @@ import { newCli } from './new/new.cli';
 import { start } from './start/start.cli';
 import { testcli } from './testcli/test.cli';
 import { config } from './config/config.cli';
+import { version } from './../package.json';
 
 const chalk = require('chalk');
-const VERSION = '0.22.1';
 
 export function cli(args) {
   switch (args._[0]) {
@@ -38,7 +38,7 @@ export function cli(args) {
   }
 
   if (args.version) {
-    info(chalk.yellow(`\nVersion: ${VERSION}\n`));
+    info(chalk.yellow(`\nVersion: ${version}\n`));
   }
 
   if (args.license) {
@@ -57,7 +57,7 @@ export function cli(args) {
     info(chalk.grey(` -  --headers : add headers to check in the request`));
     info(chalk.grey(` -  --license : MIT\n\n`));
     info(chalk.grey(`Example: hjs new mock-service --vs\n`));
-    info(chalk.yellow(`version: ${VERSION}\n`));
+    info(chalk.yellow(`version: ${version}\n`));
   }
 
   if (args._.length === 0 && sizeObject(args) === 1) {

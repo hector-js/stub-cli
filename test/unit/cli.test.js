@@ -30,7 +30,8 @@ describe('cli', () => {
       './testcli/test.cli': { testcli: testcliStub },
       './config/config.cli': { config: configStub },
       'shelljs': { cd: cdStub },
-      'console': { info: infoStub, warn: warnStub }
+      'console': { info: infoStub, warn: warnStub },
+      './../package.json': { version: '0.22.1' }
     }).cli;
     args = {
       _: ['']
