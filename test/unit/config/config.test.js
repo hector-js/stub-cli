@@ -80,6 +80,39 @@ describe('config', () => {
         });
       });
 
+      describe('generate .hjs.banner.js', () => {
+        beforeEach(() => {
+          checkPathStub.withArgs(HJS_PATH).returns(true);
+          checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(true);
+        });
+
+        context('when "--banner" is added', ()=>{
+          it('creates a .hjs.banner.js file with example code', ()=>{
+            args.banner = true;
+
+            configCli(args);
+
+            const data = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+            assert.ok(writeFileStub.calledOnceWith('.hjs.banner.js', data));
+          });
+        });
+
+        context('when "--banner" and "--logs 8080" are added', ()=>{
+          it('creates a .hjs.banner.js and .hjs.config.json files are created', ()=>{
+            args.banner = true;
+            args.port = 8080;
+
+            configCli(args);
+
+            assert.ok(writeFileStub.calledTwice);
+            const dataBanner = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+            assert.ok(writeFileStub.calledWith('.hjs.banner.js', dataBanner));
+            const dataConfig = JSON.stringify({ port: 8080 }, null, '\t');
+            assert.ok(writeFileStub.calledWith('.hjs.config.json', dataConfig));
+          });
+        });
+      });
+
       describe('error creation', () => {
         context('when the root does not contain a package.json', () => {
           it('should show an info message', () => {
@@ -111,11 +144,12 @@ describe('config', () => {
 
             configCli(args);
 
-            expect(infoStub.callCount).to.equal(4);
+            expect(infoStub.callCount).to.equal(5);
             assert.ok(infoStub.withArgs(chalk.green('\nConfig options:\n')).calledOnce);
             assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --port [port]: select port')).calledOnce);
             assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --logs [logs]: select logs')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny')).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --banner: create custom banner')).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny --banner')).calledOnce);
           });
         });
       });
