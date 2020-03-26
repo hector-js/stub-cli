@@ -64,6 +64,13 @@ export async function newCli(args) {
 
     writeFile(PACKAGE_ROOT_JSON, JSON.stringify(packageJSON, null, '\t'), 'utf8', (err) => {
       if (err) return error(err);
+
+      if (args.banner) {
+        console.log('@@@@@@@@@@@@@');
+        createFileInPath('.hjs.banner.js', '.');
+        writeFileByData('.hjs.banner.js', 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n');
+      }
+
       mkdir('_hjs');
       cd('_hjs');
 
