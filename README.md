@@ -68,7 +68,7 @@ _MORE INFO:_ ```hjs test --help```
 
 Create a config file (_.hjs.config.json_) where you can set the logs, port, among others. 
 
-```hjs config --port 8090 --logs tiny```
+```hjs config --port 8090 --logs tiny --banner```
 
 _MORE INFO:_ ```hjs config --help```
 
