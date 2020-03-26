@@ -1,10 +1,10 @@
-import { checkPath, writeFileByData } from './../utils/file-utils.cli';
+import { checkPath, handleQuestion, writeFileByData } from './../utils/file-utils.cli';
 import { info } from 'console';
 import { HJS_PATH, PACKAGE_ROOT_JSON, NAME_FILE, BANNER_FILE, BANNER_TEXT } from '../utils/constants-backend';
 
 const chalk = require('chalk');
 
-export function config(args) {
+export async function config(args) {
   if (args.help) {
     info(chalk.green('\nConfig options:\n'));
     info(chalk.grey(' -  hjs config --port [port]: select port'));
@@ -18,9 +18,15 @@ export function config(args) {
       data.logs = args.logs;
 
       if (args.banner) {
-        writeFileByData(BANNER_FILE, BANNER_TEXT);
+        if (checkPath(`./${BANNER_FILE}`)) {
+          const result = await handleQuestion('Custom banner already exists. Do you want to replace it? [Yn] ');
+          if (result && (result === 'Y' || result === 'y' || result.toLowerCase() === 'yes')) {
+            writeFileByData(BANNER_FILE, BANNER_TEXT);
+          }
+        } else {
+          writeFileByData(BANNER_FILE, BANNER_TEXT);
+        }
       }
-
       if (data.port || data.logs || !args.banner) {
         writeFileByData(NAME_FILE, JSON.stringify(data, null, '\t'));
       }
