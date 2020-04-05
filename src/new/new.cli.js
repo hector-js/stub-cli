@@ -66,7 +66,6 @@ export async function newCli(args) {
       if (err) return error(err);
 
       if (args.banner) {
-        console.log('@@@@@@@@@@@@@');
         createFileInPath('.hjs.banner.js', '.');
         writeFileByData('.hjs.banner.js', 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n');
       }

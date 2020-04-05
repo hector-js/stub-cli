@@ -3,6 +3,7 @@ import { info, warn, error } from 'console';
 import { existsSync, writeFile } from 'fs';
 import { mkdir, cd, touch } from 'shelljs';
 
+const prompts = require('prompts');
 const chalk = require('chalk');
 
 export function handleQuestion(message) {
@@ -14,6 +15,15 @@ export function handleQuestion(message) {
   return new Promise((resolve, reject) => {
     readline.question(chalk.blue('\n>') + chalk.grey(` ${message} \n`),
         (name) => handleAnswer(resolve, reject, readline, name));
+  });
+}
+
+export async function multipleOpts(message, choices) {
+  return await prompts({
+    type: 'select',
+    name: 'data',
+    message: message,
+    choices: choices
   });
 }
 

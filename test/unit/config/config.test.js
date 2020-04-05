@@ -2,7 +2,7 @@
 
 import { assert, expect } from 'chai';
 import { stub } from 'sinon';
-import { HJS_PATH, PACKAGE_ROOT_JSON, BANNER_FILE } from '../../../src/utils/constants-backend';
+import { HJS_PATH, PACKAGE_ROOT_JSON, BANNER_FILE, UNDER_HJS, ROOT_PROJECT } from '../../../src/utils/constants-backend';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
@@ -15,17 +15,24 @@ describe('config', () => {
       let configCli;
       let infoStub;
       let handleQuestionStub;
+      let multipleOptsStub;
       let args;
+      const optsBanner = [
+        { title: 'Yes', value: 'y' },
+        { title: 'No', value: 'n' }
+      ];
 
       beforeEach(() => {
         checkPathStub = stub();
         writeFileStub = stub();
         handleQuestionStub = stub();
+        multipleOptsStub = stub();
         infoStub = stub();
         configCli = proxyquire('../../../src/config/config.cli', {
           './../utils/file-utils.cli': {
             checkPath: checkPathStub,
             handleQuestion: handleQuestionStub,
+            multipleOpts: multipleOptsStub,
             writeFileByData: writeFileStub
           },
           'console': { info: infoStub }
@@ -85,37 +92,58 @@ describe('config', () => {
       });
 
       describe('generate .hjs.banner.js', () => {
+        const choices = [
+          { title: 'Under _hjs folder', value: UNDER_HJS },
+          { title: 'Root project', value: ROOT_PROJECT }
+        ];
+
         beforeEach(() => {
           checkPathStub.withArgs(HJS_PATH).returns(true);
           checkPathStub.withArgs(PACKAGE_ROOT_JSON).returns(true);
         });
 
-        describe('banner already exist', () => {
-          beforeEach(() => checkPathStub.withArgs(`./${BANNER_FILE}`).returns(true));
-          context('when "--banner" is added', () => {
-            beforeEach(() => args.banner = true);
+        it('asks for multiple choices', async () => {
+          args.banner = true;
 
-            it('is asking for replacing the file', async () => {
-              await configCli(args);
+          await configCli(args);
 
-              assert.ok(checkPathStub.calledWith(`./${BANNER_FILE}`));
-              assert.ok(handleQuestionStub.calledOnceWith('Custom banner already exists. Do you want to replace it? [Yn] '));
-            });
+          assert.ok(multipleOptsStub.calledWith('Where do you want to create it?', choices));
+        });
 
-            context('response different', () => {
-              it('is creating a file', async () => {
-                handleQuestionStub.returns(Promise.resolve('n'));
+        context('config file root project', () => {
+          beforeEach(() => {
+            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(ROOT_PROJECT));
+          });
 
+          describe('banner already exist', () => {
+            beforeEach(() => checkPathStub.withArgs(`./${BANNER_FILE}`).returns(true));
+            context('when "--banner" is added', () => {
+              beforeEach(() => args.banner = true);
+
+              it('is asking for replacing the file', async () => {
                 await configCli(args);
 
-                assert.ok(writeFileStub.notCalled);
+                assert.ok(checkPathStub.calledWith(`./${BANNER_FILE}`));
+                assert.ok(multipleOptsStub.calledWith('Custom banner already exists. Do you want to replace it?', optsBanner));
               });
-            });
 
-            ['y', 'Y', 'yes', 'YES', 'Yes'].forEach((value) => {
-              context(`response ${value}`, () => {
+              context('response "No"', () => {
                 it('is creating a file', async () => {
-                  handleQuestionStub.returns(Promise.resolve(value));
+                  multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner)
+                    .returns(Promise.resolve({ data: 'n' }));
+
+                  await configCli(args);
+
+                  assert.ok(writeFileStub.notCalled);
+                });
+              });
+
+              context(`response "Yes"`, () => {
+                it('is creating a file', async () => {
+                  multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner)
+                    .returns(Promise.resolve({ data: 'y' }));
 
                   await configCli(args);
 
@@ -125,36 +153,132 @@ describe('config', () => {
               });
             });
           });
+
+          describe('banner no exist', () => {
+            beforeEach(() => checkPathStub.withArgs(`./${BANNER_FILE}`).returns(false));
+
+            describe('root project', () => {
+              context('when "--banner" is added', () => {
+                beforeEach(() => args.banner = true);
+                it('is creating a file without asking', async () => {
+                  await configCli(args);
+
+                  const data = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+                  assert.ok(writeFileStub.calledOnceWith('.hjs.banner.js', data));
+                  assert.ok(multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner).notCalled);
+                });
+              });
+            });
+          });
         });
 
-        describe('banner no exist', () => {
-          beforeEach(() => checkPathStub.withArgs(`./${BANNER_FILE}`).returns(false));
-          context('when "--banner" is added', () => {
-            beforeEach(() => args.banner = true);
-            it('is creating a file without asking', async () => {
-              await configCli(args);
+        context('config file under _hjs', () => {
+          beforeEach(() => {
+            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(UNDER_HJS));
+          });
 
-              const data = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
-              assert.ok(writeFileStub.calledOnceWith('.hjs.banner.js', data));
-              assert.ok(handleQuestionStub.notCalled);
+          describe('banner already exist', () => {
+            beforeEach(() => checkPathStub.withArgs(`./_hjs/${BANNER_FILE}`).returns(true));
+            context('when "--banner" is added', () => {
+              beforeEach(() => args.banner = true);
+
+              it('is asking for replacing the file', async () => {
+                await configCli(args);
+
+                assert.ok(checkPathStub.calledWith(`./_hjs/${BANNER_FILE}`));
+                assert.ok(multipleOptsStub
+                  .calledWith('Custom banner already exists. Do you want to replace it?', optsBanner));
+              });
+
+              context('response "No"', () => {
+                it('is creating a file', async () => {
+                  multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner)
+                    .returns(Promise.resolve({ data: 'n' }));
+
+                  await configCli(args);
+
+                  assert.ok(writeFileStub.notCalled);
+                });
+              });
+
+              context(`response "Yes"`, () => {
+                it('is creating a file', async () => {
+                  multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner)
+                    .returns(Promise.resolve({ data: 'y' }));
+
+                  await configCli(args);
+
+                  const data = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+                  assert.ok(writeFileStub.calledOnceWith('_hjs/.hjs.banner.js', data));
+                });
+              });
+            });
+          });
+
+          describe('banner no exist', () => {
+            beforeEach(() => checkPathStub.withArgs(`./_hjs/${BANNER_FILE}`).returns(false));
+
+            describe('root project', () => {
+              context('when "--banner" is added', () => {
+                beforeEach(() => args.banner = true);
+                it('is creating a file without asking', async () => {
+                  await configCli(args);
+
+                  const data = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+                  assert.ok(writeFileStub.calledOnceWith('_hjs/.hjs.banner.js', data));
+                  assert.ok(multipleOptsStub
+                    .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner));
+                });
+              });
             });
           });
         });
 
         context('when "--banner" and "--logs 8080" are added', () => {
-          it('creates a .hjs.banner.js and .hjs.config.json files are created', async () => {
-            handleQuestionStub.returns(Promise.resolve('y'));
-            checkPathStub.withArgs(BANNER_FILE).returns(false);
-            args.banner = true;
-            args.port = 8080;
+          context('config file root project', () => {
+            it('creates a .hjs.banner.js and .hjs.config.json files are created', async () => {
+              multipleOptsStub
+                .withArgs('Where do you want to create it?', choices)
+                .returns(Promise.resolve(ROOT_PROJECT));
 
-            await configCli(args);
+                multipleOptsStub
+                .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner)
+                .returns(Promise.resolve({ data: 'y' }));
+              checkPathStub.withArgs(BANNER_FILE).returns(false);
+              args.banner = true;
+              args.port = 8080;
 
-            assert.ok(writeFileStub.calledTwice);
-            const dataBanner = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
-            assert.ok(writeFileStub.calledWith('.hjs.banner.js', dataBanner));
-            const dataConfig = JSON.stringify({ port: 8080 }, null, '\t');
-            assert.ok(writeFileStub.calledWith('.hjs.config.json', dataConfig));
+              await configCli(args);
+
+              assert.ok(writeFileStub.calledTwice);
+              const dataBanner = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+              assert.ok(writeFileStub.calledWith('.hjs.banner.js', dataBanner));
+              const dataConfig = JSON.stringify({ port: 8080 }, null, '\t');
+              assert.ok(writeFileStub.calledWith('.hjs.config.json', dataConfig));
+            });
+          });
+
+          context('config file under _hjs', () => {
+            it('creates a .hjs.banner.js and .hjs.config.json files are created', async () => {
+              multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(UNDER_HJS));
+
+              multipleOptsStub
+                .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner).returns(Promise.resolve({ data: 'y' }));
+              checkPathStub.withArgs(BANNER_FILE).returns(false);
+              args.banner = true;
+              args.port = 8080;
+
+              await configCli(args);
+
+              assert.ok(writeFileStub.calledTwice);
+              const dataBanner = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+              assert.ok(writeFileStub.calledWith('_hjs/.hjs.banner.js', dataBanner));
+              const dataConfig = JSON.stringify({ port: 8080 }, null, '\t');
+              assert.ok(writeFileStub.calledWith('_hjs/.hjs.config.json', dataConfig));
+            });
           });
         });
       });
