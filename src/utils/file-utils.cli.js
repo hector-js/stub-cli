@@ -1,19 +1,25 @@
-import { createInterface } from 'readline';
-import { info, warn, error } from 'console';
+import { info, error } from 'console';
 import { existsSync, writeFile } from 'fs';
 import { mkdir, cd, touch } from 'shelljs';
 
+const prompts = require('prompts');
 const chalk = require('chalk');
 
-export function handleQuestion(message) {
-  const readline = createInterface({
-    input: process.stdin,
-    output: process.stdout
+export async function multipleOpts(message, choices) {
+  return await prompts({
+    type: 'select',
+    name: 'data',
+    message: message,
+    choices: choices
   });
+}
 
-  return new Promise((resolve, reject) => {
-    readline.question(chalk.blue('\n>') + chalk.grey(` ${message} \n`),
-        (name) => handleAnswer(resolve, reject, readline, name));
+export async function question(message) {
+  return await prompts({
+    type: 'text',
+    name: 'data',
+    message: message,
+    format: (v) => `${v}`
   });
 }
 
@@ -59,16 +65,4 @@ export const createFileInPath = (fileName, path) => {
   mkdir(path);
   cd(path);
   touch(fileName);
-};
-
-const handleAnswer = (resolve, reject, readline, value) => {
-  if (!value) {
-    warn(chalk.red(` You must add a value  :(`));
-    readline.close();
-    reject();
-  } else {
-    info(chalk.green(` Well done  :)`));
-    readline.close();
-    resolve(value);
-  }
 };

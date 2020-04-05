@@ -3,7 +3,7 @@ import { writeFile, readFile } from 'fs';
 import { info, error } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
-import { handleQuestion, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
+import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 import { PACKAGE_ROOT_JSON } from '../utils/constants-backend';
 
 const chalk = require('chalk');
@@ -15,9 +15,10 @@ export async function newCli(args) {
 
   let nameProject;
   if (commands.length < 2) {
-    const newProject = await handleQuestion('Create new project? [Yn]').catch(() => process.exit());
-    if (newProject === 'Y' || newProject === 'y' || newProject.toLowerCase() === 'yes') {
-      nameProject = await handleQuestion('Project name?').catch(() => process.exit());
+    const opts = [{ title: 'Yes', value: 'y' }, { title: 'No', value: 'n' }];
+    const newProject = await multipleOpts('Create new project?', opts);
+    if (newProject.data === 'y') {
+      nameProject = (await question('Project name?')).data;
     }
   } else {
     nameProject = commands[1];
@@ -66,7 +67,6 @@ export async function newCli(args) {
       if (err) return error(err);
 
       if (args.banner) {
-        console.log('@@@@@@@@@@@@@');
         createFileInPath('.hjs.banner.js', '.');
         writeFileByData('.hjs.banner.js', 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n');
       }
@@ -96,4 +96,3 @@ const checkIDE = (argsCLI, shortCliIDE) => {
     exec(`${shortCliIDE} .`);
   }
 };
-

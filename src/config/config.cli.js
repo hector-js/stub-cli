@@ -1,6 +1,6 @@
-import { checkPath, handleQuestion, writeFileByData } from './../utils/file-utils.cli';
 import { info } from 'console';
-import { HJS_PATH, PACKAGE_ROOT_JSON, NAME_FILE, BANNER_FILE, BANNER_TEXT } from '../utils/constants-backend';
+import { BANNER_FILE, BANNER_TEXT, HJS_PATH, NAME_FILE, PACKAGE_ROOT_JSON, ROOT_PROJECT, UNDER_HJS } from '../utils/constants-backend';
+import { checkPath, multipleOpts, writeFileByData } from './../utils/file-utils.cli';
 
 const chalk = require('chalk');
 
@@ -17,18 +17,30 @@ export async function config(args) {
       data.port = args.port;
       data.logs = args.logs;
 
+      const choices = [
+        { title: 'Under _hjs folder', value: UNDER_HJS },
+        { title: 'Root project', value: ROOT_PROJECT }
+      ];
+      const result = await multipleOpts('Where do you want to create it?', choices);
+
+      const path = result === UNDER_HJS ? '_hjs/' : '';
+
       if (args.banner) {
-        if (checkPath(`./${BANNER_FILE}`)) {
-          const result = await handleQuestion('Custom banner already exists. Do you want to replace it? [Yn] ');
-          if (result && (result === 'Y' || result === 'y' || result.toLowerCase() === 'yes')) {
-            writeFileByData(BANNER_FILE, BANNER_TEXT);
+        if (checkPath(`./${path}${BANNER_FILE}`)) {
+          const opts = [
+            { title: 'Yes', value: 'y' },
+            { title: 'No', value: 'n' }
+          ];
+          const result = await multipleOpts('Custom banner already exists. Do you want to replace it?', opts);
+          if (result && result.data === 'y') {
+            writeFileByData(`${path}${BANNER_FILE}`, BANNER_TEXT);
           }
         } else {
-          writeFileByData(BANNER_FILE, BANNER_TEXT);
+          writeFileByData(`${path}${BANNER_FILE}`, BANNER_TEXT);
         }
       }
       if (data.port || data.logs || !args.banner) {
-        writeFileByData(NAME_FILE, JSON.stringify(data, null, '\t'));
+        writeFileByData(`${path}${NAME_FILE}`, JSON.stringify(data, null, '\t'));
       }
     } else {
       info(chalk.red('Package.json should exists :('));
