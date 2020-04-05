@@ -14,7 +14,6 @@ describe('config', () => {
       let writeFileStub;
       let configCli;
       let infoStub;
-      let handleQuestionStub;
       let multipleOptsStub;
       let args;
       const optsBanner = [
@@ -25,13 +24,11 @@ describe('config', () => {
       beforeEach(() => {
         checkPathStub = stub();
         writeFileStub = stub();
-        handleQuestionStub = stub();
         multipleOptsStub = stub();
         infoStub = stub();
         configCli = proxyquire('../../../src/config/config.cli', {
           './../utils/file-utils.cli': {
             checkPath: checkPathStub,
-            handleQuestion: handleQuestionStub,
             multipleOpts: multipleOptsStub,
             writeFileByData: writeFileStub
           },
