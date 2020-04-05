@@ -4,4 +4,6 @@ export const PACKAGE_JSON = './../package.json';
 export const PACKAGE_ROOT_JSON = './package.json';
 export const NAME_FILE = '.hjs.config.json';
 export const BANNER_FILE = '.hjs.banner.js';
-export const BANNER_TEXT = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n'; ;
+export const BANNER_TEXT = 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n';
+export const ROOT_PROJECT = 'ROOT_PROJECT';
+export const UNDER_HJS = 'UNDER_HJS';
