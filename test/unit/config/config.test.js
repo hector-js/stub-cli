@@ -109,7 +109,7 @@ describe('config', () => {
 
         context('config file root project', () => {
           beforeEach(() => {
-            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(ROOT_PROJECT));
+            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve({ data: ROOT_PROJECT }));
           });
 
           describe('banner already exist', () => {
@@ -172,7 +172,7 @@ describe('config', () => {
 
         context('config file under _hjs', () => {
           beforeEach(() => {
-            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(UNDER_HJS));
+            multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve({ data: UNDER_HJS }));
           });
 
           describe('banner already exist', () => {
@@ -260,7 +260,7 @@ describe('config', () => {
 
           context('config file under _hjs', () => {
             it('creates a .hjs.banner.js and .hjs.config.json files are created', async () => {
-              multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve(UNDER_HJS));
+              multipleOptsStub.withArgs('Where do you want to create it?', choices).returns(Promise.resolve({ data: UNDER_HJS }));
 
               multipleOptsStub
                   .withArgs('Custom banner already exists. Do you want to replace it?', optsBanner).returns(Promise.resolve({ data: 'y' }));
