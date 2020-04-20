@@ -23,7 +23,7 @@ export async function config(args) {
       ];
       const result = await multipleOpts('Where do you want to create it?', choices);
 
-      const path = result === UNDER_HJS ? '_hjs/' : '';
+      const path = result && result.data === UNDER_HJS ? '_hjs/' : '';
 
       if (args.banner) {
         if (checkPath(`./${path}${BANNER_FILE}`)) {
