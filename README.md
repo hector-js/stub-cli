@@ -13,7 +13,19 @@ _stub-cli_ is a command line which helps you to create new projects, generate me
 
 Keep it simple :smile:
 
-# CLI
+# Install
+
+Install the library:
+
+Globally (recommended):
+```
+npm install -g @hectorjs/stub-cli
+```
+or locally:
+
+```
+npm install @hectorjs/stub-cli --save-dev
+```
 
 Verify your **hjs** command is installed correctly.
 
@@ -25,13 +37,13 @@ hjs --version
 hjs --help
 ```
 
-## Commands
+# Commands
 
-### ```hjs --help```
+## 1) ```hjs --help```
 
- It will display posible options available in the library.
+It will display posible options available in the library.
 
-### ```hjs new/n [name-mock-service]```  
+## 2) ```hjs new/n [name-mock-service]```  
 
 It creates a new project with the name provided in the brakets.
 
@@ -43,7 +55,7 @@ If you execute the command without project name (```hjs new```), the terminal wi
 
 _MORE INFO:_ ```hjs new --help```
 
-### ```hjs generate/g [method] [name-path]```
+## 3) ```hjs generate/g [method] [name-path]```
 
 It will generate a method template resource with a test. For example , ```hjs g get customers/{id}/business?product={param}```). More info: ```hjs g --help```.
 You can generate different methods like get, head, post, delete among others.
@@ -57,23 +69,25 @@ _NOTE:_ The endpoint should not start with '/' for the cli and you should escape
 ```hjs g post customers/{id}/products?query={param1}\&identifier={identifier}```
 _MORE INFO:_ ```hjs generate --help```
 
-### ```hjs test```
+## 4) ```hjs test```
 
-Execute the tests which have been created by each method generate command (```hjs g get ...```).
+Execute the tests which have been created by each method generate command (```hjs g get ...```). You can add different properties to the command as port, logs or profile.
 
 _NOTE_: you can run ```npm test``` as well.
 _MORE INFO:_ ```hjs test --help```
 
-### ```hjs config [prop]```
+## 5) ```hjs config [prop]```
 
-Create a config file (_.hjs.config.json_) where you can set the logs, port, among others. 
+Create a config file (_.hjs.config.json_) where you can set the logs, port, among others settings. 
 
 ```hjs config --port 8090 --logs tiny --banner```
 
+The library use morgan library for the logs, so you can add different kind of logs as tiny, common...
+
 _MORE INFO:_ ```hjs config --help```
 
-### ```hjs start```
-If you want to run the mock ```hjs start```.
+## 6) ```hjs start```
+If you want to run the mock ```hjs start```. Also if you want to run the mocks with nodemon listening the changes under the resources folder, execute ```hjs start --dev```.
 
 _NOTE:_ you can run ```npm start``` as well.
 _MORE INFO:_ ```hjs start --help```
