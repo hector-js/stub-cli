@@ -1,10 +1,9 @@
+import { replacements } from './replacements';
 
-export function bodyReq() {
-  return `\n      .send({'dummy': 'dummy'})`;
+export function bodyReq(fromTemplate) {
+  return replacements(fromTemplate).bodyReq;
 }
 
-export function bodyReqXml() {
-  return `\n      .set('Accept', 'text/xml; charset=utf-8')
-      .type('application/xml')
-      .send('<xml><tbd>Xml request to be defined</tbd></xml>')`;
+export function bodyReqXml(fromTemplate) {
+  return replacements(fromTemplate).bodyReqXml;
 }

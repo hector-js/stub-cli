@@ -1,10 +1,11 @@
 import { cd, exec, mkdir } from 'shelljs';
-import { writeFile, readFile } from 'fs';
+import { writeFile, readFile, readFileSync } from 'fs';
 import { info, error } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
 import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 import { PACKAGE_ROOT_JSON } from '../utils/constants-backend';
+import { prependNewLines } from '../utils/templates/tests/builder/sections/replacements';
 
 const chalk = require('chalk');
 
@@ -29,6 +30,11 @@ export async function newCli(args) {
     cd(pathProject);
   } else {
     pathProject = `./${nameProject}`;
+  }
+
+  let replacements;
+  if (args.template && existsSync(args.template)) {
+    replacements = prependNewLines(readFileSync(args.template));
   }
 
   info(chalk.green(`\n----------------------------------------------------\n`));
@@ -78,7 +84,7 @@ export async function newCli(args) {
       writeFileByData('health.json', healthData);
       cd('..');
       createFileInPath('health.test.js', 'test');
-      writeFileByData('health.test.js', healthTest);
+      writeFileByData('health.test.js', healthTest(args));
       cd('..');
 
       checkIDE(args['vs'], 'code');

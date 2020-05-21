@@ -1,6 +1,7 @@
 import { getCookies, arrayToArrayValues } from '../../../../utils.cli';
+import { replacements } from './replacements';
 
-export function cookies(cookiesArg) {
+export function cookies(cookiesArg, fromTemplate) {
   const cookies = getCookies(cookiesArg);
-  return `\n      .set('Cookie', [${arrayToArrayValues(cookies)}])`;
+  return replacements(fromTemplate).cookies.replace(/{cookies}/g, arrayToArrayValues(cookies));
 }

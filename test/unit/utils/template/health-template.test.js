@@ -28,7 +28,7 @@ describe('health-template', () => {
 
   describe('test', () => {
     it('should return the resource scenario', () => {
-      expect(healthTest).to.equal(`'use strict';
+      expect(healthTest()).to.equal(`'use strict';
     
 var app = require('@hectorjs/stub-backend');
 var chai = require('chai');
