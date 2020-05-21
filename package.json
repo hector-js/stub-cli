@@ -33,14 +33,14 @@
 		"esm": "^3.2.25",
 		"minimist": "^1.2.2",
 		"prompts": "^2.3.2",
-		"shelljs": "^0.8.3"
+		"shelljs": "^0.8.3",
+		"chai": "^4.2.0",
+		"mocha": "^5.2.0"
 	},
 	"devDependencies": {
 		"@hectorjs/stub-backend": "^0.112.0",
-		"chai": "^4.2.0",
 		"eslint": "^6.8.0",
 		"eslint-config-google": "^0.14.0",
-		"mocha": "^5.2.0",
 		"nodemon": "^2.0.3",
 		"nyc": "^14.1.1",
 		"proxyquire": "^2.1.3",
