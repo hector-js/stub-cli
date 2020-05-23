@@ -1,5 +1,5 @@
 import { cd, exec, mkdir } from 'shelljs';
-import { writeFile, readFile, readFileSync } from 'fs';
+import { writeFile, readFile } from 'fs';
 import { info, error } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
@@ -29,11 +29,6 @@ export async function newCli(args) {
     cd(pathProject);
   } else {
     pathProject = `./${nameProject}`;
-  }
-
-  let replacements;
-  if (args.template && existsSync(args.template)) {
-    replacements = readFileSync(args.template);
   }
 
   info(chalk.green(`\n----------------------------------------------------\n`));
