@@ -122,7 +122,7 @@ describe('GET - /any-path/{id}/data ', () => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(404);
           expect(res.body).to.deep.equal({
-            'body' : 'To be defined'
+            'body': 'To be defined'
           });
           done();
       });
@@ -185,7 +185,7 @@ describe('GET - /any-path/{id}/data ', () => {
           expect(err).to.not.exist;
           expect(res.status).to.equal(404);
           expect(res.body).to.deep.equal({
-            'body' : 'To be defined'
+            'body': 'To be defined'
           });
           done();
       });

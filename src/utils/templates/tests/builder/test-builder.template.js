@@ -8,20 +8,27 @@ import { bodyReq, bodyReqXml } from './sections/body-req.template';
 import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
 import { libraries } from './sections/libraries.template';
 import { cookies } from './sections/cookies.template';
-import { prependNewLines } from './sections/replacements';
+import { replacements, prependNewLines } from './sections/replacements';
 
 export class TestBuilder {
-  constructor(args, methodName) {
+  constructor(args, methodName, extraTemplate, description) {
     this.template = ``;
     this.args = args;
     this.methodName = methodName;
+    this.description = description;
     if (this.args.template && existsSync(this.args.template)) {
       this.replacements = prependNewLines(readFileSync(this.args.template));
     }
+    if (extraTemplate) {
+      this.replacements = {
+        ...extraTemplate,
+        ...(this.replacements || {})
+      };
+    }
   }
 
-  static aTemplate(args, methodName) {
-    return new TestBuilder(args, methodName);
+  static aTemplate(args, methodName, extraTemplate, describe) {
+    return new TestBuilder(args, methodName, extraTemplate, describe);
   }
 
   libraries() {
@@ -30,7 +37,7 @@ export class TestBuilder {
   }
 
   describe() {
-    this.template = this.template + describe(this.args._[2], this.methodName, this.replacements);
+    this.template = this.template + describe(this.description || this.args._[2], this.methodName, this.replacements);
     return this;
   }
 
@@ -45,7 +52,7 @@ export class TestBuilder {
   }
 
   method(idFormatted) {
-    this.template = this.template + methodReq(this.methodName, this.args, idFormatted, this.replacements);
+    this.template = this.template + methodReq(this.methodName, this.description || this.args._[2], idFormatted, this.replacements);
     return this;
   }
 
@@ -92,7 +99,9 @@ export class TestBuilder {
   }
 
   bodyG() {
-    const body = this.args.xml ? bodyGXml(this.replacements) : bodyG(this.replacements);
+    const body = this.args.xml ?
+      bodyGXml(this.replacements) :
+      bodyG(this.replacements, replacements(this.replacements).bodyKey, replacements(this.replacements).bodyVal);
     this.template = this.template + body;
     return this;
   }
@@ -125,4 +134,3 @@ export class TestBuilder {
     return this.template;
   }
 }
-

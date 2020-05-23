@@ -1,8 +1,7 @@
 import { buildUrl } from '../../../../utils.cli';
 import { replacements } from './replacements';
 
-export function methodReq(method, args, idsFormatted, fromTemplate) {
-  const path = args._[2];
+export function methodReq(method, path, idsFormatted, fromTemplate) {
   const pathWithDummyData = buildUrl(path, idsFormatted);
   return replacements(fromTemplate)
       .method.replace(/{method}/g, method)

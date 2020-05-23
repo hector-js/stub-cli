@@ -1,6 +1,8 @@
 import preset from './preset.json';
 
-const prependNewLine = (obj) => (a, k) => ({ ...a, [k]: k === 'libraries' ? obj[k] : `\n${obj[k]}` });
+const noNewlines = ['libraries', 'bodyKey', 'bodyVal'];
+
+const prependNewLine = (obj) => (a, k) => ({ ...a, [k]: noNewlines.includes(k) ? obj[k] : `\n${obj[k]}` });
 
 export const prependNewLines = (obj) => Object.keys(obj).reduce(prependNewLine(obj), {});
 
@@ -11,7 +13,7 @@ export function replacements(fromTemplate) {
     return prependedPreset;
   }
   return {
-    ...preset,
+    ...prependedPreset,
     ...fromTemplate
   };
 }

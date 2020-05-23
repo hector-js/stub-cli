@@ -18,8 +18,8 @@ export function body(fromTemplate) {
   return replacements(fromTemplate).body;
 }
 
-export function bodyG(fromTemplate) {
-  return replacements(fromTemplate).bodyG;
+export function bodyG(fromTemplate, key, value) {
+  return replacements(fromTemplate).bodyG.replace(/{bodyKey}/g, key).replace(/{bodyVal}/g, value);
 }
 export function bodyGXml(fromTemplate) {
   return replacements(fromTemplate).bodyGXml;
