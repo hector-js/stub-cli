@@ -5,7 +5,6 @@ import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
 import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 import { PACKAGE_ROOT_JSON } from '../utils/constants-backend';
-import { prependNewLines } from '../utils/templates/tests/builder/sections/replacements';
 
 const chalk = require('chalk');
 
@@ -34,7 +33,7 @@ export async function newCli(args) {
 
   let replacements;
   if (args.template && existsSync(args.template)) {
-    replacements = prependNewLines(readFileSync(args.template));
+    replacements = readFileSync(args.template);
   }
 
   info(chalk.green(`\n----------------------------------------------------\n`));

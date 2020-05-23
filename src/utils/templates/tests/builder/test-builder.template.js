@@ -8,7 +8,7 @@ import { bodyReq, bodyReqXml } from './sections/body-req.template';
 import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
 import { libraries } from './sections/libraries.template';
 import { cookies } from './sections/cookies.template';
-import { replacements, prependNewLines } from './sections/replacements';
+import { replacements } from './sections/replacements';
 
 export class TestBuilder {
   constructor(args, methodName, extraTemplate, description) {
@@ -17,7 +17,7 @@ export class TestBuilder {
     this.methodName = methodName;
     this.description = description;
     if (this.args.template && existsSync(this.args.template)) {
-      this.replacements = prependNewLines(readFileSync(this.args.template));
+      this.replacements = readFileSync(this.args.template);
     }
     if (extraTemplate) {
       this.replacements = {
