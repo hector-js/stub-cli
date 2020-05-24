@@ -14,14 +14,13 @@ export function status(statusArg) {
   return replacements().status.replace(/{status}/g, status ? status : '200');
 }
 
+
 export function body() {
   return replacements().body;
 }
 
 export function bodyG(fromTemplate, key, value) {
-  return replacements()
-    .bodyG.replace(/{bodyKey}/g, key)
-    .replace(/{bodyVal}/g, value);
+  return replacements().bodyG.replace(/{bodyKey}/g, key).replace(/{bodyVal}/g, value);
 }
 export function bodyGXml() {
   return replacements().bodyGXml;
