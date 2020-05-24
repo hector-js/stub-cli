@@ -5,10 +5,15 @@ let fromTemplate = preset;
 
 export function setTemplate(template) {
   if (template && existsSync(template)) {
-    fromTemplate = {
-      ...fromTemplate,
-      ...readFileSync(template)
-    };
+    try {
+      const parsed = JSON.parse(readFileSync(template));
+      if (parsed) {
+        fromTemplate = {
+          ...fromTemplate,
+          ...parsed
+        };
+      }
+    } catch (err) {}
   }
 }
 
