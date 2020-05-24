@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import { TestBuilder } from '../../../../../src/utils/templates/tests/builder/test-builder.template';
-import preset from '../../../../../src/utils/templates/tests/builder/sections/preset.json';
+import preset from '../../../../../src/utils/templates/preset.json';
 
 describe('test-builder-template', () => {
   let args;

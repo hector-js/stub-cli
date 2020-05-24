@@ -1,4 +1,3 @@
-
 import { info, warn } from 'console';
 import { generateCli } from './generate/generate.cli';
 import { cd } from 'shelljs';
@@ -8,10 +7,12 @@ import { start } from './start/start.cli';
 import { testcli } from './testcli/test.cli';
 import { config } from './config/config.cli';
 import { version } from './../package.json';
+import { setTemplate } from './utils/templates/replacements';
 
 const chalk = require('chalk');
 
 export function cli(args) {
+  setTemplate(args.template);
   switch (args._[0]) {
     case 'new':
     case 'n':

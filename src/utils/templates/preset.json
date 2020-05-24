@@ -1,6 +1,6 @@
 {
   "dataname": "{rootFile}-{method}.json",
-  "filename": "{rootFile}-{method}.test.js",
+  "testname": "{rootFile}-{method}.test.js",
   "assert": "\n      .end((err, res) => {",
   "noErrors": "\n          expect(err).to.not.exist;",
   "status": "\n          expect(res.status).to.equal({status});",

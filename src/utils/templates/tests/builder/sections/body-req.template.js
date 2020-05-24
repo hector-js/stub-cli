@@ -1,9 +1,9 @@
-import { replacements } from './replacements';
+import { replacements } from '../../../replacements';
 
-export function bodyReq(fromTemplate) {
-  return replacements(fromTemplate).bodyReq;
+export function bodyReq() {
+  return replacements().bodyReq;
 }
 
-export function bodyReqXml(fromTemplate) {
-  return replacements(fromTemplate).bodyReqXml;
+export function bodyReqXml() {
+  return replacements().bodyReqXml;
 }

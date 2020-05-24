@@ -1,5 +1,5 @@
-import { replacements } from "./replacements";
+import { replacements } from '../../../replacements';
 
-export function request(fromTemplate) {
-  return replacements(fromTemplate).request;
+export function request() {
+  return replacements().request;
 }

@@ -1,13 +1,13 @@
-import { replacements } from './replacements';
+import { replacements } from '../../../replacements';
 
-export function it(fromTemplate) {
-  return replacements(fromTemplate).it;
+export function it() {
+  return replacements().it;
 }
 
-export function endIt(fromTemplate) {
-  return replacements(fromTemplate).endIt;
+export function endIt() {
+  return replacements().endIt;
 }
 
-export function endItDelay(delay, fromTemplate) {
-  return replacements(fromTemplate).endItDelay.replace(/{delay}/g, delay);
+export function endItDelay(delay) {
+  return replacements().endItDelay.replace(/{delay}/g, delay);
 }

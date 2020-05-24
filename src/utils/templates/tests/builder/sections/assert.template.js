@@ -1,34 +1,36 @@
 import { getStatus } from '../../../../utils.cli';
-import { replacements } from './replacements';
+import { replacements } from '../../../replacements';
 
-export function assert(fromTemplate) {
-  return replacements(fromTemplate).assert;
+export function assert() {
+  return replacements().assert;
 }
 
-export function noErrors(fromTemplate) {
-  return replacements(fromTemplate).noErrors;
+export function noErrors() {
+  return replacements().noErrors;
 }
 
-export function status(statusArg, fromTemplate) {
+export function status(statusArg) {
   const status = getStatus(statusArg);
-  return replacements(fromTemplate).status.replace(/{status}/g, status ? status : '200');
+  return replacements().status.replace(/{status}/g, status ? status : '200');
 }
 
-export function body(fromTemplate) {
-  return replacements(fromTemplate).body;
+export function body() {
+  return replacements().body;
 }
 
 export function bodyG(fromTemplate, key, value) {
-  return replacements(fromTemplate).bodyG.replace(/{bodyKey}/g, key).replace(/{bodyVal}/g, value);
+  return replacements()
+    .bodyG.replace(/{bodyKey}/g, key)
+    .replace(/{bodyVal}/g, value);
 }
-export function bodyGXml(fromTemplate) {
-  return replacements(fromTemplate).bodyGXml;
-}
-
-export function emptyBody(fromTemplate) {
-  return replacements(fromTemplate).emptyBody;
+export function bodyGXml() {
+  return replacements().bodyGXml;
 }
 
-export function endAssert(fromTemplate) {
-  return replacements(fromTemplate).endAssert;
+export function emptyBody() {
+  return replacements().emptyBody;
+}
+
+export function endAssert() {
+  return replacements().endAssert;
 }
