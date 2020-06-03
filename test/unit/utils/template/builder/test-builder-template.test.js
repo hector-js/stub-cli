@@ -6,13 +6,11 @@ import preset from '../../../../../src/utils/templates/preset.json';
 
 describe('test-builder-template', () => {
   let args;
-  let ids;
 
   beforeEach(() => {
     args = {
       _: ['', '', '/any-path/{id}/data']
     };
-    ids = ['id'];
   });
 
   it('should use the default preset', () => {

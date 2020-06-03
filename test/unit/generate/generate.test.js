@@ -306,6 +306,23 @@ describe('generate', () => {
           expect(infoStub.callCount).to.equal(4);
         });
       });
+
+      context('when help has template as well like "hjs g --help --template"', ()=>{
+        it('should show common options', ()=>{
+          const args = {
+            help: true,
+            template: 'template.json'
+          };
+
+          generateCli(args);
+
+          assert.ok(infoStub.withArgs(chalk.green(`\nCustomise the test file output`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('> Template options:\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  --template "[file.json]"`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customrers --template template.json`)).calledOnce);
+          expect(infoStub.callCount).to.equal(4);
+        });
+      });
     });
   });
 });
