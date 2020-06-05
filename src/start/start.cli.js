@@ -23,7 +23,7 @@ export function start(args) {
     }
 
     let command;
-    const appHJS = `.\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js`;
+    const appHJS = `.\/node_modules\/@hectorjs\/stub-backend\/lib\/server.js`;
     if (args.dev) {
       const root = `nodemon ${appHJS}`;
       command = argsCli ? `${root}${argsCli}` : root;

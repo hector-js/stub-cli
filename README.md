@@ -5,6 +5,9 @@
 
  - ![](https://img.shields.io/npm/v/@hectorjs/stub-cli?label=version&logo=npm) ![](https://img.shields.io/npm/dt/@hectorjs/stub-cli?logo=npm&logoColor=blue) ![](https://img.shields.io/snyk/vulnerabilities/npm/@hectorjs/stub-cli?logo=snyk) ![](https://img.shields.io/github/last-commit/HecJimSan/stub-cli?logo=github)
 
+ [Releases documentation](https://github.com/HecJimSan/stub-cli/releases)
+
+
 # Description
 
 The aim of this project is to mock backend services building different responses for a given authentication, cookie or request among others.
