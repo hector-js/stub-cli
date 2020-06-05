@@ -46,12 +46,10 @@ export async function newCli(args) {
   }
 
   if (nameProject) {
-    exec('npm install @hectorjs/stub-backend --silent');
+    exec('npm install @hectorjs/stub-backend@1.3.0 --silent');
   } else {
-    exec('npm install @hectorjs/stub-backend --save-dev --silent');
+    exec('npm install @hectorjs/stub-backend@1.3.0 --save-dev --silent');
   }
-
-  exec('npm install chai mocha supertest nodemon --save-dev --silent');
 
   readFile(PACKAGE_ROOT_JSON, 'utf8', (err, data) => {
     if (err) return error('Error while package.json was opening!');
