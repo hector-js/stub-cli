@@ -7,7 +7,7 @@ const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 
 describe('start', () => {
-  const appHJS ='.\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js';
+  const appHJS ='.\/node_modules\/@hectorjs\/stub-backend\/lib\/server.js';
   let start;
   let execCliStub;
   let cdCliStub;
@@ -46,7 +46,7 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/app.js'));
+      assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/server.js'));
     });
   });
 

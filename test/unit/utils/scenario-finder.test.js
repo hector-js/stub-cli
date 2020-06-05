@@ -78,7 +78,7 @@ describe('scenario-provider', () => {
 
           expect(cdStub.callCount).to.equals(3);
           assert.ok(resourceTemplateStub.calledOnceWith(args, ['id']));
-          assert.ok(writeFileByDataStub.withArgs('any-path-id-data.get.json', 'any template').calledOnce);
+          assert.ok(writeFileByDataStub.withArgs('any-path-id-data-get.json', 'any template').calledOnce);
         });
       });
 

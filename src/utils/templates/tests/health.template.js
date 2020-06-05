@@ -1,17 +1,12 @@
-import { libraries } from './builder/sections/libraries.template';
+import { TestBuilder } from './builder/test-builder.template';
 
-export const healthTest = libraries() + `
-describe('GET - health ', () => {
-	it('should exist', (done) => {
-		request(app)
-			.get('/health')
-			.end((err, res) => {
-        expect(err).to.not.exist;
-				expect(res.status).to.equal(200);
-				expect(res.body).to.deep.equal({
-					'STATUS': 'UP'
-				});
-        done();
-		});
-	});
-});`;
+export const healthTest = (args) => {
+  return TestBuilder.aTemplate(args, 'get', { bodyKey: '\'STATUS\'', bodyVal: '\'UP\'' }, 'health')
+      .libraries()
+      .describe().it().request()
+      .method().headers().cookies()
+      .assert().noErrors().status().bodyG()
+      .endAssert().endIt().endDes()
+      .build();
+};
+

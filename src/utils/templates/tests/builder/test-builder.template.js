@@ -1,21 +1,25 @@
-import { describe } from './sections/describe.template';
-import { it } from './sections/it.template';
+import { describe, endDes } from './sections/describe.template';
+import { it, endIt, endItDelay } from './sections/it.template';
+import { request } from './sections/request.template';
 import { methodReq } from './sections/method.template';
 import { headers } from './sections/headers.template';
 import { bodyReq, bodyReqXml } from './sections/body-req.template';
 import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
 import { libraries } from './sections/libraries.template';
 import { cookies } from './sections/cookies.template';
+import { replacements, addReplacements, restoreReplacements } from '../../replacements';
 
 export class TestBuilder {
-  constructor(args, methodName) {
+  constructor(args, methodName, extraTemplate, description) {
     this.template = ``;
     this.args = args;
     this.methodName = methodName;
+    this.description = description;
+    this.storedReplacements = addReplacements(extraTemplate);
   }
 
-  static aTemplate(args, methodName) {
-    return new TestBuilder(args, methodName);
+  static aTemplate(args, methodName, extraTemplate, describe) {
+    return new TestBuilder(args, methodName, extraTemplate, describe);
   }
 
   libraries() {
@@ -24,7 +28,7 @@ export class TestBuilder {
   }
 
   describe() {
-    this.template = this.template + describe(this.args._[2], this.methodName);
+    this.template = this.template + describe(this.description || this.args._[2], this.methodName);
     return this;
   }
 
@@ -34,12 +38,12 @@ export class TestBuilder {
   }
 
   request() {
-    this.template = this.template + `\n    request(app)`;
+    this.template = this.template + request();
     return this;
   }
 
   method(idFormatted) {
-    this.template = this.template + methodReq(this.methodName, this.args, idFormatted);
+    this.template = this.template + methodReq(this.methodName, this.description || this.args._[2], idFormatted);
     return this;
   }
 
@@ -86,7 +90,7 @@ export class TestBuilder {
   }
 
   bodyG() {
-    const body = this.args.xml ? bodyGXml() : bodyG();
+    const body = this.args.xml ? bodyGXml() : bodyG(this.fromTemplate, replacements().bodyKey, replacements().bodyVal);
     this.template = this.template + body;
     return this;
   }
@@ -102,21 +106,21 @@ export class TestBuilder {
   }
 
   endDes() {
-    this.template = this.template + `\n});`;
+    this.template = this.template + endDes();
     return this;
   }
 
   endIt() {
     if (this.args.delay) {
-      this.template = this.template + `\n  }).timeout(${this.args.delay + 500});`;
+      this.template = this.template + endItDelay(this.args.delay + 500);
     } else {
-      this.template = this.template + `\n  });`;
+      this.template = this.template + endIt();
     }
     return this;
   }
 
   build() {
+    restoreReplacements(this.storedReplacements);
     return this.template;
   }
 }
-
