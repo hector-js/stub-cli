@@ -1,6 +1,7 @@
 import { getHeaders, arrayToJson } from '../../../../utils.cli';
+import { replacements } from '../../../replacements';
 
 export function headers(headersArg) {
   const headers = getHeaders(headersArg);
-  return `\n      .set({${arrayToJson(headers)}})`;
+  return replacements().headers.replace(/{headers}/g, arrayToJson(headers));
 }

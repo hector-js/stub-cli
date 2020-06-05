@@ -78,7 +78,7 @@ export async function newCli(args) {
       writeFileByData('health.json', healthData);
       cd('..');
       createFileInPath('health.test.js', 'test');
-      writeFileByData('health.test.js', healthTest);
+      writeFileByData('health.test.js', healthTest(args));
       cd('..');
 
       checkIDE(args['vs'], 'code');

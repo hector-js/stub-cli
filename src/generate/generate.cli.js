@@ -49,7 +49,14 @@ export function generateCli(args) {
       info(chalk.grey(`    Example: hjs g g customrers --delay 1000`));
     }
 
-    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status && !args.delay) {
+    if (args.template) {
+      info(chalk.green(`\nCustomise the test file output`));
+      info(chalk.green('> Template options:\n'));
+      info(chalk.grey(`  --template "[file.json]"`));
+      info(chalk.grey(`    Example: hjs g g customrers --template template.json`));
+    }
+
+    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status && !args.delay && !args.template) {
       displayGeneratorOpts();
     }
   } else {

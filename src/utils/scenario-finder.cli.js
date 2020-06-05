@@ -3,6 +3,7 @@ import { warn } from 'console';
 import { sanitizeRootFile, getIdFormatted } from './utils.cli';
 import { checkPath, writeFileByData } from './file-utils.cli';
 import { PACKAGE_JSON, RESOURCES_PATH } from './constants-backend';
+import { replacements } from './templates/replacements';
 
 const chalk = require('chalk');
 
@@ -18,13 +19,15 @@ export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) 
     const idsFormatted = getIdFormatted(path);
 
     goPath(pathForResources);
-    writeFileByData(`${rootFile}.${METHOD}.json`, resourceTemplate(args, idsFormatted));
+    const dataname = replacements().dataname.replace(/{rootFile}/g, rootFile).replace(/{method}/g, METHOD);
+    writeFileByData(dataname, resourceTemplate(args, idsFormatted));
     goRoot(pathForResources);
 
     goTest();
 
     goPath(pathForResources);
-    writeFileByData(`${rootFile}-${METHOD}.test.js`, testTemplate(args, idsFormatted));
+    const testname = replacements().testname.replace(/{rootFile}/g, rootFile).replace(/{method}/g, METHOD);
+    writeFileByData(testname, testTemplate(args, idsFormatted));
     goRoot(pathForResources);
   } else {
     warn(chalk.yellow('\nInfo: Please, navigate to package.json file level and run the command from there.'));

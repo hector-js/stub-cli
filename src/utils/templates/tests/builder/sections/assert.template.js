@@ -1,40 +1,35 @@
 import { getStatus } from '../../../../utils.cli';
+import { replacements } from '../../../replacements';
 
 export function assert() {
-  return `\n      .end((err, res) => {`;
+  return replacements().assert;
 }
 
 export function noErrors() {
-  return `\n          expect(err).to.not.exist;`;
+  return replacements().noErrors;
 }
 
 export function status(statusArg) {
   const status = getStatus(statusArg);
-  return `\n          expect(res.status).to.equal(${status ? status : '200'});`;
+  return replacements().status.replace(/{status}/g, status ? status : '200');
 }
 
 
 export function body() {
-  return `\n          expect(res.body).to.deep.equal({
-            'dummyResponse': 'dummyResponse'
- 
-          });`;
+  return replacements().body;
 }
 
-export function bodyG() {
-  return `\n          expect(res.body).to.deep.equal({
-            'body' : 'To be defined'
-          });`;
+export function bodyG(fromTemplate, key, value) {
+  return replacements().bodyG.replace(/{bodyKey}/g, key).replace(/{bodyVal}/g, value);
 }
 export function bodyGXml() {
-  return `\n          expect(res.get('Content-Type')).to.equal('text/xml; charset=utf-8');
-          expect(res.text).to.equal('<xml><tbd>Xml response to be defined</tbd></xml>');`;
+  return replacements().bodyGXml;
 }
 
 export function emptyBody() {
-  return `\n          expect(res.body).to.be.empty;`;
+  return replacements().emptyBody;
 }
 
 export function endAssert() {
-  return `\n          done();\n      });`;
+  return replacements().endAssert;
 }
