@@ -1,12 +1,11 @@
 import { error } from 'console';
+import chalk from 'chalk';
 
-const chalk = require('chalk');
-
-export function sizeObject(obj) {
+const sizeObject = (obj) => {
   return obj ? Object.keys(obj).length : 0;
 };
 
-export const sanitizeRootFile = (path) => {
+const sanitizeRootFile = (path) => {
   if (!path) {
     error(chalk.red('\nSorry, you missed the path.'));
     error(chalk.grey('For example: hjs g g [path]\n'));
@@ -32,7 +31,7 @@ export const sanitizeRootFile = (path) => {
   return rootFile ? rootFile : 'to-be-defined';
 };
 
-export const getIdFormatted = (path) => {
+const getIdFormatted = (path) => {
   if (!path) {
     throw new Error('The path must exits');
   }
@@ -49,23 +48,23 @@ export const getIdFormatted = (path) => {
   return idsFormatted;
 };
 
-export const getHeaders = (headers) => {
+const getHeaders = (headers) => {
   return headers ? headers.replace(' ', '').split(',') : null;
 };
 
-export const getCookies = (cookies) => {
+const getCookies = (cookies) => {
   return cookies ? cookies.replace(' ', '').split(',') : null;
 };
 
-export const getStatus = (status) => {
+const getStatus = (status) => {
   return status && parseInt(status) ? status : null;
 };
 
-export const arrayToJson = (array) => arToCus(array, (ele) => `"${ele}": "any value",`, false);
+const arrayToJson = (array) => arToCus(array, (ele) => `"${ele}": "any value",`, false);
 
-export const arrayToArrayValues = (array) => arToCus(array, (header) => `"${header}=anyValue",`, false);
+const arrayToArrayValues = (array) => arToCus(array, (header) => `"${header}=anyValue",`, false);
 
-export const buildUrl = (path, ids) => {
+const buildUrl = (path, ids) => {
   if (!path) {
     throw new Error(chalk.red('no path'));
   }
@@ -75,9 +74,24 @@ export const buildUrl = (path, ids) => {
   return path;
 };
 
-export function argsBy(argKey, argValue) {
+const argsBy = (argKey, argValue) => {
   return argValue ? ` --${argKey} ${argValue}` : '';
-}
+};
+
+
+export {
+  argsBy,
+  buildUrl,
+  arrayToArrayValues,
+  arrayToJson,
+  getStatus,
+  getCookies,
+  getHeaders,
+  getIdFormatted,
+  sanitizeRootFile,
+  sizeObject
+};
+
 
 const arToCus = (array, fn, lastElement) => {
   let resultArray = '';
@@ -89,3 +103,5 @@ const arToCus = (array, fn, lastElement) => {
   }
   return resultArray;
 };
+
+
