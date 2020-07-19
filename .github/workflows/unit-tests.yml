@@ -10,7 +10,7 @@ on:
     
 jobs:
   build:
-    name: Stub-backend
+    name: Stub-cli
 
     runs-on: ubuntu-latest
 
