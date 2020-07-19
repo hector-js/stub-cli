@@ -1,11 +1,10 @@
 import { info, error } from 'console';
 import { existsSync, writeFile } from 'fs';
 import { mkdir, cd, touch } from 'shelljs';
+import prompts from 'prompts';
+import chalk from 'chalk';
 
-const prompts = require('prompts');
-const chalk = require('chalk');
-
-export async function multipleOpts(message, choices) {
+async function multipleOpts(message, choices) {
   return await prompts({
     type: 'select',
     name: 'data',
@@ -14,7 +13,7 @@ export async function multipleOpts(message, choices) {
   });
 }
 
-export async function question(message) {
+async function question(message) {
   return await prompts({
     type: 'text',
     name: 'data',
@@ -23,7 +22,7 @@ export async function question(message) {
   });
 }
 
-export const checkPath = (path) => {
+const checkPath = (path) => {
   try {
     return existsSync(path);
   } catch (err) {
@@ -32,7 +31,7 @@ export const checkPath = (path) => {
   }
 };
 
-export const writeFileByData = (file, data) => {
+const writeFileByData = (file, data) => {
   if (!file || !data) {
     if (!file) {
       error(chalk.red('File is undefined'));
@@ -52,7 +51,7 @@ export const writeFileByData = (file, data) => {
   });
 };
 
-export const createFileInPath = (fileName, path) => {
+const createFileInPath = (fileName, path) => {
   if (!fileName || !path) {
     if (!fileName) {
       error(chalk.red('File is undefined'));
@@ -65,4 +64,12 @@ export const createFileInPath = (fileName, path) => {
   mkdir(path);
   cd(path);
   touch(fileName);
+};
+
+export {
+  createFileInPath,
+  writeFileByData,
+  checkPath,
+  question,
+  multipleOpts
 };
