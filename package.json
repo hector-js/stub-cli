@@ -24,6 +24,9 @@
 		"stub",
 		"hectorjs",
 		"stub-backend",
+		"mock",
+		"json",
+		"tdd",
 		"frontend"
 	],
 	"author": "Hector Jimenez Sanchez",
