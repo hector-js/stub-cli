@@ -147,4 +147,4 @@ Enjoy!
 
 # Respository
 
-https://github.com/HecJimSan/stub-cli
+https://github.com/hector-js/stub-cli
