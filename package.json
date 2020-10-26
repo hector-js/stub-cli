@@ -12,7 +12,7 @@
 	"scripts": {
 		"test": "mocha --recursive --require esm --exit",
 		"eslint": "eslint ./src/**/*.js ./test/**/*.js",
-		"test-all": "rm -rf node_modules && npm audit && npm i && npm run eslint && npm run coverage",
+		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf node_modules && npm audit && npm i && npm run eslint && npm run coverage",
 		"report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
 		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit",
 		"_start": "hjs start",
@@ -39,6 +39,7 @@
 		"mocha": "^7.2.0",
 		"prompts": "^2.3.2",
 		"shelljs": "^0.8.4",
+		"husky": "^4.3.0",
 		"supertest": "^4.0.2"
 	},
 	"devDependencies": {
@@ -54,5 +55,11 @@
 		"type": "git",
 		"url": "git://github.com/hector-js/stub-cli.git"
 	},
-	"homepage": "https://hectorjs.herokuapp.com"
+	"homepage": "https://hectorjs.herokuapp.com",
+	"husky": {
+		"hooks": {
+			"pre-commit": "sh scripts/banners/earth.sh",
+			"pre-push": "npm run test-all"
+		}
+	}
 }
