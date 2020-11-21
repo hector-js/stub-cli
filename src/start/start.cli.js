@@ -10,7 +10,7 @@ export function start(args) {
     info(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`));
     info(chalk.grey(` -  hjs start       : run service`));
     info(chalk.grey(` -  hjs start --path: run service from different directory`));
-    info(chalk.grey(` -  hjs start --ui  : open chrome browser`));
+    info(chalk.grey(` -  hjs start --open  : open chrome browser`));
     info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
   } else {
     if (args.path) {
@@ -18,8 +18,8 @@ export function start(args) {
     }
     let argsCli = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
 
-    if (args.ui) {
-      argsCli = `${argsCli} --ui`;
+    if (args.open) {
+      argsCli = `${argsCli} --open`;
     }
 
     let command;

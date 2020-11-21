@@ -99,7 +99,7 @@ describe('scenario-provider', () => {
         it('should generate the file under two levels', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
-            path: 'cases/data'
+            package: 'cases/data'
           };
           const testTemplateStub = stub();
           checkStub.withArgs('./cases').returns(false);
@@ -123,7 +123,7 @@ describe('scenario-provider', () => {
           it('should generate the file under two levels', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
-              path: '/cases/data'
+              package: '/cases/data'
             };
             const testTemplateStub = stub();
             testTemplateStub.withArgs(args, ['id']).returns('any template');
@@ -144,7 +144,7 @@ describe('scenario-provider', () => {
           it('should generate the file under two levels', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
-              path: 'cases/data/'
+              package: 'cases/data/'
             };
             const testTemplateStub = stub();
             testTemplateStub.withArgs(args, ['id']).returns('any template');
@@ -162,7 +162,7 @@ describe('scenario-provider', () => {
         it('should generate the file under one level', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
-            path: 'cases'
+            package: 'cases'
           };
           const testTemplateStub = stub();
           testTemplateStub.withArgs(args, ['id']).returns('any template');

@@ -67,6 +67,10 @@ For each method, it creates a test with dummy data. It will reduce the time to t
 
 The request and response are json by default. If you want to create a scenario for xml, you have to include ```--xml``` in you cli.
 
+You can group each resource using the --package with the name of the folder where resource will be place.
+
+For example: ```hjs g g customers --package customer```
+
 _NOTE:_ The endpoint should not start with '/' for the cli and you should escape '&' like the next example:
 
 ```hjs g post customers/{id}/products?query={param1}\&identifier={identifier}```
