@@ -13,7 +13,7 @@ export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) 
     const filterDocSlash =RESOURCES_PATH.replace(/\.|\//g, '');
     cd(filterDocSlash);
     const path = args._[2];
-    const pathForResources = sanitizePath(args.path);
+    const pathForResources = sanitizePath(args.package);
 
     const rootFile = sanitizeRootFile(path);
     const idsFormatted = getIdFormatted(path);

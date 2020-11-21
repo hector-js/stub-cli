@@ -125,17 +125,17 @@ describe('start', () => {
         });
       });
 
-      context('when the argument is "--ui"', () => {
-        it('should execute a command with the ui', () => {
+      context('when the argument is "--open"', () => {
+        it('should execute a command with the open command', () => {
           const args = {
             _: ['start'],
-            ui: true,
+            open: true,
             dev: true
           };
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --ui`));
+          assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --open`));
         });
       });
     });
@@ -180,16 +180,16 @@ describe('start', () => {
         });
       });
 
-      context('when the argument is "--ui"', () => {
-        it('should execute a command with the ui', () => {
+      context('when the argument is "--open"', () => {
+        it('should execute a command with the open command', () => {
           const args = {
             _: ['start'],
-            ui: true
+            open: true
           };
 
           start(args);
 
-          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --ui`));
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --open`));
         });
       });
     });

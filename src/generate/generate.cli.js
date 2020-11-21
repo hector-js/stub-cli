@@ -14,49 +14,49 @@ export function generateCli(args) {
     if (args.headers) {
       info(chalk.green('\nHeader options:\n'));
       info(chalk.grey(`  --headers [header1],[header2]`));
-      info(chalk.grey(`    Example: hjs g g customrers --headers authorization,client_id`));
+      info(chalk.grey(`    Example: hjs g g customers --headers authorization,client_id`));
     }
 
     if (args.status) {
       info(chalk.green('\nStatus options:\n'));
       info(chalk.grey(`  --status [status]`));
-      info(chalk.grey(`    Example: hjs g g customrers --status 404`));
+      info(chalk.grey(`    Example: hjs g g customers --status 404`));
+    }
+
+    if (args.package) {
+      info(chalk.green(`\nGenerate the file resource and test under the package.`));
+      info(chalk.green('\nPackage options:\n'));
+      info(chalk.grey(`  --package [folder name]`));
+      info(chalk.grey(`    Example: hjs g g customers --package my-package/my-subpackage`));
     }
 
     if (args.cookies) {
       info(chalk.green('\nCookies options:\n'));
       info(chalk.grey(`  --cookies [cookies]`));
-      info(chalk.grey(`    Example: hjs g g customrers --cookies NormalCookie`));
+      info(chalk.grey(`    Example: hjs g g customers --cookies NormalCookie`));
     }
 
     if (args.description) {
       info(chalk.green('\nDescription options:\n'));
       info(chalk.grey(`  --description "[description]"`));
-      info(chalk.grey(`    Example: hjs g g customrers --description "Hello world!"`));
-    }
-
-    if (args.path) {
-      info(chalk.green(`\nGenerate the file resource and test under the path.`));
-      info(chalk.green('> Path options:\n'));
-      info(chalk.grey(`  --path "[path]"`));
-      info(chalk.grey(`    Example: hjs g g customrers --path cases/whatever`));
+      info(chalk.grey(`    Example: hjs g g customers --description "Hello world!"`));
     }
 
     if (args.delay) {
       info(chalk.green(`\nGenerate the file resource and test adding a delay in the response.`));
       info(chalk.green('> Delay options:\n'));
       info(chalk.grey(`  --delay "[milliseconds]"`));
-      info(chalk.grey(`    Example: hjs g g customrers --delay 1000`));
+      info(chalk.grey(`    Example: hjs g g customers --delay 1000`));
     }
 
     if (args.template) {
       info(chalk.green(`\nCustomise the test file output`));
       info(chalk.green('> Template options:\n'));
       info(chalk.grey(`  --template "[file.json]"`));
-      info(chalk.grey(`    Example: hjs g g customrers --template template.json`));
+      info(chalk.grey(`    Example: hjs g g customers --template template.json`));
     }
 
-    if (!args.path && !args.description && !args.headers && !args.cookies && !args.status && !args.delay && !args.template) {
+    if (!args.package && !args.description && !args.headers && !args.cookies && !args.status && !args.delay && !args.template) {
       displayGeneratorOpts();
     }
   } else {
