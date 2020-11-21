@@ -46,9 +46,9 @@ export async function newCli(args) {
   }
 
   if (nameProject) {
-    exec('npm install @hectorjs/stub-backend@1.9.0 --silent');
+    exec('npm install @hectorjs/stub-backend@1.10.0 --silent');
   } else {
-    exec('npm install @hectorjs/stub-backend@1.9.0 --save-dev --silent');
+    exec('npm install @hectorjs/stub-backend@1.10.0 --save-dev --silent');
   }
 
   readFile(PACKAGE_ROOT_JSON, 'utf8', (err, data) => {
