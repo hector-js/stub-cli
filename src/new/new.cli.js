@@ -11,7 +11,11 @@ const chalk = require('chalk');
 export async function newCli(args) {
   const commands = args._;
   const start = new Date();
+
   exec('clear');
+
+  const optsPackageManager = [{ title: 'Npm', value: 'npm' }, { title: 'Yarn', value: 'yarn' }];
+  const packageManager = (await multipleOpts('Package manager?', optsPackageManager)).data;
 
   let nameProject;
   if (commands.length < 2) {
@@ -39,23 +43,30 @@ export async function newCli(args) {
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
     mkdir(nameProject);
     cd(nameProject);
-    exec('npm init -y --silent');
+    console.log(`COMMAND: ${packageManager} init -y --silent`);
+    exec(`${packageManager} init -y --silent`);
   } else {
     info(chalk.green(` -> Setting the mock service in the project\n`));
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
   }
 
+  const installCommand = packageManager === 'yarn'? 'add': 'install';
+
   if (nameProject) {
-    exec('npm install @hectorjs/stub-backend@1.10.0 --silent');
+    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.10.0 --silent`);
   } else {
-    exec('npm install @hectorjs/stub-backend@1.10.0 --save-dev --silent');
+    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.10.0 --save-dev --silent`);
   }
+
 
   readFile(PACKAGE_ROOT_JSON, 'utf8', (err, data) => {
     if (err) return error('Error while package.json was opening!');
     const packageJSON = JSON.parse(data);
-    if (nameProject) {
+    if (nameProject && packageManager === 'npm') {
       delete packageJSON.scripts.test;
+    }
+    if (packageManager === 'yarn') {
+      packageJSON.scripts = {};
     }
     packageJSON.scripts['_start'] = 'hjs start';
     packageJSON.scripts['_test'] = 'env KEY=local mocha ./_hjs --recursive --exit';

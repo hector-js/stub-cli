@@ -20,6 +20,7 @@ Keep it simple :smile:
 
 Install the library:
 
+## Npm
 Globally (recommended):
 ```
 npm install -g @hectorjs/stub-cli
@@ -29,6 +30,18 @@ or locally:
 ```
 npm install @hectorjs/stub-cli --save-dev
 ```
+## Yarn
+Globally (recommended):
+```
+yarn add -g @hectorjs/stub-cli
+```
+or locally:
+
+```
+yarn add @hectorjs/stub-cli --save-dev
+```
+
+## Verification
 
 Verify your **hjs** command is installed correctly.
 
@@ -80,7 +93,7 @@ _MORE INFO:_ ```hjs generate --help```
 
 Execute the tests which have been created by each method generate command (```hjs g get ...```). You can add different properties to the command as port, logs or profile.
 
-_NOTE_: you can run ```npm test``` as well.
+_NOTE_: you can run ```npm run _test``` or ```yarn _test``` as well.
 _MORE INFO:_ ```hjs test --help```
 
 ## 5) ```hjs config [prop]```
@@ -96,7 +109,7 @@ _MORE INFO:_ ```hjs config --help```
 ## 6) ```hjs start```
 If you want to run the mock ```hjs start```. Also if you want to run the mocks with nodemon listening the changes under the resources folder, execute ```hjs start --dev```.
 
-_NOTE:_ you can run ```npm start``` as well.
+_NOTE:_ you can run ```npm run _start``` or ```yarn _start``` as well.
 _MORE INFO:_ ```hjs start --help```
 
 # UI
