@@ -17,13 +17,7 @@ export function testcli(args) {
 
     const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
 
-    let command;
-    if (argumens) {
-      command = `npm run _test --${argumens}`;
-    } else {
-      command = `npm run _test`;
-    }
-    exec(command);
+    exec(`env KEY=local mocha ./_hjs --recursive --exit${argumens?argumens: ''}`);
   }
 }
 
