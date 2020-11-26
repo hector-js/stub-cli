@@ -53,9 +53,9 @@ export async function newCli(args) {
   const installCommand = packageManager === 'yarn'? 'add': 'install';
 
   if (nameProject) {
-    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.10.0 --silent`);
+    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.14.0 --silent`);
   } else {
-    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.10.0 --save-dev --silent`);
+    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.14.0 --save-dev --silent`);
   }
 
 
