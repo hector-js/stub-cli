@@ -118,6 +118,8 @@ This section is in progress at this moment.
 
 You can run the application and navigate to ```http://localhost:3005/``` and have a look.
 
+_MORE INFO:_ ```hjs start --open```
+
 # Example
 
 Once you create a new project, it is adding a health check endpoint by default with its test.
