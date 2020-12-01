@@ -43,7 +43,6 @@ export async function newCli(args) {
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
     mkdir(nameProject);
     cd(nameProject);
-    console.log(`COMMAND: ${packageManager} init -y --silent`);
     exec(`${packageManager} init -y --silent`);
   } else {
     info(chalk.green(` -> Setting the mock service in the project\n`));
@@ -69,7 +68,7 @@ export async function newCli(args) {
       packageJSON.scripts = {};
     }
     packageJSON.scripts['_start'] = 'hjs start';
-    packageJSON.scripts['_test'] = 'env KEY=local mocha ./_hjs --recursive --exit';
+    packageJSON.scripts['_test'] = 'hjs test';
     packageJSON.scripts['_start-dev'] = 'hjs start --dev';
 
     writeFile(PACKAGE_ROOT_JSON, JSON.stringify(packageJSON, null, '\t'), 'utf8', (err) => {
