@@ -46,7 +46,20 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(execCliStub.calledOnceWith('nodemon .\/node_modules\/@hectorjs\/stub-backend\/lib\/server.js'));
+      assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS}`));
+    });
+  });
+
+  context('when start is comming with no delays flag such as "--no-delays"', () => {
+    it('should run the application with nodemon', () => {
+      const args = {
+        _: ['start'],
+        no_delays: true
+      };
+
+      start(args);
+
+      assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --no_delays true`));
     });
   });
 
