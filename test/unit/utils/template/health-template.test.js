@@ -6,7 +6,7 @@ import { healthTest } from '../../../../src/utils/templates/tests/health.templat
 
 describe('health-template', () => {
   describe('resources', () => {
-    it('should return the resource scenario', () => {
+    it('returns the resource scenario', () => {
       expect(healthData).to.equal(`{
   "_get" : {
     "/health": [
@@ -27,7 +27,7 @@ describe('health-template', () => {
   });
 
   describe('test', () => {
-    it('should return the resource scenario', () => {
+    it('returns the resource scenario', () => {
       expect(healthTest({})).to.equal(`'use strict';
     
 var app = require('@hectorjs/stub-backend');

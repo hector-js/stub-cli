@@ -59,7 +59,7 @@ describe('scenario-provider', () => {
       });
 
       describe('navigation path', () => {
-        it('should navigate to the proper file', () => {
+        it('navigates to the proper file', () => {
           scenarioGenerator(args, stub(), stub(), null);
 
           expect(cdStub.callCount).to.equals(3);
@@ -70,7 +70,7 @@ describe('scenario-provider', () => {
       });
 
       describe('resource template', () => {
-        it('should write a file with the proper name and template', () => {
+        it('writes a file with the proper name and template', () => {
           const resourceTemplateStub = stub();
           resourceTemplateStub.withArgs(args, ['id']).returns('any template');
 
@@ -83,7 +83,7 @@ describe('scenario-provider', () => {
       });
 
       describe('test template', () => {
-        it('should write a file with the proper name and template', () => {
+        it('writes a file with the proper name and template', () => {
           const testTemplateStub = stub();
           testTemplateStub.withArgs(args, ['id']).returns('any template');
 
@@ -96,7 +96,7 @@ describe('scenario-provider', () => {
       });
 
       describe('path is set', () => {
-        it('should generate the file under two levels', () => {
+        it('generates the file under two levels', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
             package: 'cases/data'
@@ -120,7 +120,7 @@ describe('scenario-provider', () => {
         });
 
         context('when the path starts with /', () => {
-          it('should generate the file under two levels', () => {
+          it('generates the file under two levels', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
               package: '/cases/data'
@@ -141,7 +141,7 @@ describe('scenario-provider', () => {
         });
 
         context('when the path ends with /', () => {
-          it('should generate the file under two levels', () => {
+          it('generates the file under two levels', () => {
             args = {
               _: ['', '', '/any-path/{id}/data'],
               package: 'cases/data/'
@@ -159,7 +159,7 @@ describe('scenario-provider', () => {
           });
         });
 
-        it('should generate the file under one level', () => {
+        it('generates the file under one level', () => {
           args = {
             _: ['', '', '/any-path/{id}/data'],
             package: 'cases'
@@ -177,7 +177,7 @@ describe('scenario-provider', () => {
         });
       });
 
-      [null, undefined, ''].forEach((value) => it(`should return the same value for ${value}`, () => {
+      [null, undefined, ''].forEach((value) => it(`returns the same value for ${value}`, () => {
         args = {
           _: ['', '', value]
         };
@@ -190,7 +190,7 @@ describe('scenario-provider', () => {
 
     describe('location is not right', () => {
       context('when the package.json is not at the same level', () => {
-        it('should throw an error', () => {
+        it('throws an error', () => {
           checkStub.withArgs(RESOURCES_PATH).returns(true);
 
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');
@@ -199,7 +199,7 @@ describe('scenario-provider', () => {
       });
 
       context('when the resource package does not exist', () => {
-        it('should throw an error', () => {
+        it('throws an error', () => {
           checkStub.withArgs(PACKAGE_JSON).returns(true);
 
           assert.throws(() => scenarioGenerator(null, null, null, null), Error, '');

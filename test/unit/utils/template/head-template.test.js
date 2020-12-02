@@ -18,7 +18,7 @@ describe('head-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should return the resource scenario', () => {
+      it('returns the resource scenario', () => {
         result = headTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -39,7 +39,7 @@ describe('head-template', () => {
     });
 
     describe('xml', () => {
-      it('should return the resource scenario', () => {
+      it('returns the resource scenario', () => {
         args.xml = true;
 
         result = headTemplate(args, ids);
@@ -89,7 +89,7 @@ describe('head-template', () => {
 
   describe('test', () => {
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         result = headTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -117,7 +117,7 @@ describe('HEAD - /any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true;
 
         result = headTestTemplate(args, ids);

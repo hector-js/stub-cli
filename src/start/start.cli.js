@@ -16,7 +16,8 @@ export function start(args) {
     if (args.path) {
       cd(args.path);
     }
-    let argsCli = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
+
+    let argsCli = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors) +argsBy('no_delays', args['no_delays']);
 
     if (args.open) {
       argsCli = `${argsCli} --open`;

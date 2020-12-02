@@ -22,7 +22,7 @@ describe('get-template', () => {
     beforeEach(() => args.description = 'customDescription');
 
     describe('json', () => {
-      it('should return the resource scenario', () => {
+      it('returns the resource scenario', () => {
         result = getTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -103,7 +103,7 @@ describe('get-template', () => {
 
   describe('test', () => {
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         result = getTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -133,7 +133,7 @@ describe('GET - /any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true;
 
         result = getTestTemplate(args, ids);

@@ -13,12 +13,12 @@ describe('test-builder-template', () => {
     };
   });
 
-  it('should use the default preset', () => {
+  it('uses the default preset', () => {
     const testBuilder = TestBuilder.aTemplate(args, 'get');
     expect(testBuilder.assert().build()).to.equal(preset.assert);
   });
 
-  it('should allow overrides of the default preset', () => {
+  it('allows overrides of the default preset', () => {
     const newPreset = {
       assert: 'assert'
     };
@@ -26,12 +26,12 @@ describe('test-builder-template', () => {
     expect(testBuilder.assert().build()).to.equal(newPreset.assert);
   });
 
-  it('should create the method from the default preset', () => {
+  it('creates the method from the default preset', () => {
     const testBuilder = TestBuilder.aTemplate(args, 'get');
     expect(testBuilder.method().build()).to.equal('\n      .get(\'/any-path/{id}/data\')');
   });
 
-  it('should use the method from the supplied description', () => {
+  it('uses the method from the supplied description', () => {
     const testBuilder = TestBuilder.aTemplate(args, 'get', undefined, 'different');
     expect(testBuilder.method().build()).to.equal('\n      .get(\'/different\')');
   });
