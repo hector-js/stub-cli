@@ -20,7 +20,7 @@ describe('patch-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenario', () => {
+      it('adds the resource scenario', () => {
         const result = patchTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -47,7 +47,7 @@ describe('patch-template', () => {
     });
 
     describe('xml', () => {
-      it('should add the resource scenatio', () => {
+      it('adds the resource scenatio', () => {
         args.xml = true;
 
         result = patchTemplate(args, ids);
@@ -115,7 +115,7 @@ describe('patch-template', () => {
     });
 
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         result = patchTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -149,7 +149,7 @@ describe('PATCH - any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true;
 
         result = patchTestTemplate(args, ids);

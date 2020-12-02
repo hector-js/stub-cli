@@ -24,7 +24,7 @@ describe('file-utils', () => {
     afterEach(()=>proxyquire.callThru());
 
     context('when the patch exits', () => {
-      it('should return true', () => {
+      it('returns true', () => {
         const path = './test';
         existsSyncStub.returns(true);
 
@@ -37,7 +37,7 @@ describe('file-utils', () => {
 
     ['/noPath', undefined, null].forEach((path) => {
       context(`when the path is ${path}`, () => {
-        it('should return false', () => {
+        it('returns false', () => {
           existsSyncStub.throws(new Error);
 
           const result = pq.checkPath(path);
@@ -63,7 +63,7 @@ describe('file-utils', () => {
     });
 
     context('when the path exits and the data is correct', () => {
-      it('should write a file with the data provided', () => {
+      it('writes a file with the data provided', () => {
         const file = 'temporal';
         const data = 'hello world';
 
@@ -85,7 +85,7 @@ describe('file-utils', () => {
       context(`when:
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
-        it('should return false', () => {
+        it('returns false', () => {
           const fn = () => pq.writeFileByData(value[0], value[1]);
 
           assert.throws(fn, Error, `It couldn't create a file`);
@@ -114,7 +114,7 @@ describe('file-utils', () => {
     });
 
     context('when the fileName exits and path is correct', () => {
-      it('should create a file in the correct path', () => {
+      it('creates a file in the correct path', () => {
         const fileName = 'tempFile';
         const path = 'temp';
 
@@ -125,7 +125,6 @@ describe('file-utils', () => {
         assert.ok(touchStub.calledOnceWith(fileName));
       });
     });
-
 
     [
       [undefined, undefined],
@@ -140,7 +139,7 @@ describe('file-utils', () => {
       context(`when:
           -file name: `+ chalk.magenta(`${value[0]}`) + `
           -data:      `+ chalk.magenta(`${value[1]}`), () => {
-        it('should return false', () => {
+        it('returns false', () => {
           const fn = () => pq.createFileInPath(value[0], value[1]);
 
           assert.throws(fn, Error, `It couldn't create a file`);
