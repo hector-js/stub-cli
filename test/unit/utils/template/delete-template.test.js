@@ -18,7 +18,7 @@ describe('delete-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenario', () => {
+      it('adds the resource scenario', () => {
         result = deleteTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -43,7 +43,7 @@ describe('delete-template', () => {
     });
 
     describe('xml', () => {
-      it('should add the resource scenatio', () => {
+      it('adds the resource scenatio', () => {
         args.xml = true;
 
         result = deleteTemplate(args, ids);
@@ -69,7 +69,7 @@ describe('delete-template', () => {
     });
 
     describe('delay', ()=>{
-      it('include the scenario', () => {
+      it('includes the scenario', () => {
         args.delay = 10000;
 
         result = deleteTemplate(args, ids);
@@ -99,7 +99,7 @@ describe('delete-template', () => {
 
   describe('test', () => {
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         result = deleteTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -131,7 +131,7 @@ describe('DELETE - /any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true;
 
         result = deleteTestTemplate(args, ids);

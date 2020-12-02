@@ -18,7 +18,7 @@ describe('put-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenario', () => {
+      it('adds the resource scenario', () => {
         const result = putTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -43,7 +43,7 @@ describe('put-template', () => {
     });
 
     describe('xml', () => {
-      it('should add the resource scenatio', () => {
+      it('adds the resource scenatio', () => {
         args.xml = true;
 
         result = putTemplate(args, ids);
@@ -99,7 +99,7 @@ describe('put-template', () => {
 
   describe('test', () => {
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         const result = putTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -131,7 +131,7 @@ describe('PUT - /any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true,
 
         result = putTestTemplate(args, ids);

@@ -6,15 +6,15 @@ import { setTemplate, addReplacements, restoreReplacements, replacements } from 
 import preset from '../../../../src/utils/templates/preset.json';
 
 describe('replacements', () => {
-  it('should use the default preset', () => {
+  it('uses the default preset', () => {
     expect(replacements().dataname).to.equal(preset.dataname);
   });
 
-  it('should override the default preset with a directly supplied extra template', () => {
+  it('overrides the default preset with a directly supplied extra template', () => {
     expect(replacements({ dataname: preset.dataname + '-changed' }).dataname).to.equal(preset.dataname + '-changed');
   });
 
-  it('should combine the preset with a file supplied to setTemplate', () => {
+  it('combines the preset with a file supplied to setTemplate', () => {
     const toRestore = addReplacements({});
     const { existsSync, readFileSync } = fs;
     fs.existsSync = () => true;
@@ -26,13 +26,13 @@ describe('replacements', () => {
     restoreReplacements(toRestore);
   });
 
-  it('should use an extra template with addReplacements', () => {
+  it('uses an extra template with addReplacements', () => {
     const toRestore = addReplacements({ dataname: preset.dataname + '-changed' });
     expect(replacements().dataname).to.equal(preset.dataname + '-changed');
     restoreReplacements(toRestore);
   });
 
-  it('should restore the previous template with restoreReplacements', () => {
+  it('restores the previous template with restoreReplacements', () => {
     const toRestore = addReplacements({ dataname: preset.dataname + '-changed' });
     restoreReplacements(toRestore);
     expect(replacements().dataname).to.equal(preset.dataname);

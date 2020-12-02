@@ -18,7 +18,7 @@ describe('trace-template', () => {
 
   describe('resources', () => {
     describe('json', () => {
-      it('should add the resource scenario', () => {
+      it('adds the resource scenario', () => {
         result = traceTemplate(args, ids);
 
         expect(JSON.parse(result)).to.deep.equal({
@@ -39,7 +39,7 @@ describe('trace-template', () => {
     });
 
     describe('xml', () => {
-      it('should add the resource scenatio', () => {
+      it('adds the resource scenatio', () => {
         args.xml = true;
 
         result = traceTemplate(args, ids);
@@ -88,7 +88,7 @@ describe('trace-template', () => {
 
   describe('test', () => {
     describe('json', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         result = traceTestTemplate(args, ids);
 
         expect(result).to.equal(`'use strict';
@@ -116,7 +116,7 @@ describe('TRACE - /any-path/{id}/data ', () => {
     });
 
     describe('xml', () => {
-      it('should return a test template', () => {
+      it('returns a test template', () => {
         args.xml = true;
 
         result = traceTestTemplate(args, ids);
