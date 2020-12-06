@@ -1,8 +1,7 @@
-import { exec, cd } from 'shelljs';
+import { runTests } from '../utils/runners.cli';
+import { cd } from 'shelljs';
 import { info } from 'console';
-import { argsBy } from '../utils/utils.cli';
-
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export function testcli(args) {
   if (args.help) {
@@ -14,10 +13,6 @@ export function testcli(args) {
     if (args.path) {
       cd(args.path);
     }
-
-    const argumens = argsBy('logs', args.logs) + argsBy('port', args.port) + argsBy('cors', args.cors);
-
-    exec(`env KEY=local mocha ./_hjs --recursive --exit${argumens?argumens: ''}`);
+    runTests(args.root, args.include);
   }
 }
-

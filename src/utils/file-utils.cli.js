@@ -3,6 +3,7 @@ import { existsSync, writeFile } from 'fs';
 import { mkdir, cd, touch } from 'shelljs';
 import prompts from 'prompts';
 import chalk from 'chalk';
+import fs from 'fs';
 
 async function multipleOpts(message, choices) {
   return await prompts({
@@ -66,10 +67,27 @@ const createFileInPath = (fileName, path) => {
   touch(fileName);
 };
 
+const getAllFiles = function(dirPath, arrayOfFiles) {
+  const files = fs.readdirSync(dirPath);
+
+  arrayOfFiles = arrayOfFiles || [];
+
+  files.forEach(function(file) {
+    if (fs.statSync(dirPath + '/' + file).isDirectory()) {
+      arrayOfFiles = getAllFiles(dirPath + '/' + file, arrayOfFiles);
+    } else {
+      arrayOfFiles.push(dirPath + '/' + file);
+    }
+  });
+
+  return arrayOfFiles;
+};
+
 export {
   createFileInPath,
   writeFileByData,
   checkPath,
   question,
-  multipleOpts
+  multipleOpts,
+  getAllFiles
 };
