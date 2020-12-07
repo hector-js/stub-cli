@@ -1,6 +1,6 @@
 'use strict';
 
-import { assert } from 'chai';
+import { assert, expect } from 'chai';
 import { stub } from 'sinon';
 import proxyquire from 'proxyquire';
 import chalk from 'chalk';
@@ -64,6 +64,20 @@ describe('testcli', () => {
 
         assert.ok(runTestsCliStub.calledOnceWith());
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
+      });
+    });
+
+    context('when the argument is "--profile flan"', () => {
+      it('changes process.env.KEY to flan', () => {
+        const args = {
+          _: ['test'],
+          profile: 'flan'
+        };
+
+        testcli(args);
+
+        assert.ok(runTestsCliStub.calledOnceWith());
+        expect(process.env.KEY).to.eq('flan');
       });
     });
 

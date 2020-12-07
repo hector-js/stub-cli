@@ -13,6 +13,8 @@ export function testcli(args) {
     if (args.path) {
       cd(args.path);
     }
+    process.env.KEY = args.profile?args.profile: 'local';
+
     runTests(args.root, args.include);
   }
 }
