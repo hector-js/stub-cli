@@ -1,23 +1,23 @@
 'use strict';
 
-import { assert } from 'chai';
+import { assert, expect } from 'chai';
 import { stub } from 'sinon';
-
-const proxyquire = require('proxyquire');
-const chalk = require('chalk');
+import proxyquire from 'proxyquire';
+import chalk from 'chalk';
 
 describe('testcli', () => {
   let testcli;
-  let execCliStub;
+  let runTestsCliStub;
   let cdCliStub;
   let infoStub;
 
   beforeEach(() => {
-    execCliStub = stub();
+    runTestsCliStub = stub();
     cdCliStub = stub();
     infoStub = stub();
     testcli = proxyquire('../../../src/testcli/test.cli', {
-      'shelljs': { exec: execCliStub, cd: cdCliStub },
+      '../utils/runners.cli': { runTests: runTestsCliStub },
+      'shelljs': { cd: cdCliStub },
       'console': { info: infoStub }
     }).testcli;
   });
@@ -32,7 +32,7 @@ describe('testcli', () => {
 
       testcli(args);
 
-      assert.ok(execCliStub.calledOnceWith('env KEY=local mocha ./_hjs --recursive --exit'));
+      assert.ok(runTestsCliStub.calledOnceWith());
     });
   });
 
@@ -53,7 +53,7 @@ describe('testcli', () => {
   });
 
   describe('arguments', () => {
-    context('when the argument is "--path path/to/navigate"', () => {
+    context('when the argument is "--include path/to/navigate"', () => {
       it('should navigate to the directory from where you are first', () => {
         const args = {
           _: ['test'],
@@ -62,47 +62,48 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('env KEY=local mocha ./_hjs --recursive --exit'));
+        assert.ok(runTestsCliStub.calledOnceWith());
         assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
       });
     });
 
-    context('when the argument is "--logs tiny"', () => {
-      it('should execute a command with the logs in tiny mode', () => {
+    context('when the argument is "--profile flan"', () => {
+      it('changes process.env.KEY to flan', () => {
         const args = {
           _: ['test'],
-          logs: 'tiny'
+          profile: 'flan'
         };
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('env KEY=local mocha ./_hjs --recursive --exit --logs tiny'));
+        assert.ok(runTestsCliStub.calledOnceWith());
+        expect(process.env.KEY).to.eq('flan');
       });
     });
 
-    context('when the argument is "--port 8080"', () => {
-      it('should execute a command with the port in the 8080', () => {
+    context('when the argument is "--include any-regex"', () => {
+      it('includes the tests which match the regex', () => {
         const args = {
           _: ['test'],
-          port: '8080'
+          include: 'my-regex'
         };
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('env KEY=local mocha ./_hjs --recursive --exit --port 8080'));
+        assert.ok(runTestsCliStub.calledOnceWith(undefined, 'my-regex'));
       });
     });
 
-    context('when the argument is "--cors business.uk.org,localhost"', () => {
-      it('should execute a command with the cors in the business.uk.org,localhost', () => {
+    context('when the argument is "--root my-root"', () => {
+      it('includes test under relative path root', () => {
         const args = {
           _: ['test'],
-          cors: 'business.uk.org,localhost'
+          root: 'my-root'
         };
 
         testcli(args);
 
-        assert.ok(execCliStub.calledOnceWith('env KEY=local mocha ./_hjs --recursive --exit --cors business.uk.org,localhost'));
+        assert.ok(runTestsCliStub.calledOnceWith('my-root', undefined));
       });
     });
   });

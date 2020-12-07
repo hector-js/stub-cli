@@ -1,10 +1,9 @@
 import { cd, exec, mkdir } from 'shelljs';
-import { writeFile, readFile } from 'fs';
-import { info, error } from 'console';
+import { writeFileSync } from 'fs';
+import { info } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
 import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
-import { PACKAGE_ROOT_JSON } from '../utils/constants-backend';
 
 const chalk = require('chalk');
 
@@ -43,7 +42,23 @@ export async function newCli(args) {
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
     mkdir(nameProject);
     cd(nameProject);
-    exec(`${packageManager} init -y --silent`);
+
+    const packageJson = {
+      'name': nameProject,
+      'version': '1.0.0',
+      'description': `${nameProject} description`,
+      'main': 'index.js',
+      'scripts': {
+        '_start': 'hjs start',
+        '_test': 'hjs test',
+        '_start-dev': 'hjs start --dev'
+      },
+      'keywords': [],
+      'author': '',
+      'license': 'ISC'
+    };
+
+    writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
   } else {
     info(chalk.green(` -> Setting the mock service in the project\n`));
     info(chalk.green(`- - - - - - - - - - - - - - - - - - - - - - - - - - \n`));
@@ -52,51 +67,32 @@ export async function newCli(args) {
   const installCommand = packageManager === 'yarn'? 'add': 'install';
 
   if (nameProject) {
-    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.15.0 --silent`);
+    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.15.0`);
   } else {
-    exec(`${packageManager} ${installCommand} @hectorjs/stub-backend@1.15.0 --save-dev --silent`);
+    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.15.0 --save-dev`);
   }
 
+  if (args.banner) {
+    createFileInPath('.hjs.banner.js', '.');
+    writeFileByData('.hjs.banner.js', 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n');
+  }
 
-  readFile(PACKAGE_ROOT_JSON, 'utf8', (err, data) => {
-    if (err) return error('Error while package.json was opening!');
-    const packageJSON = JSON.parse(data);
-    if (nameProject && packageManager === 'npm') {
-      delete packageJSON.scripts.test;
-    }
-    if (packageManager === 'yarn') {
-      packageJSON.scripts = {};
-    }
-    packageJSON.scripts['_start'] = 'hjs start';
-    packageJSON.scripts['_test'] = 'hjs test';
-    packageJSON.scripts['_start-dev'] = 'hjs start --dev';
+  mkdir('_hjs');
+  cd('_hjs');
 
-    writeFile(PACKAGE_ROOT_JSON, JSON.stringify(packageJSON, null, '\t'), 'utf8', (err) => {
-      if (err) return error(err);
+  createFileInPath('health.json', 'resources');
+  writeFileByData('health.json', healthData);
+  cd('..');
+  createFileInPath('health.test.js', 'test');
+  writeFileByData('health.test.js', healthTest(args));
+  cd('..');
 
-      if (args.banner) {
-        createFileInPath('.hjs.banner.js', '.');
-        writeFileByData('.hjs.banner.js', 'module.exports= function (){\n console.log("custom banner ready to set:)")\n};\n');
-      }
+  checkIDE(args['vs'], 'code');
+  checkIDE(args['idea'], 'idea');
 
-      mkdir('_hjs');
-      cd('_hjs');
-
-      createFileInPath('health.json', 'resources');
-      writeFileByData('health.json', healthData);
-      cd('..');
-      createFileInPath('health.test.js', 'test');
-      writeFileByData('health.test.js', healthTest(args));
-      cd('..');
-
-      checkIDE(args['vs'], 'code');
-      checkIDE(args['idea'], 'idea');
-
-      info(chalk.green('The mock has been set successfully (run hjs start)'));
-      const end = new Date() - start;
-      info(chalk.grey('\nExecution time: %dms \n'), end);
-    });
-  });
+  info(chalk.green('The mock has been set successfully (run hjs start)'));
+  const end = new Date() - start;
+  info(chalk.grey('\nExecution time: %dms \n'), end);
 }
 
 const checkIDE = (argsCLI, shortCliIDE) => {

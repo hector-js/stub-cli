@@ -96,6 +96,8 @@ Execute the tests which have been created by each method generate command (```hj
 _NOTE_: you can run ```npm run _test``` or ```yarn _test``` as well.
 _MORE INFO:_ ```hjs test --help```
 
+Also you can add ```--logs [type] --port [port] --profile [profile]```
+
 ## 5) ```hjs config [prop]```
 
 Create a config file (_.hjs.config.json_) where you can set the logs, port, among others settings. 

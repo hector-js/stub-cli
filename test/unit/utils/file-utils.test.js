@@ -3,9 +3,11 @@
 import { unlinkSync } from 'fs';
 import { expect, assert } from 'chai';
 import { stub, match } from 'sinon';
+import { getAllFiles } from '../../../src/utils/file-utils.cli';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
+
 
 describe('file-utils', () => {
   describe('#checkPath', () => {
@@ -150,6 +152,18 @@ describe('file-utils', () => {
           unlinkSync(value[0]);
         });
       });
+    });
+  });
+
+  describe('#getAllFiles', ()=>{
+    const rootPath = 'test/unit/temp';
+
+    it('gets an array with all the files under one root folder', ()=>{
+      const arrayItems = getAllFiles(rootPath);
+
+      expect(arrayItems).to.deep.equal([
+        rootPath+'/file1.js',
+        rootPath+'/sub-temp/file2.js']);
     });
   });
 });
