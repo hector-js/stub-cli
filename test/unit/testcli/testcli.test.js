@@ -1,7 +1,7 @@
 'use strict';
 
-import { assert, expect } from 'chai';
-import { stub } from 'sinon';
+import { expect } from 'chai';
+import { stub, assert } from 'sinon';
 import proxyquire from 'proxyquire';
 import chalk from 'chalk';
 
@@ -32,7 +32,7 @@ describe('testcli', () => {
 
       testcli(args);
 
-      assert.ok(runTestsCliStub.calledOnceWith());
+      assert.calledOnceWithExactly(runTestsCliStub, undefined, undefined);
     });
   });
 
@@ -45,10 +45,10 @@ describe('testcli', () => {
 
       testcli(args);
 
-      assert.ok(infoStub.withArgs(chalk.green('\nTest options:\n')).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs test       : execute tests related to the mock`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs test --path: execute test in the path`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce);
+      expect(infoStub.withArgs(chalk.green('\nTest options:\n')).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(` -  hjs test       : execute tests related to the mock`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(` -  hjs test --path: execute test in the path`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce).to.be.true;
     });
   });
 
@@ -62,8 +62,8 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(runTestsCliStub.calledOnceWith());
-        assert.ok(cdCliStub.calledOnceWith('path/to/navigate'));
+        assert.calledOnceWithExactly(runTestsCliStub, undefined, undefined);
+        assert.calledOnceWithExactly(cdCliStub, 'path/to/navigate');
       });
     });
 
@@ -76,7 +76,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(runTestsCliStub.calledOnceWith());
+        assert.calledOnceWithExactly(runTestsCliStub, undefined, undefined);
         expect(process.env.KEY).to.eq('flan');
       });
     });
@@ -90,7 +90,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(runTestsCliStub.calledOnceWith(undefined, 'my-regex'));
+        assert.calledOnceWithExactly(runTestsCliStub, undefined, 'my-regex');
       });
     });
 
@@ -103,7 +103,7 @@ describe('testcli', () => {
 
         testcli(args);
 
-        assert.ok(runTestsCliStub.calledOnceWith('my-root', undefined));
+        assert.calledOnceWithExactly(runTestsCliStub, 'my-root', undefined);
       });
     });
   });
