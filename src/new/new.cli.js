@@ -49,6 +49,7 @@ export async function newCli(args) {
       'description': `${nameProject} description`,
       'main': 'index.js',
       'scripts': {
+        'hjs': 'hjs',
         '_start': 'hjs start',
         '_test': 'hjs test',
         '_start-dev': 'hjs start --dev'
