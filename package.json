@@ -22,11 +22,17 @@
 	"keywords": [
 		"cli",
 		"stub",
+		"angular",
+		"react",
+		"vuejs",
 		"hectorjs",
+		"@hectorjs/stub-backend",
 		"stub-backend",
 		"mock",
 		"json",
 		"tdd",
+		"node",
+		"express",
 		"frontend"
 	],
 	"author": "Hector Jimenez Sanchez",
