@@ -3,18 +3,40 @@ import { writeFileSync } from 'fs';
 import { info } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
+import { version } from './../../package.json';
 import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 
 const chalk = require('chalk');
 
 export async function newCli(args) {
+  if (args.help) {
+    info(chalk.green('\n-- New options --------------------------------\n'));
+    info(chalk.yellow(`hjs new`));
+    info(chalk.grey(`  (generates new project)`));
+    info(chalk.yellow(`hjs new [name]`));
+    info(chalk.grey(`  (generates a new project undre name folder)`));
+    info(chalk.yellow(`hjs new --package-manager`));
+    info(chalk.grey(` (run service from different directory (npm|yarn))`));
+    info(chalk.yellow(`hjs new --skip-install`));
+    info(chalk.grey(` (skip packages installation)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+    return;
+  }
   const commands = args._;
   const start = new Date();
 
   exec('clear');
 
   const optsPackageManager = [{ title: 'Npm', value: 'npm' }, { title: 'Yarn', value: 'yarn' }];
-  const packageManager = (await multipleOpts('Package manager?', optsPackageManager)).data;
+
+  let packageManager;
+  const packageManagerArgs = args['package-manager'];
+  if (packageManagerArgs && (packageManagerArgs === 'npm' || packageManagerArgs ==='yarn')) {
+    packageManager = args['package-manager'];
+  } else {
+    packageManager = (await multipleOpts('Package manager?', optsPackageManager)).data;
+  }
 
   let nameProject;
   if (commands.length < 2) {
@@ -59,6 +81,10 @@ export async function newCli(args) {
       'license': 'ISC'
     };
 
+    if (args['skip-install']) {
+      packageJson.dependencies = { '@hectorjs/stub-backend': '1.21.0' };
+    }
+
     writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
   } else {
     info(chalk.green(` -> Setting the mock service in the project\n`));
@@ -67,7 +93,7 @@ export async function newCli(args) {
 
   const installCommand = packageManager === 'yarn'? 'add': 'install';
   info(chalk.gray(` Installing the dependencies...\n`));
-  if (nameProject) {
+  if (nameProject && !args['skip-install']) {
     exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.20.0`);
   } else {
     exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.20.0 --save-dev`);
