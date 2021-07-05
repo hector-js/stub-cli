@@ -7,11 +7,12 @@ const chalk = require('chalk');
 export function start(args) {
   if (args.help) {
     info(chalk.green('\nStart options:\n'));
-    info(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`));
-    info(chalk.grey(` -  hjs start       : run service`));
-    info(chalk.grey(` -  hjs start --path: run service from different directory`));
-    info(chalk.grey(` -  hjs start --open  : open chrome browser`));
+    info(chalk.grey(` -  hjs start --dev        : run service for dev (listening to changes)`));
+    info(chalk.grey(` -  hjs start              : run service`));
+    info(chalk.grey(` -  hjs start --path       : run service from different directory`));
     info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
+    info(chalk.grey(` -  hjs start --open       : open chrome browser`));
+    info(chalk.grey(` -  hjs start --ui-enable  : enable ui`));
   } else {
     if (args.path) {
       cd(args.path);
@@ -21,6 +22,10 @@ export function start(args) {
 
     if (args.open) {
       argsCli = `${argsCli} --open`;
+    }
+
+    if (args['ui-enable']) {
+      argsCli = `${argsCli} --ui-enable`;
     }
 
     let command;
