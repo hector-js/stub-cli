@@ -118,9 +118,19 @@ _MORE INFO:_ ```hjs start --help```
 
 This section is in progress at this moment.
 
-You can run the application and navigate to ```http://localhost:3005/``` and have a look.
+You can run the application and navigate to ```http://localhost:3005/``` and have a look. You need to execute the command with ui-enable option available.
 
-_MORE INFO:_ ```hjs start --open```
+Also, you can add the following option in your hjs.config.js file:
+
+```json
+{
+    "ui":{
+        "enable": true
+    }
+}
+```
+
+_MORE INFO:_ ```hjs start --open --ui-enable```
 
 # Example
 

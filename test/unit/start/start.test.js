@@ -73,10 +73,12 @@ describe('start', () => {
       start(args);
 
       assert.ok(infoStub.withArgs(chalk.green('\nStart options:\n')).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --dev : run service for dev (listening to changes)`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start       : run service`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --path: run service from different directory`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --dev        : run service for dev (listening to changes)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start              : run service`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --path       : run service from different directory`)).calledOnce);
       assert.ok(infoStub.withArgs(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --open       : open chrome browser`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --ui-enable  : enable ui`)).calledOnce);
     });
   });
 
@@ -149,6 +151,33 @@ describe('start', () => {
           start(args);
 
           assert.ok(execCliStub.calledOnceWith(`nodemon ${appHJS} --open`));
+        });
+      });
+    });
+
+    describe('ui-enable', () => {
+      context('when the argument is "--ui-enable"', () => {
+        it('executes a command with ui-enable', () => {
+          const args = {
+            '_': ['start'],
+            'ui-enable': true
+          };
+
+          start(args);
+
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS} --ui-enable`));
+        });
+      });
+
+      context('when therer is no argument --ui-enable', () => {
+        it('executes a command without ui-enable', () => {
+          const args = {
+            '_': ['start']
+          };
+
+          start(args);
+
+          assert.ok(execCliStub.calledOnceWith(`node ${appHJS}`));
         });
       });
     });
