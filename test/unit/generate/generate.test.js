@@ -2,6 +2,7 @@
 
 import { assert, expect } from 'chai';
 import { stub } from 'sinon';
+import { version } from './../../../package.json';
 
 const proxyquire = require('proxyquire');
 
@@ -218,10 +219,12 @@ describe('generate', () => {
 
           generateCli(args);
 
-          assert.ok(infoStub.withArgs(chalk.green('\nHeader options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --headers [header1],[header2]`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customers --headers authorization,client_id`)).calledOnce);
-          expect(infoStub.callCount).to.equal(3);
+          assert.ok(infoStub.withArgs(chalk.green('\n--Header option --------------------------------\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.yellow(`hjs generate [method] --headers [header1],[header2]`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  (Example: hjs g g customers --headers authorization,client_id)`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
+          expect(infoStub.callCount).to.equal(5);
         });
       });
 
@@ -234,10 +237,12 @@ describe('generate', () => {
 
           generateCli(args);
 
-          assert.ok(infoStub.withArgs(chalk.green('\nCookies options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --cookies [cookies]`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customers --cookies NormalCookie`)).calledOnce);
-          expect(infoStub.callCount).to.equal(3);
+          assert.ok(infoStub.withArgs(chalk.green('\n--Cookies option --------------------------------\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.yellow(`hjs generate [method] --cookies [key-cookie]`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  (Example: hjs g g customers --cookies NormalCookie)`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
+          expect(infoStub.callCount).to.equal(5);
         });
       });
 
@@ -250,10 +255,12 @@ describe('generate', () => {
 
           generateCli(args);
 
-          assert.ok(infoStub.withArgs(chalk.green('\nStatus options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --status [status]`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customers --status 404`)).calledOnce);
-          expect(infoStub.callCount).to.equal(3);
+          assert.ok(infoStub.withArgs(chalk.green('\n--Status option --------------------------------\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.yellow(`hjs generate [method] --status [status-code]`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  (Example: hjs g g customers --status 404)`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
+          expect(infoStub.callCount).to.equal(5);
         });
       });
 
@@ -266,11 +273,13 @@ describe('generate', () => {
 
           generateCli(args);
 
-          assert.ok(infoStub.withArgs(chalk.green('\nGenerate the file resource and test under the package.')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.green('\nPackage options:\n')).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`  --package [folder name]`)).calledOnce);
-          assert.ok(infoStub.withArgs(chalk.grey(`    Example: hjs g g customers --package my-package/my-subpackage`)).calledOnce);
-          expect(infoStub.callCount).to.equal(4);
+          assert.ok(infoStub.withArgs(chalk.green('\n--Package option --------------------------------\n')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.yellow(`hjs generate [method] --package [folder-name]`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  (Generate the file resource and test under the package.)`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.grey(`  (Example: hjs g g customers --package my-package/my-subpackage)`)).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+          assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
+          expect(infoStub.callCount).to.equal(6);
         });
       });
 

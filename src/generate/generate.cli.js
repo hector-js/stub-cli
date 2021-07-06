@@ -6,34 +6,43 @@ import { deleteCli } from './methods/delete.cli';
 import { patchCli } from './methods/patch.cli';
 import { traceCli } from './methods/trace.cli';
 import { info, warn } from 'console';
+import { version } from './../../package.json';
 
 const chalk = require('chalk');
 
 export function generateCli(args) {
   if (args.help) {
     if (args.headers) {
-      info(chalk.green('\nHeader options:\n'));
-      info(chalk.grey(`  --headers [header1],[header2]`));
-      info(chalk.grey(`    Example: hjs g g customers --headers authorization,client_id`));
+      info(chalk.green('\n--Header option --------------------------------\n'));
+      info(chalk.yellow(`hjs generate [method] --headers [header1],[header2]`));
+      info(chalk.grey(`  (Example: hjs g g customers --headers authorization,client_id)`));
+      info(chalk.green('\n-----------------------------------------------'));
+      info(chalk.green(`                                version: ${version}`));
     }
 
     if (args.status) {
-      info(chalk.green('\nStatus options:\n'));
-      info(chalk.grey(`  --status [status]`));
-      info(chalk.grey(`    Example: hjs g g customers --status 404`));
+      info(chalk.green('\n--Status option --------------------------------\n'));
+      info(chalk.yellow(`hjs generate [method] --status [status-code]`));
+      info(chalk.grey(`  (Example: hjs g g customers --status 404)`));
+      info(chalk.green('\n-----------------------------------------------'));
+      info(chalk.green(`                                version: ${version}`));
     }
 
     if (args.package) {
-      info(chalk.green(`\nGenerate the file resource and test under the package.`));
-      info(chalk.green('\nPackage options:\n'));
-      info(chalk.grey(`  --package [folder name]`));
-      info(chalk.grey(`    Example: hjs g g customers --package my-package/my-subpackage`));
+      info(chalk.green('\n--Package option --------------------------------\n'));
+      info(chalk.yellow(`hjs generate [method] --package [folder-name]`));
+      info(chalk.grey(`  (Generate the file resource and test under the package.)`));
+      info(chalk.grey(`  (Example: hjs g g customers --package my-package/my-subpackage)`));
+      info(chalk.green('\n-----------------------------------------------'));
+      info(chalk.green(`                                version: ${version}`));
     }
 
     if (args.cookies) {
-      info(chalk.green('\nCookies options:\n'));
-      info(chalk.grey(`  --cookies [cookies]`));
-      info(chalk.grey(`    Example: hjs g g customers --cookies NormalCookie`));
+      info(chalk.green('\n--Cookies option --------------------------------\n'));
+      info(chalk.yellow(`hjs generate [method] --cookies [key-cookie]`));
+      info(chalk.grey(`  (Example: hjs g g customers --cookies NormalCookie)`));
+      info(chalk.green('\n-----------------------------------------------'));
+      info(chalk.green(`                                version: ${version}`));
     }
 
     if (args.description) {
