@@ -6,59 +6,13 @@ import { deleteCli } from './methods/delete.cli';
 import { patchCli } from './methods/patch.cli';
 import { traceCli } from './methods/trace.cli';
 import { info, warn } from 'console';
+import { version } from './../../package.json';
 
 const chalk = require('chalk');
 
 export function generateCli(args) {
   if (args.help) {
-    if (args.headers) {
-      info(chalk.green('\nHeader options:\n'));
-      info(chalk.grey(`  --headers [header1],[header2]`));
-      info(chalk.grey(`    Example: hjs g g customers --headers authorization,client_id`));
-    }
-
-    if (args.status) {
-      info(chalk.green('\nStatus options:\n'));
-      info(chalk.grey(`  --status [status]`));
-      info(chalk.grey(`    Example: hjs g g customers --status 404`));
-    }
-
-    if (args.package) {
-      info(chalk.green(`\nGenerate the file resource and test under the package.`));
-      info(chalk.green('\nPackage options:\n'));
-      info(chalk.grey(`  --package [folder name]`));
-      info(chalk.grey(`    Example: hjs g g customers --package my-package/my-subpackage`));
-    }
-
-    if (args.cookies) {
-      info(chalk.green('\nCookies options:\n'));
-      info(chalk.grey(`  --cookies [cookies]`));
-      info(chalk.grey(`    Example: hjs g g customers --cookies NormalCookie`));
-    }
-
-    if (args.description) {
-      info(chalk.green('\nDescription options:\n'));
-      info(chalk.grey(`  --description "[description]"`));
-      info(chalk.grey(`    Example: hjs g g customers --description "Hello world!"`));
-    }
-
-    if (args.delay) {
-      info(chalk.green(`\nGenerate the file resource and test adding a delay in the response.`));
-      info(chalk.green('> Delay options:\n'));
-      info(chalk.grey(`  --delay "[milliseconds]"`));
-      info(chalk.grey(`    Example: hjs g g customers --delay 1000`));
-    }
-
-    if (args.template) {
-      info(chalk.green(`\nCustomise the test file output`));
-      info(chalk.green('> Template options:\n'));
-      info(chalk.grey(`  --template "[file.json]"`));
-      info(chalk.grey(`    Example: hjs g g customers --template template.json`));
-    }
-
-    if (!args.package && !args.description && !args.headers && !args.cookies && !args.status && !args.delay && !args.template) {
-      displayGeneratorOpts();
-    }
+    helpOptions(args);
   } else {
     switch (args._[1]) {
       case 'get':
@@ -96,22 +50,95 @@ export function generateCli(args) {
 }
 
 function displayGeneratorOpts() {
-  info(chalk.green('\nGenerate options:\n'));
-  info(chalk.grey(` -  hjs generate get [url]: scenario for a GET request`));
-  info(chalk.grey(` -  hjs generate post [url]: scenario for a POST request`));
-  info(chalk.grey(` -  hjs generate delete [url]: scenario for a DELETE request`));
-  info(chalk.grey(` -  hjs generate head [url]: scenario for a HEAD request`));
-  info(chalk.grey(` -  hjs generate put [url]: scenario for a PUT request`));
-  info(chalk.grey(` -  hjs generate patch [url]: scenario for a PATCH request`));
-  info(chalk.green(`\nYou can use the following abreviations:\n`));
-  info(chalk.grey(` -  generate = g  (hjs g get ...)`));
-  info(chalk.grey(` -  get = g       (hjs g g ...)`));
-  info(chalk.grey(` -  post = p      (hjs g p ...)`));
-  info(chalk.grey(` -  delete = d    (hjs g d ...)`));
-  info(chalk.grey(` -  head = h      (hjs g h ...)`));
-  info(chalk.grey(` -  put = pu      (hjs g pu ...)`));
-  info(chalk.grey(` -  patch = pa    (hjs g pa ...)\n`));
-  info(chalk.grey(` -  trace = t     (hjs g t ...)\n`));
+  info(chalk.green('\n--Generate options --------------------------------\n'));
+  info(chalk.yellow(`hjs generate/g [method] [url]`));
+  info(chalk.yellow(`hjs generate get/g [url]`));
+  info(chalk.grey(`  (scenario for a GET request)`));
+  info(chalk.yellow(`hjs generate post/p [url]`));
+  info(chalk.grey(`  (scenario for a POST request)`));
+  info(chalk.yellow(`hjs generate delete/d [url]`));
+  info(chalk.grey(`  (scenario for a DELETE request)`));
+  info(chalk.yellow(`hjs generate head/h [url]`));
+  info(chalk.grey(`  (scenario for a HEAD request)`));
+  info(chalk.yellow(`hjs generate put/pu [url]`));
+  info(chalk.grey(`  (scenario for a PUT request)`));
+  info(chalk.yellow(`hjs generate patch/pa [url]`));
+  info(chalk.grey(`  (scenario for a PATCH request)`));
   info(chalk.green(`\nOther options:\n`));
-  info(chalk.grey(` -  --xml         response is xml\n`));
+  info(chalk.grey(`  (xml, headers, cookies, skip-install, status,\n`));
+  info(chalk.grey(`  package, description, delay, template)\n`));
+  info(chalk.green('\n-----------------------------------------------'));
+  info(chalk.green(`                                version: ${version}`));
+}
+
+function helpOptions(args) {
+  if (args.headers) {
+    info(chalk.green('\n--Header option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --headers [header1],[header2]`));
+    info(chalk.grey(`  (Example: hjs g g customers --headers authorization,client_id)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.status) {
+    info(chalk.green('\n--Status option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --status [status-code]`));
+    info(chalk.grey(`  (Example: hjs g g customers --status 404)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.package) {
+    info(chalk.green('\n--Package option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --package [folder-name]`));
+    info(chalk.grey(`  (Generate the file resource and test under the package.)`));
+    info(chalk.grey(`  (Example: hjs g g customers --package my-package/my-subpackage)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.cookies) {
+    info(chalk.green('\n--Cookies option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --cookies [key-cookie]`));
+    info(chalk.grey(`  (Example: hjs g g customers --cookies NormalCookie)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.description) {
+    info(chalk.green('\n--Description option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --description "[description]"`));
+    info(chalk.grey(`  (Example: hjs g g customers --description "Hello world!")`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.delay) {
+    info(chalk.green('\n--Delay option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --delay [milliseconds]`));
+    info(chalk.grey(`  (Example: hjs g g customers --delay 1000)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.template) {
+    info(chalk.green('\n--Template option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --template [path/to/file.json]`));
+    info(chalk.grey(`  (Example: hjs g g customers --template template.json)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (args.xml) {
+    info(chalk.green('\n--XML option --------------------------------\n'));
+    info(chalk.yellow(`hjs generate [method] --xml`));
+    info(chalk.grey(`  (Response body is a xml)`));
+    info(chalk.grey(`  (Example: hjs g g customers --xml)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
+  }
+
+  if (!args.package && !args.description && !args.xml && !args.headers && !args.cookies && !args.status && !args.delay && !args.template) {
+    displayGeneratorOpts();
+  }
 }

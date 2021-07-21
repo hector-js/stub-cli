@@ -1,16 +1,22 @@
 import { info } from 'console';
 import { BANNER_FILE, BANNER_TEXT, HJS_PATH, NAME_FILE, PACKAGE_ROOT_JSON, ROOT_PROJECT, UNDER_HJS } from '../utils/constants-backend';
 import { checkPath, multipleOpts, writeFileByData } from './../utils/file-utils.cli';
+import { version } from './../../package.json';
 
 const chalk = require('chalk');
 
 export async function config(args) {
   if (args.help) {
-    info(chalk.green('\nConfig options:\n'));
-    info(chalk.grey(' -  hjs config --port [port]: select port'));
-    info(chalk.grey(' -  hjs config --logs [logs]: select logs'));
-    info(chalk.grey(' -  hjs config --banner: create custom banner'));
-    info(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny --banner'));
+    info(chalk.green('\n-- nConfig options --------------------------------\n'));
+    info(chalk.yellow(`hjs config --port [port]`));
+    info(chalk.grey(`  (select port)`));
+    info(chalk.yellow(`hjs config --logs [logs]`));
+    info(chalk.grey(`  (select logs)`));
+    info(chalk.yellow(`hjs config --banner`));
+    info(chalk.grey(` (create custom banner)`));
+    info(chalk.grey(` (Example: hjs config --port 3004 --logs tiny --banner)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
   } else {
     if (checkPath(PACKAGE_ROOT_JSON) && checkPath(HJS_PATH)) {
       const data = {};
