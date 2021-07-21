@@ -2,13 +2,18 @@ import { runTests } from '../utils/runners.cli';
 import { cd } from 'shelljs';
 import { info } from 'console';
 import chalk from 'chalk';
+import { version } from './../../package.json';
 
 export function testcli(args) {
   if (args.help) {
-    info(chalk.green('\nTest options:\n'));
-    info(chalk.grey(` -  hjs test       : execute tests related to the mock`));
-    info(chalk.grey(` -  hjs test --path: execute test in the path`));
-    info(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`));
+    info(chalk.green('\n-- Test options --------------------------------\n'));
+    info(chalk.yellow(`hjs test`));
+    info(chalk.grey(`  (execute tests related to the mock)`));
+    info(chalk.yellow(`hjs test --path`));
+    info(chalk.grey(`  (execute test in the path)`));
+    info(chalk.grey(`  (Example: hjs test --path folderOne/folderTwo/projectFolder`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
   } else {
     if (args.path) {
       cd(args.path);

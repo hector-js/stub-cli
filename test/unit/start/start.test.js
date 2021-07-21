@@ -2,6 +2,7 @@
 
 import { assert } from 'chai';
 import { stub } from 'sinon';
+import { version } from './../../../package.json';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
@@ -72,13 +73,21 @@ describe('start', () => {
 
       start(args);
 
-      assert.ok(infoStub.withArgs(chalk.green('\nStart options:\n')).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --dev        : run service for dev (listening to changes)`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start              : run service`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --path       : run service from different directory`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --open       : open chrome browser`)).calledOnce);
-      assert.ok(infoStub.withArgs(chalk.grey(` -  hjs start --ui-enable  : enable ui`)).calledOnce);
+
+      assert.ok(infoStub.withArgs(chalk.green('\n-- Start options --------------------------------\n')).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.yellow(`hjs start`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(`  (run service)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.yellow(`hjs start --dev`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(`  (run service for dev (listening to changes))`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.yellow(`hjs start --path`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` (run service from different directory)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` (Example: hjs start --path folderOne/folderTwo/projectFolder)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.yellow(`hjs start --open`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` (open chrome browser)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.yellow(`hjs start --ui-enable`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.grey(` (enable ui)`)).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+      assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
     });
   });
 

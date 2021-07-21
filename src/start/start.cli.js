@@ -1,18 +1,26 @@
 import { exec, cd } from 'shelljs';
 import { info } from 'console';
 import { argsBy } from '../utils/utils.cli';
+import { version } from './../../package.json';
 
 const chalk = require('chalk');
 
 export function start(args) {
   if (args.help) {
-    info(chalk.green('\nStart options:\n'));
-    info(chalk.grey(` -  hjs start --dev        : run service for dev (listening to changes)`));
-    info(chalk.grey(` -  hjs start              : run service`));
-    info(chalk.grey(` -  hjs start --path       : run service from different directory`));
-    info(chalk.grey(`        Example: hjs start --path folderOne/folderTwo/projectFolder`));
-    info(chalk.grey(` -  hjs start --open       : open chrome browser`));
-    info(chalk.grey(` -  hjs start --ui-enable  : enable ui`));
+    info(chalk.green('\n-- Start options --------------------------------\n'));
+    info(chalk.yellow(`hjs start`));
+    info(chalk.grey(`  (run service)`));
+    info(chalk.yellow(`hjs start --dev`));
+    info(chalk.grey(`  (run service for dev (listening to changes))`));
+    info(chalk.yellow(`hjs start --path`));
+    info(chalk.grey(` (run service from different directory)`));
+    info(chalk.grey(` (Example: hjs start --path folderOne/folderTwo/projectFolder)`));
+    info(chalk.yellow(`hjs start --open`));
+    info(chalk.grey(` (open chrome browser)`));
+    info(chalk.yellow(`hjs start --ui-enable`));
+    info(chalk.grey(` (enable ui)`));
+    info(chalk.green('\n-----------------------------------------------'));
+    info(chalk.green(`                                version: ${version}`));
   } else {
     if (args.path) {
       cd(args.path);
