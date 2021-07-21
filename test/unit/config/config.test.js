@@ -3,6 +3,7 @@
 import { assert, expect } from 'chai';
 import { stub } from 'sinon';
 import { HJS_PATH, PACKAGE_ROOT_JSON, BANNER_FILE, UNDER_HJS, ROOT_PROJECT } from '../../../src/utils/constants-backend';
+import { version } from './../../../package.json';
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
@@ -311,12 +312,17 @@ describe('config', () => {
 
             await configCli(args);
 
-            expect(infoStub.callCount).to.equal(5);
-            assert.ok(infoStub.withArgs(chalk.green('\nConfig options:\n')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --port [port]: select port')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --logs [logs]: select logs')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey(' -  hjs config --banner: create custom banner')).calledOnce);
-            assert.ok(infoStub.withArgs(chalk.grey('\n        Example: hjs config --port 3004 --logs tiny --banner')).calledOnce);
+            expect(infoStub.callCount).to.equal(10);
+            assert.ok(infoStub.withArgs(chalk.green('\n-- nConfig options --------------------------------\n')).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.yellow(`hjs config --port [port]`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(`  (select port)`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.yellow(`hjs config --logs [logs]`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(`  (select logs)`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.yellow(`hjs config --banner`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(` (create custom banner)`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.grey(` (Example: hjs config --port 3004 --logs tiny --banner)`)).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce);
+            assert.ok(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce);
           });
         });
       });

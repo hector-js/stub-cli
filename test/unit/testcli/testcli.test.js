@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import { stub, assert } from 'sinon';
 import proxyquire from 'proxyquire';
 import chalk from 'chalk';
+import { version } from './../../../package.json';
 
 describe('testcli', () => {
   let testcli;
@@ -45,10 +46,20 @@ describe('testcli', () => {
 
       testcli(args);
 
-      expect(infoStub.withArgs(chalk.green('\nTest options:\n')).calledOnce).to.be.true;
-      expect(infoStub.withArgs(chalk.grey(` -  hjs test       : execute tests related to the mock`)).calledOnce).to.be.true;
-      expect(infoStub.withArgs(chalk.grey(` -  hjs test --path: execute test in the path`)).calledOnce).to.be.true;
-      expect(infoStub.withArgs(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce).to.be.true;
+      // expect(infoStub.withArgs(chalk.green('\nTest options:\n')).calledOnce).to.be.true;
+      // expect(infoStub.withArgs(chalk.grey(` -  hjs test       : execute tests related to the mock`)).calledOnce).to.be.true;
+      // expect(infoStub.withArgs(chalk.grey(` -  hjs test --path: execute test in the path`)).calledOnce).to.be.true;
+      // expect(infoStub.withArgs(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce).to.be.true;
+
+
+      expect(infoStub.withArgs(chalk.green('\n-- Test options --------------------------------\n')).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.yellow(`hjs test`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(`  (execute tests related to the mock)`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.yellow(`hjs test --path`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(`  (execute test in the path)`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.grey(`  (Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.green('\n-----------------------------------------------')).calledOnce).to.be.true;
+      expect(infoStub.withArgs(chalk.green(`                                version: ${version}`)).calledOnce).to.be.true;
     });
   });
 
