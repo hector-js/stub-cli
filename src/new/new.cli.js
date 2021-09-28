@@ -82,7 +82,7 @@ export async function newCli(args) {
     };
 
     if (args['skip-install']) {
-      packageJson.dependencies = { '@hectorjs/stub-backend': '1.21.0' };
+      packageJson.dependencies = { '@hectorjs/stub-backend': '1.26.0' };
     }
 
     writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
@@ -94,9 +94,9 @@ export async function newCli(args) {
   const installCommand = packageManager === 'yarn'? 'add': 'install';
   info(chalk.gray(` Installing the dependencies...\n`));
   if (nameProject && !args['skip-install']) {
-    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.20.0`);
+    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.26.0`);
   } else {
-    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.20.0 --save-dev`);
+    exec(`${packageManager} ${installCommand} --silent @hectorjs/stub-backend@1.26.0 --save-dev`);
   }
 
   if (args.banner) {
