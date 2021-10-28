@@ -17,7 +17,8 @@
 		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit",
 		"_start": "hjs start",
 		"_test": "env KEY=local mocha ./_hjs --recursive --exit",
-		"_start-dev": "hjs start --dev"
+		"_start-dev": "hjs start --dev",
+		"preinstall": "npx npm-force-resolutions"
 	},
 	"keywords": [
 		"cli",
@@ -67,5 +68,8 @@
 			"pre-commit": "sh scripts/banners/earth.sh",
 			"pre-push": "npm run test-all"
 		}
+	},
+	"resolutions": {
+		"ansi-regex": "5.0.1"
 	}
 }
