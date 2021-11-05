@@ -12,13 +12,12 @@
 	"scripts": {
 		"test": "mocha --recursive --require esm --exit",
 		"eslint": "eslint ./src/**/*.js ./test/**/*.js",
-		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf node_modules && npm audit && npm i && npm run eslint && npm run coverage",
+		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf node_modules && npm i && npm run eslint && npm run coverage",
 		"report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
 		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit",
 		"_start": "hjs start",
 		"_test": "env KEY=local mocha ./_hjs --recursive --exit",
-		"_start-dev": "hjs start --dev",
-		"preinstall": "npx npm-force-resolutions"
+		"_start-dev": "hjs start --dev"
 	},
 	"keywords": [
 		"cli",
@@ -68,8 +67,5 @@
 			"pre-commit": "sh scripts/banners/earth.sh",
 			"pre-push": "npm run test-all"
 		}
-	},
-	"resolutions": {
-		"ansi-regex": "5.0.1"
 	}
 }
