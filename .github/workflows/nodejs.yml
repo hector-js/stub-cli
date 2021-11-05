@@ -35,11 +35,11 @@ jobs:
         npm run eslint
       env:
         CI: true
-    - name: Audit
-      run: |
-        npm audit
-      env:
-        CI: true
+    # - name: Audit
+    #   run: |
+    #     npm audit
+    #   env:
+    #     CI: true
     - name: Publish resport coverage
       run: |
         npm -g i codecov@3.6.1
