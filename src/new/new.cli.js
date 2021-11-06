@@ -3,7 +3,6 @@ import { writeFileSync } from 'fs';
 import { info } from 'console';
 import { healthData } from '../utils/templates/resources/health.template';
 import { healthTest } from '../utils/templates/tests/health.template';
-import { version } from './../../package.json';
 import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
 
 const chalk = require('chalk');
@@ -19,8 +18,9 @@ export async function newCli(args) {
     info(chalk.grey(` (run service from different directory (npm|yarn))`));
     info(chalk.yellow(`hjs new --skip-install`));
     info(chalk.grey(` (skip packages installation)`));
+    info(chalk.yellow(`hjs new --git`));
+    info(chalk.grey(` (initialize git project)`));
     info(chalk.green('\n-----------------------------------------------'));
-    info(chalk.green(`                                version: ${version}`));
     return;
   }
   const commands = args._;
@@ -83,6 +83,10 @@ export async function newCli(args) {
 
     if (args['skip-install']) {
       packageJson.dependencies = { '@hectorjs/stub-backend': '1.26.2' };
+    }
+
+    if (args['git']) {
+      exec('git init');
     }
 
     writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
