@@ -87,6 +87,8 @@ export async function newCli(args) {
 
     if (args['git']) {
       exec('git init');
+      createFileInPath('.gitignore', '.');
+      writeFileByData('.gitignore', 'node_modules');
     }
 
     writeFileSync('package.json', JSON.stringify(packageJson, null, 4));
