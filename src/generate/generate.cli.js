@@ -1,16 +1,16 @@
-import { getCli } from './methods/get.cli';
-import { headCli } from './methods/head.cli';
-import { postCli } from './methods/post.cli';
-import { putCli } from './methods/put.cli';
-import { deleteCli } from './methods/delete.cli';
-import { patchCli } from './methods/patch.cli';
-import { traceCli } from './methods/trace.cli';
-import { info, warn } from 'console';
-import { version } from './../../package.json';
+const { getCli } = require('./methods/get.cli');
+const { headCli } = require('./methods/head.cli');
+const { postCli } = require('./methods/post.cli');
+const { putCli } = require('./methods/put.cli');
+const { deleteCli } = require('./methods/delete.cli');
+const { patchCli } = require('./methods/patch.cli');
+const { traceCli } = require('./methods/trace.cli');
+const { info, warn } = require( 'console');
+const { version } = require('./../../package.json');
 
 const chalk = require('chalk');
 
-export function generateCli(args) {
+module.exports = function generateCli(args) {
   if (args.help) {
     helpOptions(args);
   } else {
@@ -47,7 +47,7 @@ export function generateCli(args) {
         warn(chalk.yellow('\nMethod not found :(\n'));
     }
   }
-}
+};
 
 function displayGeneratorOpts() {
   info(chalk.green('\n--Generate options --------------------------------\n'));

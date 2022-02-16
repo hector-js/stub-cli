@@ -1,9 +1,14 @@
-import { replacements } from '../../../replacements';
+const { replacements } = require('../../../replacements');
 
-export function bodyReq() {
+function bodyReq() {
   return replacements().bodyReq;
 }
 
-export function bodyReqXml() {
+function bodyReqXml() {
   return replacements().bodyReqXml;
 }
+
+module.exports = {
+  bodyReq,
+  bodyReqXml
+};

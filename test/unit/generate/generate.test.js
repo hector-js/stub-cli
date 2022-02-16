@@ -1,11 +1,9 @@
 'use strict';
 
-import { assert, expect } from 'chai';
-import { stub } from 'sinon';
-import { version } from './../../../package.json';
-
+const { assert, expect } = require('chai');
+const { stub } = require('sinon');
+const { version } = require('./../../../package.json');
 const proxyquire = require('proxyquire');
-
 const chalk = require('chalk');
 
 describe('generate', () => {
@@ -33,7 +31,7 @@ describe('generate', () => {
           './methods/put.cli': { putCli: putCliStub },
           './methods/trace.cli': { traceCli: traceCliStub },
           'console': { warn: warnStub }
-        }).generateCli;
+        });
       });
 
       afterEach(() => proxyquire.callThru());
@@ -175,7 +173,7 @@ describe('generate', () => {
         infoStub= stub();
         generateCli = proxyquire('../../../src/generate/generate.cli', {
           'console': { info: infoStub }
-        }).generateCli;
+        });
       });
 
       afterEach(() => proxyquire.callThru());

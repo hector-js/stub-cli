@@ -1,8 +1,8 @@
 'use strict';
 
-import { assert } from 'chai';
-import { stub } from 'sinon';
-import { version } from './../../../package.json';
+const { assert } = require('chai');
+const { stub } = require('sinon');
+const { version } = require('./../../../package.json');
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
@@ -21,7 +21,7 @@ describe('start', () => {
     start = proxyquire('../../../src/start/start.cli', {
       'shelljs': { exec: execCliStub, cd: cdCliStub },
       'console': { info: infoStub }
-    }).start;
+    });
   });
 
   afterEach(() => proxyquire.callThru());

@@ -1,9 +1,9 @@
-import { info, error } from 'console';
-import { existsSync, writeFile } from 'fs';
-import { mkdir, cd, touch } from 'shelljs';
-import prompts from 'prompts';
-import chalk from 'chalk';
-import fs from 'fs';
+const { info, error } = require('console');
+const { existsSync, writeFile } = require('fs');
+const { mkdir, cd, touch } = require('shelljs');
+const prompts = require('prompts');
+const chalk = require('chalk');
+const fs = require('fs');
 
 async function multipleOpts(message, choices) {
   return await prompts({
@@ -83,7 +83,7 @@ const getAllFiles = function(dirPath, arrayOfFiles) {
   return arrayOfFiles;
 };
 
-export {
+module.exports = {
   createFileInPath,
   writeFileByData,
   checkPath,

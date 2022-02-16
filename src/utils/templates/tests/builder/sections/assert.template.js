@@ -1,35 +1,46 @@
-import { getStatus } from '../../../../utils.cli';
-import { replacements } from '../../../replacements';
+const { getStatus } = require('../../../../utils.cli');
+const { replacements } = require('../../../replacements');
 
-export function assert() {
+function assert() {
   return replacements().assert;
 }
 
-export function noErrors() {
+function noErrors() {
   return replacements().noErrors;
 }
 
-export function status(statusArg) {
+function status(statusArg) {
   const status = getStatus(statusArg);
   return replacements().status.replace(/{status}/g, status ? status : '200');
 }
 
-
-export function body() {
+function body() {
   return replacements().body;
 }
 
-export function bodyG(fromTemplate, key, value) {
+function bodyG(fromTemplate, key, value) {
   return replacements().bodyG.replace(/{bodyKey}/g, key).replace(/{bodyVal}/g, value);
 }
-export function bodyGXml() {
+
+function bodyGXml() {
   return replacements().bodyGXml;
 }
 
-export function emptyBody() {
+function emptyBody() {
   return replacements().emptyBody;
 }
 
-export function endAssert() {
+function endAssert() {
   return replacements().endAssert;
 }
+
+module.exports = {
+  assert,
+  noErrors,
+  status,
+  body,
+  bodyG,
+  bodyGXml,
+  emptyBody,
+  endAssert
+};

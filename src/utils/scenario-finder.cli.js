@@ -1,14 +1,14 @@
-import { cd, mkdir } from 'shelljs';
-import { warn } from 'console';
-import { sanitizeRootFile, getIdFormatted } from './utils.cli';
-import { checkPath, writeFileByData } from './file-utils.cli';
-import { PACKAGE_JSON, RESOURCES_PATH } from './constants-backend';
-import { replacements } from './templates/replacements';
+const { cd, mkdir } = require('shelljs');
+const { warn } = require('console');
+const { sanitizeRootFile, getIdFormatted } = require('./utils.cli');
+const { checkPath, writeFileByData } = require('./file-utils.cli');
+const { PACKAGE_JSON, RESOURCES_PATH } = require('./constants-backend');
+const { replacements } = require('./templates/replacements');
 
 const chalk = require('chalk');
 
 
-export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
+module.exports = function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
   if (checkPath(PACKAGE_JSON) && checkPath(RESOURCES_PATH)) {
     const filterDocSlash =RESOURCES_PATH.replace(/\.|\//g, '');
     cd(filterDocSlash);
@@ -33,7 +33,7 @@ export function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) 
     warn(chalk.yellow('\nInfo: Please, navigate to package.json file level and run the command from there.'));
     throw new Error;
   }
-}
+};
 
 const sanitizePath = (path) => {
   if (path) {

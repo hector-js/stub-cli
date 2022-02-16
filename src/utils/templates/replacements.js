@@ -1,9 +1,9 @@
-import { existsSync, readFileSync } from 'fs';
-import preset from './preset.json';
+const { existsSync, readFileSync } = require('fs');
+const preset = require('./preset.json');
 
 let fromTemplate = preset;
 
-export function setTemplate(template) {
+function setTemplate(template) {
   if (template && existsSync(template)) {
     try {
       const parsed = JSON.parse(readFileSync(template));
@@ -17,7 +17,7 @@ export function setTemplate(template) {
   }
 }
 
-export function addReplacements(extraTemplate) {
+function addReplacements(extraTemplate) {
   const toRestore = fromTemplate;
   if (extraTemplate) {
     fromTemplate = {
@@ -28,11 +28,11 @@ export function addReplacements(extraTemplate) {
   return toRestore;
 }
 
-export function restoreReplacements(toRestore) {
+function restoreReplacements(toRestore) {
   fromTemplate = toRestore;
 }
 
-export function replacements(extraTemplate) {
+function replacements(extraTemplate) {
   if (extraTemplate) {
     return {
       ...fromTemplate,
@@ -41,3 +41,10 @@ export function replacements(extraTemplate) {
   }
   return fromTemplate;
 }
+
+module.exports = {
+  setTemplate,
+  addReplacements,
+  restoreReplacements,
+  replacements
+};

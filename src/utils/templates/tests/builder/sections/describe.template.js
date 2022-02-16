@@ -1,9 +1,14 @@
-import { replacements } from '../../../replacements';
+const { replacements } = require('../../../replacements');
 
-export function describe(path, method) {
+function describe(path, method) {
   return replacements().describe.replace(/{method}/g, method.toUpperCase()).replace(/{path}/g, path);
 }
 
-export function endDes() {
+function endDes() {
   return replacements().endDes;
 }
+
+module.exports = {
+  describe,
+  endDes
+};

@@ -1,7 +1,7 @@
 'use strict';
 
-import { assert } from 'chai';
-import { stub } from 'sinon';
+const { assert } = require('chai');
+const { stub } = require('sinon');
 
 const proxyquire = require('proxyquire');
 
@@ -19,7 +19,7 @@ describe('patch', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: patchCliStub },
       '../../utils/templates/resources/patch.template': { patchTemplate: patchTemplateStub },
       '../../utils/templates/tests/patch.template': { patchTestTemplate: patchTestTemplateStub }
-    }).patchCli;
+    });
   });
 
   afterEach(() => proxyquire.callThru());

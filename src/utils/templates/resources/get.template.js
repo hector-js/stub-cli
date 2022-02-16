@@ -1,6 +1,6 @@
-import { ResourceBuilder } from './builder/resource-builder.template';
+const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-export const getTemplate = (args, idsFormatted) => {
+module.exports = getTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_get', idsFormatted)
       .method().path()
       .req()

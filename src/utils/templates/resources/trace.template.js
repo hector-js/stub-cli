@@ -1,6 +1,6 @@
-import { ResourceBuilder } from './builder/resource-builder.template';
+const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-export const traceTemplate = (args, idsFormatted) => {
+module.exports = traceTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_trace', idsFormatted)
       .method().path()
       .req()

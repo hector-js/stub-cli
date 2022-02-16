@@ -1,15 +1,15 @@
-import { describe, endDes } from './sections/describe.template';
-import { it, endIt, endItDelay } from './sections/it.template';
-import { request } from './sections/request.template';
-import { methodReq } from './sections/method.template';
-import { headers } from './sections/headers.template';
-import { bodyReq, bodyReqXml } from './sections/body-req.template';
-import { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } from './sections/assert.template';
-import { libraries } from './sections/libraries.template';
-import { cookies } from './sections/cookies.template';
-import { replacements, addReplacements, restoreReplacements } from '../../replacements';
+const { describe, endDes } = require('./sections/describe.template');
+const { it, endIt, endItDelay } = require('./sections/it.template');
+const { request } = require('./sections/request.template');
+const { methodReq } = require('./sections/method.template');
+const { headers } = require('./sections/headers.template');
+const { bodyReq, bodyReqXml } = require('./sections/body-req.template');
+const { assert, status, noErrors, body, endAssert, bodyG, bodyGXml, emptyBody } = require('./sections/assert.template');
+const { libraries } = require('./sections/libraries.template');
+const { cookies } = require('./sections/cookies.template');
+const { replacements, addReplacements, restoreReplacements } = require('../../replacements');
 
-export class TestBuilder {
+module.exports = class TestBuilder {
   constructor(args, methodName, extraTemplate, description) {
     this.template = ``;
     this.args = args;
@@ -123,4 +123,4 @@ export class TestBuilder {
     restoreReplacements(this.storedReplacements);
     return this.template;
   }
-}
+};

@@ -1,5 +1,5 @@
-import { replacements } from '../../../replacements';
+const { replacements } = require('../../../replacements');
 
-export function libraries() {
+module.exports = function libraries() {
   return replacements().libraries;
-}
+};

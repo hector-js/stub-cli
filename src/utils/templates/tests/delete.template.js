@@ -1,6 +1,6 @@
-import { TestBuilder } from './builder/test-builder.template';
+const { TestBuilder } = require('./builder/test-builder.template');
 
-export const deleteTestTemplate = (args, idsFormatted) => {
+module.exports = deleteTestTemplate = (args, idsFormatted) => {
   return TestBuilder.aTemplate(args, 'delete')
       .libraries()
       .describe().it().request()

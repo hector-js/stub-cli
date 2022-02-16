@@ -1,7 +1,7 @@
 'use strict';
 
-import { assert } from 'chai';
-import { stub } from 'sinon';
+const { assert } = require('chai');
+const { stub } = require('sinon');
 
 const proxyquire = require('proxyquire');
 
@@ -19,7 +19,7 @@ describe('trace', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: traceCliStub },
       '../../utils/templates/resources/trace.template': { traceTemplate: traceTemplateStub },
       '../../utils/templates/tests/trace.template': { traceTestTemplate: traceTestTemplateStub }
-    }).traceCli;
+    });
   });
 
   afterEach(() => proxyquire.callThru());

@@ -10,7 +10,7 @@
 		"test": "test"
 	},
 	"scripts": {
-		"test": "mocha --recursive --require esm --exit",
+		"test": "mocha --recursive test/unit/generate/**/*.test.js --exit",
 		"eslint": "eslint ./src/**/*.js ./test/**/*.js",
 		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf node_modules && npm i && npm run eslint && npm run coverage",
 		"report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
@@ -42,7 +42,7 @@
 		"chalk": "^4.1.1",
 		"esm": "^3.2.25",
 		"minimist": "^1.2.2",
-		"mocha": "^8.4.0",
+		"mocha": "^9.2.0",
 		"nodemon": "^2.0.7",
 		"prompts": "^2.4.1",
 		"shelljs": "^0.8.5",

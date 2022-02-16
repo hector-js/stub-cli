@@ -1,6 +1,6 @@
-import { TestBuilder } from './builder/test-builder.template';
+const { TestBuilder } = require('./builder/test-builder.template');
 
-export const traceTestTemplate = (args, idsFormatted) => {
+module.exports = traceTestTemplate = (args, idsFormatted) => {
   return TestBuilder.aTemplate(args, 'trace')
       .libraries()
       .describe().it().request()
