@@ -14,7 +14,7 @@
 		"eslint": "eslint ./src/**/*.js ./test/**/*.js",
 		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf node_modules && npm i && npm run eslint && npm run coverage",
 		"report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --require esm --exit",
+		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --exit",
 		"_start": "hjs start",
 		"_test": "env KEY=local mocha ./_hjs --recursive --exit",
 		"_start-dev": "hjs start --dev"
@@ -40,7 +40,6 @@
 	"dependencies": {
 		"chai": "^4.3.4",
 		"chalk": "^4.1.1",
-		"esm": "^3.2.25",
 		"minimist": "^1.2.2",
 		"mocha": "^9.2.0",
 		"nodemon": "^2.0.7",
