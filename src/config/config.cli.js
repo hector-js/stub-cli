@@ -1,11 +1,11 @@
-import { info } from 'console';
-import { BANNER_FILE, BANNER_TEXT, HJS_PATH, NAME_FILE, PACKAGE_ROOT_JSON, ROOT_PROJECT, UNDER_HJS } from '../utils/constants-backend';
-import { checkPath, multipleOpts, writeFileByData } from './../utils/file-utils.cli';
-import { version } from './../../package.json';
+const { info } = require('console');
+const { BANNER_FILE, BANNER_TEXT, HJS_PATH, NAME_FILE, PACKAGE_ROOT_JSON, ROOT_PROJECT, UNDER_HJS } = require('../utils/constants-backend');
+const { checkPath, multipleOpts, writeFileByData } = require('./../utils/file-utils.cli');
+const { version } = require('./../../package.json');
 
 const chalk = require('chalk');
 
-export async function config(args) {
+async function config(args) {
   if (args.help) {
     info(chalk.green('\n-- nConfig options --------------------------------\n'));
     info(chalk.yellow(`hjs config --port [port]`));
@@ -52,4 +52,8 @@ export async function config(args) {
       info(chalk.red('Package.json should exists :('));
     }
   }
-}
+};
+
+module.exports = {
+  config
+};

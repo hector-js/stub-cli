@@ -1,10 +1,10 @@
 'use strict';
 
-import { expect } from 'chai';
-import { stub, assert } from 'sinon';
-import proxyquire from 'proxyquire';
-import chalk from 'chalk';
-import { version } from './../../../package.json';
+const { expect } = require('chai');
+const { stub, assert } = require('sinon');
+const proxyquire = require('proxyquire');
+const chalk = require('chalk');
+const { version } = require('./../../../package.json');
 
 describe('testcli', () => {
   let testcli;
@@ -45,12 +45,6 @@ describe('testcli', () => {
       };
 
       testcli(args);
-
-      // expect(infoStub.withArgs(chalk.green('\nTest options:\n')).calledOnce).to.be.true;
-      // expect(infoStub.withArgs(chalk.grey(` -  hjs test       : execute tests related to the mock`)).calledOnce).to.be.true;
-      // expect(infoStub.withArgs(chalk.grey(` -  hjs test --path: execute test in the path`)).calledOnce).to.be.true;
-      // expect(infoStub.withArgs(chalk.grey(`        Example: hjs test --path folderOne/folderTwo/projectFolder`)).calledOnce).to.be.true;
-
 
       expect(infoStub.withArgs(chalk.green('\n-- Test options --------------------------------\n')).calledOnce).to.be.true;
       expect(infoStub.withArgs(chalk.yellow(`hjs test`)).calledOnce).to.be.true;

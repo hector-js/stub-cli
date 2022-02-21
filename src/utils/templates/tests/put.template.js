@@ -1,6 +1,6 @@
-import { TestBuilder } from './builder/test-builder.template';
+const { TestBuilder } = require('./builder/test-builder.template');
 
-export const putTestTemplate = (args, idsFormatted) => {
+const putTestTemplate = (args, idsFormatted) => {
   return TestBuilder.aTemplate(args, 'put')
       .libraries()
       .describe().it().request()
@@ -9,4 +9,8 @@ export const putTestTemplate = (args, idsFormatted) => {
       .assert().noErrors().status().body()
       .endAssert().endIt().endDes()
       .build();
+};
+
+module.exports = {
+  putTestTemplate
 };

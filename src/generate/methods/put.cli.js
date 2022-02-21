@@ -1,9 +1,13 @@
-import { putTemplate } from '../../utils/templates/resources/put.template';
-import { putTestTemplate } from '../../utils/templates/tests/put.template';
-import { scenarioGenerator } from '../../utils/scenario-finder.cli';
+const { putTemplate } = require('../../utils/templates/resources/put.template');
+const { putTestTemplate } = require('../../utils/templates/tests/put.template');
+const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'put';
 
-export function putCli(args) {
+function putCli(args) {
   scenarioGenerator(args, putTemplate, putTestTemplate, METHOD);
-}
+};
+
+module.exports = {
+  putCli
+};

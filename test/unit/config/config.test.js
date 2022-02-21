@@ -1,10 +1,9 @@
 'use strict';
 
-import { assert, expect } from 'chai';
-import { stub } from 'sinon';
-import { HJS_PATH, PACKAGE_ROOT_JSON, BANNER_FILE, UNDER_HJS, ROOT_PROJECT } from '../../../src/utils/constants-backend';
-import { version } from './../../../package.json';
-
+const { assert, expect } = require('chai');
+const { stub } = require('sinon');
+const { HJS_PATH, PACKAGE_ROOT_JSON, BANNER_FILE, UNDER_HJS, ROOT_PROJECT } = require('../../../src/utils/constants-backend');
+const { version } = require('./../../../package.json');
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 

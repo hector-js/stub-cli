@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { headTemplate } from '../../../../src/utils/templates/resources/head.template';
-import { headTestTemplate } from '../../../../src/utils/templates/tests/head.template';
+const { expect } = require('chai');
+const { headTemplate } = require('../../../../src/utils/templates/resources/head.template');
+const { headTestTemplate } = require('../../../../src/utils/templates/tests/head.template');
 
 describe('head-template', () => {
   let args;

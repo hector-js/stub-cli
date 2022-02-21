@@ -1,4 +1,4 @@
-export const healthData = `{
+const healthData = `{
   "_get" : {
     "/health": [
       {
@@ -13,3 +13,7 @@ export const healthData = `{
     ]
   }
 }`;
+
+module.exports = {
+  healthData
+};

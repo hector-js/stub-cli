@@ -1,6 +1,6 @@
-import { ResourceBuilder } from './builder/resource-builder.template';
+const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-export const deleteTemplate = (args, idsFormatted) => {
+const deleteTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_delete', idsFormatted)
       .method().path()
       .req()
@@ -15,4 +15,8 @@ export const deleteTemplate = (args, idsFormatted) => {
       .delay()
       .description()
       .build();
+};
+
+module.exports = {
+  deleteTemplate
 };
