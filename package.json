@@ -64,7 +64,8 @@
 	"homepage": "https://hectorjs.herokuapp.com",
 	"husky": {
 		"hooks": {
-			"pre-commit": "sh scripts/banners/earth.sh"
+			"pre-commit": "sh scripts/banners/earth.sh",
+			"pre-push": "npm run test-all"
 		}
 	}
 }
