@@ -5,7 +5,7 @@ const { version } = require('./../../package.json');
 
 const chalk = require('chalk');
 
-module.exports = async function config(args) {
+async function config(args) {
   if (args.help) {
     info(chalk.green('\n-- nConfig options --------------------------------\n'));
     info(chalk.yellow(`hjs config --port [port]`));
@@ -52,4 +52,8 @@ module.exports = async function config(args) {
       info(chalk.red('Package.json should exists :('));
     }
   }
+};
+
+module.exports = {
+  config
 };

@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { putTemplate } from '../../../../src/utils/templates/resources/put.template';
-import { putTestTemplate } from '../../../../src/utils/templates/tests/put.template';
+const { expect } = require('chai');
+const { putTemplate } = require('../../../../src/utils/templates/resources/put.template');
+const { putTestTemplate } = require('../../../../src/utils/templates/tests/put.template');
 
 describe('put-template', () => {
   let args;

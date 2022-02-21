@@ -19,7 +19,7 @@ describe('get', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: getCliStub },
       '../../utils/templates/resources/get.template': { getTemplate: getTemplateStub },
       '../../utils/templates/tests/get.template': { getTestTemplate: getTestTemplateStub }
-    });
+    }).getCli;
   });
 
   afterEach(() => proxyquire.callThru());

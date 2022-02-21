@@ -1,9 +1,9 @@
 'use strict';
 
-import { unlinkSync } from 'fs';
-import { expect, assert } from 'chai';
-import { stub, match } from 'sinon';
-import { getAllFiles } from '../../../src/utils/file-utils.cli';
+const { unlinkSync } = require('fs');
+const { expect, assert } = require('chai');
+const { stub, match } = require('sinon');
+const { getAllFiles } = require('../../../src/utils/file-utils.cli');
 
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');

@@ -19,7 +19,7 @@ describe('patch', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: patchCliStub },
       '../../utils/templates/resources/patch.template': { patchTemplate: patchTemplateStub },
       '../../utils/templates/tests/patch.template': { patchTestTemplate: patchTestTemplateStub }
-    });
+    }).patchCli;
   });
 
   afterEach(() => proxyquire.callThru());

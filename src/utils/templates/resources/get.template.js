@@ -1,6 +1,6 @@
 const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-module.exports = getTemplate = (args, idsFormatted) => {
+const getTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_get', idsFormatted)
       .method().path()
       .req()
@@ -14,4 +14,8 @@ module.exports = getTemplate = (args, idsFormatted) => {
       .delay()
       .description()
       .build();
+};
+
+module.exports = {
+  getTemplate
 };

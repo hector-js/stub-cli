@@ -1,6 +1,6 @@
 const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-module.exports = traceTemplate = (args, idsFormatted) => {
+const traceTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_trace', idsFormatted)
       .method().path()
       .req()
@@ -13,4 +13,8 @@ module.exports = traceTemplate = (args, idsFormatted) => {
       .status()
       .description()
       .build();
+};
+
+module.exports = {
+  traceTemplate
 };

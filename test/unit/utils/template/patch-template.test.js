@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { patchTemplate } from '../../../../src/utils/templates/resources/patch.template';
-import { patchTestTemplate } from '../../../../src/utils/templates/tests/patch.template';
+const { expect } = require('chai');
+const { patchTemplate } = require('../../../../src/utils/templates/resources/patch.template');
+const { patchTestTemplate } = require('../../../../src/utils/templates/tests/patch.template');
 
 describe('patch-template', () => {
   let args;

@@ -19,7 +19,7 @@ describe('delete', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: deleteCliStub },
       '../../utils/templates/resources/delete.template': { deleteTemplate: deleteTemplateStub },
       '../../utils/templates/tests/delete.template': { deleteTestTemplate: deleteTestTemplateStub }
-    });
+    }).deleteCli;
   });
 
   afterEach(() => proxyquire.callThru());

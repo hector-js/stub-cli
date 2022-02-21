@@ -19,7 +19,7 @@ describe('head', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: headCliStub },
       '../../utils/templates/resources/head.template': { headTemplate: headTemplateStub },
       '../../utils/templates/tests/head.template': { headTestTemplate: headTestTemplateStub }
-    });
+    }).headCli;
   });
 
   afterEach(() => proxyquire.callThru());

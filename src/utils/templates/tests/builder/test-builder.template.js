@@ -9,7 +9,7 @@ const { libraries } = require('./sections/libraries.template');
 const { cookies } = require('./sections/cookies.template');
 const { replacements, addReplacements, restoreReplacements } = require('../../replacements');
 
-module.exports = class TestBuilder {
+class TestBuilder {
   constructor(args, methodName, extraTemplate, description) {
     this.template = ``;
     this.args = args;
@@ -123,4 +123,8 @@ module.exports = class TestBuilder {
     restoreReplacements(this.storedReplacements);
     return this.template;
   }
+};
+
+module.exports = {
+  TestBuilder
 };

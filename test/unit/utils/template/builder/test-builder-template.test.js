@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { TestBuilder } from '../../../../../src/utils/templates/tests/builder/test-builder.template';
-import preset from '../../../../../src/utils/templates/preset.json';
+const { expect } = require('chai');
+const { TestBuilder } = require('../../../../../src/utils/templates/tests/builder/test-builder.template');
+const preset = require('../../../../../src/utils/templates/preset.json');
 
 describe('test-builder-template', () => {
   let args;

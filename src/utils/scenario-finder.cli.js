@@ -8,7 +8,7 @@ const { replacements } = require('./templates/replacements');
 const chalk = require('chalk');
 
 
-module.exports = function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
+function scenarioGenerator(args, resourceTemplate, testTemplate, METHOD) {
   if (checkPath(PACKAGE_JSON) && checkPath(RESOURCES_PATH)) {
     const filterDocSlash =RESOURCES_PATH.replace(/\.|\//g, '');
     cd(filterDocSlash);
@@ -33,6 +33,10 @@ module.exports = function scenarioGenerator(args, resourceTemplate, testTemplate
     warn(chalk.yellow('\nInfo: Please, navigate to package.json file level and run the command from there.'));
     throw new Error;
   }
+};
+
+module.exports = {
+  scenarioGenerator
 };
 
 const sanitizePath = (path) => {

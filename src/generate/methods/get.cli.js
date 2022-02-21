@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'get';
 
-module.exports = function getCli(args) {
+function getCli(args) {
   scenarioGenerator(args, getTemplate, getTestTemplate, METHOD );
+};
+
+module.exports = {
+  getCli
 };

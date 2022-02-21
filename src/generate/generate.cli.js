@@ -10,7 +10,7 @@ const { version } = require('./../../package.json');
 
 const chalk = require('chalk');
 
-module.exports = function generateCli(args) {
+function generateCli(args) {
   if (args.help) {
     helpOptions(args);
   } else {
@@ -142,3 +142,7 @@ function helpOptions(args) {
     displayGeneratorOpts();
   }
 }
+
+module.exports = {
+  generateCli
+};

@@ -1,6 +1,6 @@
 const { TestBuilder } = require('./builder/test-builder.template');
 
-module.exports = deleteTestTemplate = (args, idsFormatted) => {
+const deleteTestTemplate = (args, idsFormatted) => {
   return TestBuilder.aTemplate(args, 'delete')
       .libraries()
       .describe().it().request()
@@ -9,4 +9,8 @@ module.exports = deleteTestTemplate = (args, idsFormatted) => {
       .assert().noErrors().status().body()
       .endAssert().endIt().endDes()
       .build();
+};
+
+module.exports = {
+  deleteTestTemplate
 };

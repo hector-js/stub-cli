@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'trace';
 
-module.exports = function traceCli(args) {
+function traceCli(args) {
   scenarioGenerator(args, traceTemplate, traceTestTemplate, METHOD);
+};
+
+module.exports = {
+  traceCli
 };

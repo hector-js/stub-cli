@@ -20,7 +20,7 @@ describe('testcli', () => {
       '../utils/runners.cli': { runTests: runTestsCliStub },
       'shelljs': { cd: cdCliStub },
       'console': { info: infoStub }
-    });
+    }).testcli;
   });
 
   afterEach(() => proxyquire.callThru());

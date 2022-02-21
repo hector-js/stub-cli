@@ -1,11 +1,11 @@
-import { exec, cd } from 'shelljs';
-import { info } from 'console';
-import { argsBy } from '../utils/utils.cli';
-import { version } from './../../package.json';
+const { exec, cd } = require('shelljs');
+const { info } = require('console');
+const { argsBy } = require('../utils/utils.cli');
+const { version } = require('./../../package.json');
 
 const chalk = require('chalk');
 
-export function start(args) {
+function start(args) {
   if (args.help) {
     info(chalk.green('\n-- Start options --------------------------------\n'));
     info(chalk.yellow(`hjs start`));
@@ -49,3 +49,6 @@ export function start(args) {
   }
 }
 
+module.exports = {
+  start
+};

@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { healthData } from '../../../../src/utils/templates/resources/health.template';
-import { healthTest } from '../../../../src/utils/templates/tests/health.template';
+const { expect } = require('chai');
+const { healthData } = require('../../../../src/utils/templates/resources/health.template');
+const { healthTest } = require('../../../../src/utils/templates/tests/health.template');
 
 describe('health-template', () => {
   describe('resources', () => {

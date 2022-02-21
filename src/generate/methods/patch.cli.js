@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'patch';
 
-module.exports = function patchCli(args) {
+function patchCli(args) {
   scenarioGenerator(args, patchTemplate, patchTestTemplate, METHOD);
+};
+
+module.exports = {
+  patchCli
 };

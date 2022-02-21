@@ -1,4 +1,4 @@
-module.exports = healthData = `{
+const healthData = `{
   "_get" : {
     "/health": [
       {
@@ -13,3 +13,7 @@ module.exports = healthData = `{
     ]
   }
 }`;
+
+module.exports = {
+  healthData
+};

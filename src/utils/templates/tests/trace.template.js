@@ -1,6 +1,6 @@
 const { TestBuilder } = require('./builder/test-builder.template');
 
-module.exports = traceTestTemplate = (args, idsFormatted) => {
+const traceTestTemplate = (args, idsFormatted) => {
   return TestBuilder.aTemplate(args, 'trace')
       .libraries()
       .describe().it().request()
@@ -8,4 +8,8 @@ module.exports = traceTestTemplate = (args, idsFormatted) => {
       .assert().noErrors().status().emptyBody()
       .endAssert().endIt().endDes()
       .build();
+};
+
+module.exports = {
+  traceTestTemplate
 };

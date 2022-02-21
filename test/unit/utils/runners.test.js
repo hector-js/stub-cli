@@ -1,6 +1,6 @@
 'use strict';
-import { stub, assert } from 'sinon';
-import proxyquire from 'proxyquire';
+const { stub, assert } = require('sinon');
+const proxyquire = require('proxyquire');
 
 describe('Runners', () => {
   let runTests;

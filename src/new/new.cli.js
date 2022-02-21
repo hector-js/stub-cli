@@ -1,13 +1,13 @@
-import { cd, exec, mkdir } from 'shelljs';
-import { writeFileSync } from 'fs';
-import { info } from 'console';
-import { healthData } from '../utils/templates/resources/health.template';
-import { healthTest } from '../utils/templates/tests/health.template';
-import { multipleOpts, question, writeFileByData, createFileInPath } from '../utils/file-utils.cli';
+const { cd, exec, mkdir } = require('shelljs');
+const { writeFileSync } = require('fs');
+const { info } = require('console');
+const { healthData } = require('../utils/templates/resources/health.template');
+const { healthTest } = require('../utils/templates/tests/health.template');
+const { multipleOpts, question, writeFileByData, createFileInPath } = require('../utils/file-utils.cli');
 
 const chalk = require('chalk');
 
-export async function newCli(args) {
+async function newCli(args) {
   if (args.help) {
     info(chalk.green('\n-- New options --------------------------------\n'));
     info(chalk.yellow(`hjs new`));
@@ -125,6 +125,10 @@ export async function newCli(args) {
   const end = new Date() - start;
   info(chalk.grey('\nExecution time: %dms \n'), end);
 }
+
+module.exports = {
+  newCli
+};
 
 const checkIDE = (argsCLI, shortCliIDE) => {
   if (argsCLI && argsCLI == true) {

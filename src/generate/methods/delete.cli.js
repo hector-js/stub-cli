@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'delete';
 
-module.exports = function deleteCli(args) {
+function deleteCli(args) {
   scenarioGenerator(args, deleteTemplate, deleteTestTemplate, METHOD);
+};
+
+module.exports = {
+  deleteCli
 };

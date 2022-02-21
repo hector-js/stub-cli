@@ -1,10 +1,10 @@
-import { runTests } from '../utils/runners.cli';
-import { cd } from 'shelljs';
-import { info } from 'console';
-import chalk from 'chalk';
-import { version } from './../../package.json';
+const { runTests } = require('../utils/runners.cli');
+const { cd } = require('shelljs');
+const { info } = require('console');
+const chalk = require('chalk');
+const { version } = require('./../../package.json');
 
-export function testcli(args) {
+function testcli(args) {
   if (args.help) {
     info(chalk.green('\n-- Test options --------------------------------\n'));
     info(chalk.yellow(`hjs test`));
@@ -23,3 +23,7 @@ export function testcli(args) {
     runTests(args.root, args.include);
   }
 }
+
+module.exports = {
+  testcli
+};

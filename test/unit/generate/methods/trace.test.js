@@ -19,7 +19,7 @@ describe('trace', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: traceCliStub },
       '../../utils/templates/resources/trace.template': { traceTemplate: traceTemplateStub },
       '../../utils/templates/tests/trace.template': { traceTestTemplate: traceTestTemplateStub }
-    });
+    }).traceCli;
   });
 
   afterEach(() => proxyquire.callThru());

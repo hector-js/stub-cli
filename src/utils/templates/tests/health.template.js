@@ -1,6 +1,6 @@
 const { TestBuilder } = require('./builder/test-builder.template');
 
-module.exports = healthTest = (args) => {
+const healthTest = (args) => {
   return TestBuilder.aTemplate(args, 'get', { bodyKey: '\'STATUS\'', bodyVal: '\'UP\'' }, 'health')
       .libraries()
       .describe().it().request()
@@ -10,3 +10,6 @@ module.exports = healthTest = (args) => {
       .build();
 };
 
+module.exports = {
+  healthTest
+};

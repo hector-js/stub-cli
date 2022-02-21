@@ -33,7 +33,7 @@ describe('config', () => {
             writeFileByData: writeFileStub
           },
           'console': { info: infoStub }
-        });
+        }).config;
         args = { _: ['config'] };
       });
 

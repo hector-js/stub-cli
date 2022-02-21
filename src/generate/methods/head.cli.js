@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'head';
 
-module.exports = function headCli(args) {
+function headCli(args) {
   scenarioGenerator(args, headTemplate, headTestTemplate, METHOD);
+};
+
+module.exports = {
+  headCli
 };

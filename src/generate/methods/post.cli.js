@@ -4,6 +4,10 @@ const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'post';
 
-module.exports = function postCli(args) {
+function postCli(args) {
   scenarioGenerator(args, postTemplate, postTestTemplate, METHOD);
+};
+
+module.exports = {
+  postCli
 };

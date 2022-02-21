@@ -10,4 +10,6 @@ const getTestTemplate = (args, idsFormatted) => {
       .build();
 };
 
-module.exports = getTestTemplate;
+module.exports = {
+  getTestTemplate
+};

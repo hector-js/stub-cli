@@ -21,7 +21,7 @@ describe('start', () => {
     start = proxyquire('../../../src/start/start.cli', {
       'shelljs': { exec: execCliStub, cd: cdCliStub },
       'console': { info: infoStub }
-    });
+    }).start;
   });
 
   afterEach(() => proxyquire.callThru());

@@ -1,5 +1,9 @@
 const { replacements } = require('../../../replacements');
 
-module.exports = function request() {
+function request() {
   return replacements().request;
+};
+
+module.exports = {
+  request
 };

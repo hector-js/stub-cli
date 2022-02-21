@@ -19,7 +19,7 @@ describe('post', () => {
       '../../utils/scenario-finder.cli': { scenarioGenerator: postCliStub },
       '../../utils/templates/resources/post.template': { postTemplate: postTemplateStub },
       '../../utils/templates/tests/post.template': { postTestTemplate: postTestTemplateStub }
-    });
+    }).postCli;
   });
 
   afterEach(() => proxyquire.callThru());

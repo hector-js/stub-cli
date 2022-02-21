@@ -1,6 +1,6 @@
 'use strict';
 
-import {
+const {
   sizeObject,
   sanitizeRootFile,
   getIdFormatted,
@@ -10,8 +10,8 @@ import {
   arrayToJson,
   arrayToArrayValues,
   buildUrl
-} from '../../../src/utils/utils.cli';
-import { expect, assert } from 'chai';
+} = require('../../../src/utils/utils.cli');
+const { expect, assert } = require('chai');
 
 const chalk = require('chalk');
 
