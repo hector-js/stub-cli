@@ -7,3 +7,5 @@
 CODE_OF_CONDUCT.md
 changelog.md
 README.md
+.eslintrc.json
+coverage.lcov
