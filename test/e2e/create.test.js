@@ -7,10 +7,6 @@ const fs = require('fs');
 describe('config', () => {
   const dir = './example';
 
-  after(()=>{
-    fs.rmdirSync(dir, { recursive: true });
-  });
-
   it('create project', () => {
     exec('npm run hjs -- new example --package-manager npm');
 
