@@ -27,13 +27,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Unit test & coverage
       run: |
-        npm ci
+        npm install
         npm run coverage
       env:
         CI: true
     - name: End to end
       run: |
-        npm ci
+        npm install
         npm run e2e
       env:
         CI: true
