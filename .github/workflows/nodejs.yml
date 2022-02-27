@@ -26,16 +26,18 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      run: |
+        npm ci
+        npm link
+
     - name: Unit test & coverage
       run: |
-        npm install
-        npm link
         npm run coverage
       env:
         CI: true
     - name: End to end
       run: |
-        npm install
+        npm ci
         npm run e2e
       env:
         CI: true
