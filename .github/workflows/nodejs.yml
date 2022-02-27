@@ -13,7 +13,8 @@ jobs:
   build:
     name: Stub-cli
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    # runs-on: ubuntu-latest
 
     strategy:
       matrix:
