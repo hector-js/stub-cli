@@ -29,6 +29,7 @@ jobs:
     - name: Unit test & coverage
       run: |
         npm install
+        npm link
         npm run coverage
       env:
         CI: true
