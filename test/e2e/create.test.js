@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const { exec } = require('shelljs');
 const fs = require('fs');
 
-describe('config', () => {
+describe('new', () => {
   const dir = './example';
 
   it('create project', () => {
