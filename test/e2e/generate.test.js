@@ -14,6 +14,10 @@ describe('generate', () => {
       exec('npm run hjs -- generate get my/path');
     });
 
+    after(()=>{
+      cd('..');
+    });
+
     describe('resource', ()=>{
       it('creates the resource file', () => {
         expect(fs.existsSync(pathResource)).to.be.true;
