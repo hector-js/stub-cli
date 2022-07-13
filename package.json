@@ -42,7 +42,7 @@
 		"chalk": "^4.1.1",
 		"minimist": "^1.2.6",
 		"mocha": "^9.2.0",
-		"nodemon": "^2.0.7",
+		"nodemon": "^2.0.19",
 		"prompts": "^2.4.1",
 		"shelljs": "^0.8.5",
 		"supertest": "^6.1.3"
