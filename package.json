@@ -1,6 +1,6 @@
 {
 	"name": "@hectorjs/stub-cli",
-	"version": "1.30.0",
+	"version": "1.31.0",
 	"description": "Command line for stub-backend library",
 	"main": "index.js",
 	"bin": {
