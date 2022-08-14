@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { getTemplate } from '../../../../src/utils/templates/resources/get.template';
-import { getTestTemplate } from '../../../../src/utils/templates/tests/get.template';
+const { expect } = require('chai');
+const { getTemplate } = require('../../../../src/utils/templates/resources/get.template');
+const { getTestTemplate } = require('../../../../src/utils/templates/tests/get.template');
 
 describe('get-template', () => {
   let args;

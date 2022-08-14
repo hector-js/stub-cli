@@ -1,7 +1,11 @@
-import { getHeaders, arrayToJson } from '../../../../utils.cli';
-import { replacements } from '../../../replacements';
+const { getHeaders, arrayToJson } = require('../../../../utils.cli');
+const { replacements } = require('../../../replacements');
 
-export function headers(headersArg) {
+function headers(headersArg) {
   const headers = getHeaders(headersArg);
   return replacements().headers.replace(/{headers}/g, arrayToJson(headers));
-}
+};
+
+module.exports = {
+  headers
+};

@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { traceTemplate } from '../../../../src/utils/templates/resources/trace.template';
-import { traceTestTemplate } from '../../../../src/utils/templates/tests/trace.template';
+const { expect } = require('chai');
+const { traceTemplate } = require('../../../../src/utils/templates/resources/trace.template');
+const { traceTestTemplate } = require('../../../../src/utils/templates/tests/trace.template');
 
 describe('trace-template', () => {
   let args;

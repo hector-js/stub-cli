@@ -1,8 +1,8 @@
 'use strict';
 
-import { assert, expect } from 'chai';
-import { stub } from 'sinon';
-import { PACKAGE_JSON, RESOURCES_PATH } from '../../../src/utils/constants-backend';
+const { assert, expect } = require('chai');
+const { stub } = require('sinon');
+const { PACKAGE_JSON, RESOURCES_PATH } = require('../../../src/utils/constants-backend');
 
 const proxyquire = require('proxyquire');
 
@@ -31,7 +31,7 @@ describe('scenario-provider', () => {
           cd: cdStub,
           mkdir: mkdirStub
         }
-      }).scenarioGenerator;
+      });
     });
 
     afterEach(() => proxyquire.callThru());

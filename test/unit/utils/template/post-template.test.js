@@ -1,8 +1,8 @@
 'use strict';
 
-import { expect } from 'chai';
-import { postTemplate } from '../../../../src/utils/templates/resources/post.template';
-import { postTestTemplate } from '../../../../src/utils/templates/tests/post.template';
+const { expect } = require('chai');
+const { postTemplate } = require('../../../../src/utils/templates/resources/post.template');
+const { postTestTemplate } = require('../../../../src/utils/templates/tests/post.template');
 
 describe('post-template', () => {
   let args;

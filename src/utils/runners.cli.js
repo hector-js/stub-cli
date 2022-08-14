@@ -1,5 +1,5 @@
-import { getAllFiles } from './file-utils.cli';
-import Mocha from 'mocha';
+const { getAllFiles } = require('./file-utils.cli');
+const Mocha = require('mocha');
 
 const runTests = (dir, fileReg) => {
   const testDir = dir || './_hjs';
@@ -15,7 +15,7 @@ const runTests = (dir, fileReg) => {
   });
 };
 
-export {
+module.exports = {
   runTests
 };
 

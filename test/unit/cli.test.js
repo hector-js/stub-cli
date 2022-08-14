@@ -1,8 +1,7 @@
 'use strict';
 
-import { assert } from 'chai';
-import { stub } from 'sinon';
-
+const { assert } = require('chai');
+const { stub } = require('sinon');
 const proxyquire = require('proxyquire');
 const chalk = require('chalk');
 

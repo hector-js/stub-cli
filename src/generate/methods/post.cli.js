@@ -1,9 +1,13 @@
-import { postTemplate } from '../../utils/templates/resources/post.template';
-import { postTestTemplate } from '../../utils/templates/tests/post.template';
-import { scenarioGenerator } from '../../utils/scenario-finder.cli';
+const { postTemplate } = require('../../utils/templates/resources/post.template');
+const { postTestTemplate } = require('../../utils/templates/tests/post.template');
+const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'post';
 
-export function postCli(args) {
+function postCli(args) {
   scenarioGenerator(args, postTemplate, postTestTemplate, METHOD);
-}
+};
+
+module.exports = {
+  postCli
+};

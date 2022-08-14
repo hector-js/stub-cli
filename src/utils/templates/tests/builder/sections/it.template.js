@@ -1,13 +1,19 @@
-import { replacements } from '../../../replacements';
+const { replacements } = require('../../../replacements');
 
-export function it() {
+function it() {
   return replacements().it;
 }
 
-export function endIt() {
+function endIt() {
   return replacements().endIt;
 }
 
-export function endItDelay(delay) {
+function endItDelay(delay) {
   return replacements().endItDelay.replace(/{delay}/g, delay);
 }
+
+module.exports = {
+  it,
+  endIt,
+  endItDelay
+};

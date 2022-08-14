@@ -1,17 +1,17 @@
-import { info, warn } from 'console';
-import { generateCli } from './generate/generate.cli';
-import { cd } from 'shelljs';
-import { sizeObject } from './utils/utils.cli';
-import { newCli } from './new/new.cli';
-import { start } from './start/start.cli';
-import { testcli } from './testcli/test.cli';
-import { config } from './config/config.cli';
-import { version } from './../package.json';
-import { setTemplate } from './utils/templates/replacements';
+const { info, warn } = require('console');
+const { generateCli } = require('./generate/generate.cli');
+const { cd } = require('shelljs');
+const { sizeObject } = require('./utils/utils.cli');
+const { newCli } = require('./new/new.cli');
+const { start } = require('./start/start.cli');
+const { testcli } = require('./testcli/test.cli');
+const { config } = require('./config/config.cli');
+const { version } = require('./../package.json');
+const { setTemplate } = require('./utils/templates/replacements');
 
 const chalk = require('chalk');
 
-export function cli(args) {
+function cli(args) {
   setTemplate(args.template);
   switch (args._[0]) {
     case 'new':
@@ -65,3 +65,7 @@ export function cli(args) {
     warn(chalk.red('\nSorry, you missed a parameter (hjs --help)'));
   }
 }
+
+module.exports = {
+  cli
+};

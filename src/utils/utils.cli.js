@@ -1,5 +1,5 @@
-import { error } from 'console';
-import chalk from 'chalk';
+const { error } = require('console');
+const chalk = require('chalk');
 
 const sizeObject = (obj) => {
   return obj ? Object.keys(obj).length : 0;
@@ -79,7 +79,7 @@ const argsBy = (argKey, argValue) => {
 };
 
 
-export {
+module.exports = {
   argsBy,
   buildUrl,
   arrayToArrayValues,

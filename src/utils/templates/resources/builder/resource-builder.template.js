@@ -1,7 +1,7 @@
-import { path } from './path.template';
-import { getHeaders, getCookies, getStatus } from '../../../utils.cli';
+const { path } = require('./path.template');
+const { getHeaders, getCookies, getStatus } = require('../../../utils.cli');
 
-export class ResourceBuilder {
+class ResourceBuilder {
   constructor(args, methodName, idsFormatted) {
     this.template = {};
     this.args = args;
@@ -117,5 +117,8 @@ export class ResourceBuilder {
   build() {
     return JSON.stringify(this.template, null, '  ');
   }
-}
+};
 
+module.exports = {
+  ResourceBuilder
+};

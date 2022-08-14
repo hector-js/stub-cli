@@ -1,9 +1,13 @@
-import { traceTestTemplate } from '../../utils/templates/tests/trace.template';
-import { traceTemplate } from '../../utils/templates/resources/trace.template';
-import { scenarioGenerator } from '../../utils/scenario-finder.cli';
+const { traceTestTemplate } = require('../../utils/templates/tests/trace.template');
+const { traceTemplate } = require('../../utils/templates/resources/trace.template');
+const { scenarioGenerator } = require('../../utils/scenario-finder.cli');
 
 const METHOD = 'trace';
 
-export function traceCli(args) {
+function traceCli(args) {
   scenarioGenerator(args, traceTemplate, traceTestTemplate, METHOD);
-}
+};
+
+module.exports = {
+  traceCli
+};

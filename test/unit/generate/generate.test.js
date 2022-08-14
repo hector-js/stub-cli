@@ -1,11 +1,9 @@
 'use strict';
 
-import { assert, expect } from 'chai';
-import { stub } from 'sinon';
-import { version } from './../../../package.json';
-
+const { assert, expect } = require('chai');
+const { stub } = require('sinon');
+const { version } = require('./../../../package.json');
 const proxyquire = require('proxyquire');
-
 const chalk = require('chalk');
 
 describe('generate', () => {

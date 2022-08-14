@@ -1,6 +1,6 @@
-import { ResourceBuilder } from './builder/resource-builder.template';
+const { ResourceBuilder } = require('./builder/resource-builder.template');
 
-export const patchTemplate = (args, idsFormatted) => {
+const patchTemplate = (args, idsFormatted) => {
   return ResourceBuilder.aTemplate(args, '_patch', idsFormatted)
       .method().path()
       .req()
@@ -15,4 +15,8 @@ export const patchTemplate = (args, idsFormatted) => {
       .status()
       .description()
       .build();
+};
+
+module.exports = {
+  patchTemplate
 };
