@@ -19,7 +19,7 @@
 		"_start": "hjs start",
 		"_test": "env KEY=local mocha ./_hjs --recursive --exit",
 		"_start-dev": "hjs start --dev",
-		"hjs": "hjs"
+		"hjs": "node bin/hjs"
 	},
 	"keywords": [
 		"cli",
