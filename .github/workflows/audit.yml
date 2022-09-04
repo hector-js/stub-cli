@@ -1,33 +1,33 @@
-# name: 'Audit'
+name: 'Audit'
 
-# on:
-#   push:
-#     branches:
-#       - master
-#       - development
-#     schedule:
-#     - cron:  '0 8 * * *'
+on:
+  push:
+    branches:
+      - master
+      - development
+    schedule:
+    - cron:  '0 8 * * *'
     
-# jobs:
-#   build:
-#     name: Stub-cli
+jobs:
+  build:
+    name: Stub-cli
 
-#     runs-on: ubuntu-latest
+    runs-on: macos-latest
 
-#     strategy:
-#       matrix:
-#         node-version: [  10.x , 12.x ]
+    strategy:
+      matrix:
+        node-version: [  10.x , 12.x ]
 
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Use Node.js ${{ matrix.node-version }}
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#     - name: Audit
-#       run: |
-#         npm ci
-#         npm audit
-#       env:
-#         CI: true
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Audit
+      run: |
+        npm ci
+        npm audit
+      env:
+        CI: true
         

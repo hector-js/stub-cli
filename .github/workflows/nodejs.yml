@@ -5,15 +5,14 @@ on:
     branches:
       - master
       - development
+      - feature/#26
   schedule:
     - cron:  '0 8 * * *'
 
 jobs:
   build:
     name: Stub-cli
-
-    runs-on: ubuntu-latest
-
+    runs-on: macos-latest
     strategy:
       matrix:
         node-version: [ 10.x , 12.x ]
@@ -24,10 +23,20 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Unit test & coverage
+    - name: Set up
       run: |
         npm ci
+        npm link
+      env:
+        CI: true
+    - name: Unit test & coverage
+      run: |
         npm run coverage
+      env:
+        CI: true
+    - name: End to end
+      run: |
+        npm run e2e
       env:
         CI: true
     - name: Code quality
@@ -35,11 +44,11 @@ jobs:
         npm run eslint
       env:
         CI: true
-    # - name: Audit
-    #   run: |
-    #     npm audit
-    #   env:
-    #     CI: true
+    - name: Audit
+      run: |
+        npm audit
+      env:
+        CI: true
     - name: Publish resport coverage
       run: |
         npm -g i codecov@3.6.1

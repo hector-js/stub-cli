@@ -27,6 +27,7 @@ jobs:
     - name: Coverage
       run: 
         npm ci
+        npm link
         npm run coverage
       env:
         CI: true
