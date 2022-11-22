@@ -40,14 +40,14 @@
 	"author": "Hector Jimenez Sanchez",
 	"license": "MIT",
 	"dependencies": {
-		"chai": "^4.3.4",
+		"chai": "^4.3.7",
 		"chalk": "^4.1.1",
-		"minimist": "^1.2.6",
+		"minimist": "^1.2.7",
 		"mocha": "^9.2.0",
-		"nodemon": "^2.0.19",
+		"nodemon": "^2.0.20",
 		"prompts": "^2.4.1",
 		"shelljs": "^0.8.5",
-		"supertest": "^6.2.4"
+		"supertest": "^6.3.1"
 	},
 	"devDependencies": {
 		"eslint": "^7.32.0",

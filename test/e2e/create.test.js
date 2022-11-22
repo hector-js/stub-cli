@@ -100,7 +100,7 @@ describe('new', () => {
       author: '',
       license: 'ISC',
       dependencies: {
-        '@hectorjs/stub-backend': '^1.35.0'
+        '@hectorjs/stub-backend': '^1.36.0'
       }
     });
   });
