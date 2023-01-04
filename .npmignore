@@ -9,3 +9,4 @@ changelog.md
 README.md
 .eslintrc.json
 coverage.lcov
+/example/
