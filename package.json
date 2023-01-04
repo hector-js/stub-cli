@@ -13,7 +13,7 @@
 		"test": "mocha --recursive  ./test/unit/**/* --exit",
 		"e2e": "mocha --recursive  ./test/e2e/**/* --exit",
 		"eslint": "eslint ./src/**/*.js ./test/**/*.js",
-		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf example && rm -rf node_modules && npm i && npm run eslint && npm run coverage && npm audit",
+		"test-all": "sh scripts/banners/cup-tea.sh && rm -rf example && rm -rf node_modules && sleep 3 && npm i && npm run eslint && npm run coverage && npm audit",
 		"report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
 		"coverage": "nyc --reporter=html --cache false --reporter=text-summary mocha --recursive --exit",
 		"_start": "hjs start",
