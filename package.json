@@ -21,6 +21,9 @@
 		"_start-dev": "hjs start --dev",
 		"hjs": "node bin/hjs"
 	},
+	"overrides": {
+		"optionator": "0.9.3"
+	},
 	"keywords": [
 		"cli",
 		"stub",
