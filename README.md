@@ -3,7 +3,7 @@
 ![](https://github.com/hector-js/stub-cli/workflows/%40hectorjs%2Fstub%2Dcli/badge.svg)
  - ![](https://github.com/hector-js/stub-cli/workflows/eslint%2Dconfig%2Dgoogle/badge.svg) ![](https://github.com/hector-js/stub-backend/workflows/Unit%20tests/badge.svg) ![](https://github.com/hector-js/stub-backend/workflows/Coverage/badge.svg) ![](https://github.com/hector-js/stub-backend/workflows/Audit/badge.svg)
 
- - ![](https://img.shields.io/npm/v/@hectorjs/stub-cli?label=version&logo=npm) ![](https://img.shields.io/npm/dt/@hectorjs/stub-cli?logo=npm&logoColor=blue) ![](https://img.shields.io/snyk/vulnerabilities/npm/@hectorjs/stub-cli?logo=snyk) ![](https://img.shields.io/github/last-commit/hector-js/stub-cli?logo=github)
+ - ![](https://img.shields.io/npm/v/@hectorjs/stub-cli?label=version&logo=npm) ![](https://img.shields.io/npm/dt/@hectorjs/stub-cli?logo=npm&logoColor=blue) ![](https://img.shields.io/github/last-commit/hector-js/stub-cli?logo=github)
 
  [Releases documentation](https://github.com/hector-js/stub-cli/releases)
 
